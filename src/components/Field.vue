@@ -34,14 +34,14 @@ const wrapperClass = computed(() => {
   <div class="mb-6 last:mb-0">
     <label
       v-if="label"
-      class="block font-bold mb-2"
+      class="block mb-2 font-bold"
     >{{ label }}</label>
     <div :class="wrapperClass">
       <slot />
     </div>
     <div
       v-if="help"
-      class="text-xs text-gray-500 dark:text-gray-400 mt-1"
+      class="mt-1 text-xs text-gray-500 dark:text-gray-400"
     >
       {{ help }}
     </div>

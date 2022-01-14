@@ -34,13 +34,13 @@ const menuClick = (event, item) => {
   <aside
     v-show="!isFullScreen"
     id="aside"
-    class="w-60 fixed top-0 z-40 h-screen bg-gray-800 transition-position lg:left-0 dark:border-r dark:border-gray-800 dark:bg-gray-900"
+    class="fixed top-0 z-40 h-screen bg-menu w-60 transition-position lg:left-0 dark:border-r dark:border-gray-800 "
     :class="[ isAsideMobileExpanded ? 'left-0' : '-left-60', isAsideLgActive ? 'block' : 'lg:hidden xl:block' ]"
   >
-    <div class="flex flex-row w-full bg-gray-900 text-white flex-1 h-14 items-center">
+    <div class="flex flex-row items-center flex-1 w-full text-menu h-14">
       <nav-bar-item
         type="hidden lg:flex xl:hidden"
-        active-color="text-white"
+        active-color="text-menu"
         active
         @click="asideLgClose"
       >
@@ -50,8 +50,8 @@ const menuClick = (event, item) => {
           size="24"
         />
       </nav-bar-item>
-      <div class="flex-1 px-3">
-        <span>Admin</span> <b class="font-black">One</b>
+      <div class="flex-1 px-3 text-center">
+        <span>Pi-</span> <b class="font-black">Hole</b>
       </div>
     </div>
     <div>
@@ -59,7 +59,7 @@ const menuClick = (event, item) => {
         <p
           v-if="typeof menuGroup === 'string'"
           :key="`a-${index}`"
-          class="p-3 text-xs uppercase text-gray-400"
+          class="p-3 text-xs text-gray-400 uppercase"
         >
           {{ menuGroup }}
         </p>

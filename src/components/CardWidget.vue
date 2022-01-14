@@ -75,7 +75,7 @@ const darkMode = computed(() => store.state.darkMode)
         <h3 class="text-lg leading-tight text-gray-500 dark:text-gray-400">
           {{ label }}
         </h3>
-        <h1 class="text-3xl leading-tight font-semibold">
+        <h1 class="text-3xl font-semibold leading-tight">
           <growing-number
             :value="number"
             :prefix="prefix"

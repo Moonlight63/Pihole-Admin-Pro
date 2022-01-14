@@ -24,12 +24,15 @@ export default createStore({
 
     /* Sample data (commonly used) */
     clients: [],
-    history: []
+    history: [],
+    myusers: []
   },
   mutations: {
     /* A fit-them-all commit */
     basic (state, payload) {
       state[payload.key] = payload.value
+
+      // console.log(payload)
     },
 
     /* User */
@@ -82,7 +85,7 @@ export default createStore({
       })
     },
 
-    fetch ({ commit }, payload) {
+    fetch ({ commit, state }, payload) {
       axios
         .get(`data-sources/${payload}.json`)
         .then((r) => {
@@ -96,7 +99,25 @@ export default createStore({
         .catch(error => {
           alert(error.message)
         })
+    },
+
+    getusers ({ commit, state }, payload) {
+      axios
+        .get('https://jsonplaceholder.typicode.com/users')
+        .then((r) => {
+          // console.log(payload)
+          if (r.data) {
+            commit('basic', {
+              key: payload,
+              value: r.data
+            })
+          }
+        })
+        .catch(error => {
+          alert(error.message)
+        })
     }
+
   },
   modules: {
   }

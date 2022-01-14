@@ -20,6 +20,10 @@ const props = defineProps({
     type: String,
     default: 'md:rounded-3xl'
   },
+  bgColor: {
+    type: String,
+    default: 'bg-panel'
+  },
   hasTable: Boolean,
   empty: Boolean,
   form: Boolean,
@@ -32,7 +36,8 @@ const is = computed(() => props.form ? 'form' : 'div')
 
 const componentClass = computed(() => {
   const base = [
-    props.rounded
+    props.rounded,
+    props.bgColor
   ]
 
   if (props.hoverable) {
@@ -57,7 +62,7 @@ const submit = e => {
   <component
     :is="is"
     :class="componentClass"
-    class="border border-gray-100 dark:border-gray-900 bg-panel"
+    class="border border-gray-100 dark:border-gray-900"
     @submit="submit"
   >
     <header

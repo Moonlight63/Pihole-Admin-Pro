@@ -1,0 +1,64 @@
+.theme-default {
+
+    --main-background-light: theme(colors.slate.200);
+    /* --main-background-dark: #263238; */
+    --main-background-dark: theme(colors.slate.800);
+    --main-text-light: theme(colors.gray.900);
+    --main-text-dark: theme(colors.white);
+    --panel-background-light: theme(colors.slate.100);
+    --panel-background-dark: theme(colors.slate.900);
+    /* --panel-background-dark: #192227; */
+    --menu-background-light: theme(colors.slate.200);
+    --menu-background-dark: theme(colors.slate.900);
+    /* --menu-background-dark: #192227; */
+    --menu-items-background-light: unset;
+    --menu-items-background-dark: unset;
+    --menu-items-background-light-hover: theme(colors.gray.300);
+    --menu-items-background-dark-hover: theme(colors.gray.700);
+    --menu-items-background-light-focus: theme(colors.slate.100);
+    --menu-items-background-dark-focus: theme(colors.slate.900);
+    --menu-items-subitems-background-light: theme(colors.slate.100);
+    --menu-items-subitems-background-dark: theme(colors.slate.900);
+    --menu-items-subitems-background-light-hover: theme(colors.slate.100);
+    --menu-items-subitems-background-dark-hover: theme(colors.slate.900);
+    --menu-items-subitems-background-light-focus: theme(colors.slate.100);
+    --menu-items-subitems-background-dark-focus: theme(colors.slate.900);
+
+    /* --color-background-light: theme(colors.slate.200);
+    /* --color-background-dark: theme(colors.slate.800); *
+    --color-background-dark: #263238;
+
+    --color-panel-background-light: theme(colors.slate.100);
+    /* --color-panel-background-dark: theme(colors.slate.900); *
+    --color-panel-background-dark: #192227;
+
+    --color-menu-background-light: theme(colors.slate.200);
+    /* --color-menu-background-dark: theme(colors.slate.900); *
+    --color-menu-background-dark: #192227;
+    --color-menu-text-light: theme(colors.gray.900);
+    --color-menu-text-dark: theme(colors.white);
+
+
+    --color-menu-items-background-light: unset;
+    --color-menu-items-background-dark: unset;
+
+    --color-menu-items-background-light-hover: theme(colors.gray.300);
+    --color-menu-items-background-dark-hover: theme(colors.gray.700);
+
+    --color-menu-items-background-light-focus: theme(colors.slate.100);
+    --color-menu-items-background-dark-focus: theme(colors.slate.900);
+
+    --color-menu-items-text-light: theme(colors.gray.900);
+    --color-menu-items-text-dark: theme(colors.purple.500);
+
+
+    --color-menu-subitems-background-light: theme(colors.slate.100);
+    --color-menu-subitems-background-dark: theme(colors.slate.900);
+
+    --color-menu-subitems-background-light-hover: theme(colors.slate.100);
+    --color-menu-subitems-background-dark-hover: theme(colors.slate.900);
+
+    --color-menu-subitems-background-light-focus: theme(colors.slate.100);
+    --color-menu-subitems-background-dark-focus: theme(colors.slate.900); */
+
+}

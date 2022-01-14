@@ -3,12 +3,11 @@ table {
 }
 
 thead {
-  @apply hidden lg:table-header-group;
+  @apply hidden border-gray-100 lg:table-header-group lg:border-b-4 dark:border-gray-700;
 }
 
 tr {
-  @apply max-w-full block relative border-b-4 border-gray-100
-    lg:table-row lg:border-b-0 dark:border-gray-700;
+  @apply relative block max-w-full border-b-4 border-gray-100 lg:table-row lg:border-b dark:border-gray-700;
 }
 
 tr:last-child {
@@ -20,13 +19,12 @@ th {
 }
 
 td {
-  @apply flex justify-between text-right py-3 px-4 align-top border-b border-gray-100
-    lg:table-cell lg:text-left lg:py-2 lg:px-3 lg:align-middle lg:border-b-0 dark:border-gray-700;
+  @apply flex justify-between px-4 py-3 text-right align-top border-b border-gray-100 lg:table-cell lg:text-left lg:py-2 lg:px-3 lg:align-middle lg:border-b-0 dark:border-gray-700;
 }
 
-tr:nth-child(odd) td {
+/* tr:nth-child(odd) td {
   @apply lg:bg-gray-50 lg:dark:bg-gray-800;
-}
+} */
 
 td:last-child {
   @apply border-b-0;
@@ -38,7 +36,7 @@ tbody tr:hover td {
 
 td:before {
   content: attr(data-label);
-  @apply font-semibold pr-3 text-left lg:hidden;
+  @apply pr-3 font-semibold text-left lg:hidden;
 }
 
 td.checkbox-cell, th.checkbox-cell {
@@ -46,8 +44,7 @@ td.checkbox-cell, th.checkbox-cell {
 }
 
 td.progress-cell progress {
-  @apply flex w-2/5 self-center
-    lg:w-full;
+  @apply flex self-center w-2/5 lg:w-full;
 }
 
 td.image-cell {

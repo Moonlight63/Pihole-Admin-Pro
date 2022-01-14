@@ -11,6 +11,11 @@ import './css/main.css'
 store.dispatch('fetch', 'clients')
 store.dispatch('fetch', 'history')
 
+store.dispatch('getusers', 'myusers')
+
+// console.log(store.state.clients)
+// console.log(store.state.users)
+
 /* Dark mode */
 const localStorageDarkModeValue = localStorage.getItem(darkModeKey)
 
@@ -19,7 +24,7 @@ if ((localStorageDarkModeValue === null && window.matchMedia('(prefers-color-sch
 }
 
 /* Default title tag */
-const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
+const defaultDocumentTitle = 'Pi-Hole Admin Pro'
 
 /* Collapse mobile aside menu on route change */
 router.beforeEach(to => {

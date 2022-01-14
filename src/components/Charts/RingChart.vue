@@ -17,6 +17,11 @@ const props = defineProps({
     type: Object,
     required: true
   }
+  // labels: {
+  //   type: Array,
+  //   required: false,
+  //   default: []
+  // }
 })
 
 const root = ref(null)
@@ -27,22 +32,24 @@ let chart
 
 onMounted(() => {
   chart = new Chart(root.value, {
-    type: 'line',
+    type: 'doughnut',
     data: props.data,
     options: {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
         y: {
-          display: true
+          display: false
         },
         x: {
-          display: true
+          display: false
         }
       },
       plugins: {
         legend: {
-          display: false
+          display: true,
+          position: 'right',
+          align: 'start'
         }
       }
     }

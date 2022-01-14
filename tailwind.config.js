@@ -1,3 +1,4 @@
+
 module.exports = {
   content: [
     './public/index.html',
@@ -37,6 +38,8 @@ module.exports = {
     }
   },
   plugins: [
-    require('@tailwindcss/forms')
+    require('@tailwindcss/forms'),
+    // require('@tailwindcss/aspect-ratio'),
+    require('./src/themes/themes')
   ]
 }

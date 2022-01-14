@@ -2,6 +2,8 @@
 @import "tailwind/_components.css";
 @import "tailwind/_utilities.css";
 
+@import "_theme.css";
+
 @import "_checkbox-radio-switch.css";
 
 @import "_app.css";

@@ -2,6 +2,7 @@ export const chartColors = {
   default: {
     primary: '#00D1B2',
     info: '#209CEE',
+    warning: '#fb923c',
     danger: '#FF3860'
   }
 }
@@ -18,9 +19,10 @@ const randomChartData = n => {
 
 const datasetObject = (color, points) => {
   return {
-    fill: false,
+    fill: true,
     borderColor: chartColors.default[color],
-    borderWidth: 2,
+    backgroundColor: chartColors.default[color],
+    borderWidth: 0,
     borderDash: [],
     borderDashOffset: 0.0,
     pointBackgroundColor: chartColors.default[color],
@@ -36,11 +38,20 @@ const datasetObject = (color, points) => {
   }
 }
 
-export const sampleChartData = (points = 9) => {
+export const sampleChartData = (points = 9, sets = 4) => {
   const labels = []
 
   for (let i = 1; i <= points; i++) {
     labels.push(`0${i}`)
+  }
+
+  if (sets === 1) {
+    return {
+      labels,
+      datasets: [
+        { ...datasetObject('primary', points), backgroundColor: ['#00D1B2', '#209CEE', '#fb923c', '#FF3860'] }
+      ]
+    }
   }
 
   return {
@@ -48,6 +59,7 @@ export const sampleChartData = (points = 9) => {
     datasets: [
       datasetObject('primary', points),
       datasetObject('info', points),
+      datasetObject('warning', points),
       datasetObject('danger', points)
     ]
   }

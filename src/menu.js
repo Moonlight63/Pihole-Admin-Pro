@@ -89,3 +89,131 @@ export default [
     }
   ]
 ]
+
+// export default [
+//   'General',
+//   [
+//     {
+//       to: '/',
+//       icon: mdiDesktopMac,
+//       label: 'Dashboard'
+//     },
+//     {
+//       to: '/somepage',
+//       icon: mdiDesktopMac,
+//       label: 'Queries'
+//     },
+//     {
+//       to: '/somepage',
+//       icon: mdiDesktopMac,
+//       label: 'Whitelist'
+//     },
+//     {
+//       to: '/somepage',
+//       icon: mdiDesktopMac,
+//       label: 'Blacklist'
+//     }
+//   ],
+//   'Data',
+//   [
+//     {
+//       to: '/tables',
+//       label: 'Graphics',
+//       icon: mdiTable,
+//       updateMark: true
+//     },
+//     {
+//       to: '/forms',
+//       label: 'Queries',
+//       icon: mdiSquareEditOutline
+//     }
+//   ],
+//   'Management',
+//   [
+//     {
+//       label: 'Groups',
+//       subLabel: 'Submenus Example',
+//       icon: mdiViewList,
+//       menu: [
+//         {
+//           label: 'Sub-item One'
+//         },
+//         {
+//           label: 'Sub-item Two'
+//         }
+//       ]
+//     },
+//     {
+//       label: 'Disable',
+//       subLabel: 'Submenus Example',
+//       icon: mdiViewList,
+//       menu: [
+//         {
+//           label: 'Sub-item One'
+//         },
+//         {
+//           label: 'Sub-item Two'
+//         }
+//       ]
+//     },
+//     {
+//       label: 'Tools',
+//       subLabel: 'Submenus Example',
+//       icon: mdiViewList,
+//       menu: [
+//         {
+//           label: 'Sub-item One'
+//         },
+//         {
+//           label: 'Sub-item Two'
+//         }
+//       ]
+//     },
+//     {
+//       label: 'DNS',
+//       subLabel: 'Submenus Example',
+//       icon: mdiViewList,
+//       menu: [
+//         {
+//           label: 'Sub-item One'
+//         },
+//         {
+//           label: 'Sub-item Two'
+//         }
+//       ]
+//     },
+//     {
+//       href: 'https://justboil.me/tailwind-admin-templates/vue-dashboard/',
+//       label: 'Settings',
+//       icon: mdiMonitorShimmer,
+//       target: '_blank'
+//     },
+//     {
+//       href: 'https://github.com/justboil/admin-one-vue-tailwind',
+//       label: 'Logout',
+//       icon: mdiGithub,
+//       target: '_blank'
+//     }
+//   ],
+//   'About',
+//   [
+//     {
+//       href: 'https://justboil.me/tailwind-admin-templates/vue-dashboard/',
+//       label: 'Documentation',
+//       icon: mdiMonitorShimmer,
+//       target: '_blank'
+//     },
+//     {
+//       href: 'https://github.com/justboil/admin-one-vue-tailwind',
+//       label: 'GitHub',
+//       icon: mdiGithub,
+//       target: '_blank'
+//     },
+//     {
+//       href: 'https://github.com/justboil/admin-one-vue-tailwind',
+//       label: 'Donate',
+//       icon: mdiGithub,
+//       target: '_blank'
+//     }
+//   ]
+// ]

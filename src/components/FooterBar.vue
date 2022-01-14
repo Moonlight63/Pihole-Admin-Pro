@@ -14,24 +14,23 @@ const isFooterBarVisible = computed(() => !store.state.isFullScreen)
 <template>
   <footer
     v-show="isFooterBarVisible"
-    class="bg-white py-2 px-6 dark:bg-gray-900"
+    class="px-6 py-2 bg-panel"
   >
     <level>
       <div class="text-center md:text-left">
-        <b>&copy; {{ year }}, <a
-          href="https://justboil.me/"
+        <b><a
+          href="#"
           target="_blank"
-        >JustBoil.me</a>.</b>
-        Get more with <a
-          href="https://justboil.me/tailwind-admin-templates/vue-dashboard/"
-          target="_blank"
-          class="text-blue-500"
-        >Premium version</a>
+        >Donate</a></b>
+        if you found this useful.
       </div>
       <div class="md:py-2">
-        <a href="https://justboil.me">
-          <jb-logo class="w-auto h-8 md:h-6" />
-        </a>
+        <b>Pi-hole  </b>
+        <a href="#">v5.7</a>
+        <b>  |  FTL  </b>
+        <a href="#">v5.12.1</a>
+        <b>  |  Web Interface  </b>
+        <a href="#">v5.9</a>
       </div>
     </level>
   </footer>

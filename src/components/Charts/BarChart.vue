@@ -27,7 +27,7 @@ let chart
 
 onMounted(() => {
   chart = new Chart(root.value, {
-    type: 'line',
+    type: 'bar',
     data: props.data,
     options: {
       responsive: true,
