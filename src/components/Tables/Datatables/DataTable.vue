@@ -12,9 +12,6 @@ import TableRow from './Components/Table/TableRow.vue'
 import Pagination from './Components/Pagination/Pagination.vue'
 import TableBodyCell from './Components/Table/TableBodyCell.vue'
 
-const PER_PAGE = 10
-const PER_PAGE_OPTIONS = [5, 10, 15, 25, 50, 75, 100]
-
 const debounce = (callback, wait = 400) => {
   let timeout
 
@@ -36,10 +33,8 @@ const props = defineProps({
   rows: { type: Array, required: true },
   columns: { type: Array, required: true },
   pagination: { type: Object, required: false, default: null },
-  sn: { type: Boolean, required: false, default: false },
   filter: { type: Boolean, required: false, default: false },
   loading: { type: Boolean, required: false, default: false },
-  perPageOptions: { type: Array, required: false, default: () => [5, 10, 15, 25, 50, 75, 100] },
   query: { type: Object, required: false, default: () => ({}) },
   hoverable: { type: Boolean, required: false, default: false },
   clickable: { type: Boolean, required: false, default: false }
@@ -51,15 +46,15 @@ const emit = defineEmits([
 ])
 
 const tableQuery = reactive({
-  page: props.pagination.page || 0,
+  page: props.pagination.initalPage || 0,
   search: props.query.search || '',
-  per_page: props.pagination.per_page || 5,
+  perPage: props.pagination.perPageDefault || 10,
   sortByKey: '',
   sortAccending: false
 })
 
 const showPagination = computed(() => !!props.pagination)
-const totalData = computed(() => props.pagination.total || props.rows.length)
+const totalData = computed(() => props.pagination.totalRecordCount || props.rows.length)
 const tableRows = computed(() => props.rows)
 const tableColumns = computed(() => {
   const newArr = []
@@ -84,7 +79,7 @@ const tableColumns = computed(() => {
   }
   return newArr
 })
-const paginatedRowIndex = computed(() => showPagination.value ? tableQuery.per_page * (tableQuery.page) : 0)
+// const paginatedRowIndex = computed(() => showPagination.value ? tableQuery.perPage * (tableQuery.page) : 0)
 const uniqueId = () => Math.floor(Math.random() * 100)
 
 const fireDataLoad = () => {
@@ -105,7 +100,7 @@ const handleOnSearchChange = debounce((value) => {
   tableQuery.page = 0
 })
 const handleOnPaginationSizeChange = (value) => {
-  tableQuery.per_page = value
+  tableQuery.perPage = value
 }
 const handleChangeSort = (sortBy) => {
   if (sortBy === tableQuery.sortByKey) {
@@ -134,8 +129,8 @@ const rowClickHandler = (row) => {
     <Level>
       <Field class="w-24">
         <Control
-          v-model="tableQuery.per_page"
-          :options="PER_PAGE_OPTIONS"
+          v-model="tableQuery.perPage"
+          :options="pagination.perPageOptions || { 0: 'All', 5: '5', 10: '10', 15: '15', 25: '25', 50: '50' }"
         />
       </Field>
       <Field>
@@ -148,14 +143,14 @@ const rowClickHandler = (row) => {
 
     <TableWrapper>
       <TableHead>
-        <slot
+        <!-- <slot
           v-if="sn"
           name="thead-sn"
         >
           <TableHeadCell
             v-text="`S.N.`"
           />
-        </slot>
+        </slot> -->
 
         <slot
           name="thead"
@@ -183,7 +178,7 @@ const rowClickHandler = (row) => {
           :row-index="rowIndex"
           @clicked="rowClickHandler(row)"
         >
-          <slot
+          <!-- <slot
             v-if="sn"
             name="tbody-sn"
             :sn="rowIndex + 1"
@@ -192,7 +187,7 @@ const rowClickHandler = (row) => {
               class="dt__table__tbody_td_sn"
               v-text="rowIndex + 1 + paginatedRowIndex"
             />
-          </slot>
+          </slot> -->
 
           <slot
             name="tbody"
@@ -209,6 +204,7 @@ const rowClickHandler = (row) => {
               <TableBodyCell
                 :key="`datatable-tbody-td-${uniqueId()}-${column.label}`"
                 :name="column.key"
+                :data-label="column.label"
                 v-text="row[column.key]"
               />
             </slot>
@@ -228,7 +224,7 @@ const rowClickHandler = (row) => {
       <Pagination
         :total="totalData"
         :current-page="tableQuery.page"
-        :per-page="parseInt(tableQuery.per_page.toString())"
+        :per-page="parseInt(tableQuery.perPage.toString())"
         @changed="handlePageChange"
       >
         <template #pagination-info="paginationInfo">

@@ -17,20 +17,31 @@ import TableRow from '@/components/Tables/Datatables/Components/Table/TableRow.v
 import DataTable from '@/components/Tables/Datatables/DataTable.vue'
 import TableBodyCell from './Datatables/Components/Table/TableBodyCell.vue'
 
-defineProps({
-  checkable: Boolean
-})
-
-const PER_PAGE_OPTIONS = [5, 10, 15, 25, 50, 75, 100]
+// defineProps({
+//   checkable: Boolean
+// })
 
 const store = useStore()
+
+const sortByKey = ref('')
+const sortAcending = ref(false)
+const perPage = ref(10)
+const currentPage = ref(0)
+
+const dataRaw = computed(() => store.state.clients)
+const dataSorted = computed(() => {
+  if (sortByKey.value === '') return dataRaw.value
+  return dataRaw.value.slice(0).sort((a, b) => a[sortByKey.value].toString().toLowerCase().localeCompare(b[sortByKey.value].toString().toLowerCase()))
+})
+const dataPaginated = computed(
+  () => dataSorted.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
+)
+
 const darkMode = computed(() => store.state.darkMode)
 const itemsUnsorted = computed(() => store.state.clients)
 const items = computed(() => itemsUnsorted.value.slice(0).sort((a, b) => parseFloat(b.progress) - parseFloat(a.progress)))
 const isModalActive = ref(false)
 const isModalDangerActive = ref(false)
-const perPage = ref(10)
-const currentPage = ref(0)
 const checkedRows = ref([])
 // const totalRecordCount = computed(() => itemsUnsorted.value.length)
 
@@ -67,23 +78,25 @@ const checked = (isChecked, client) => {
   }
 }
 
-const handlePageChange = (page) => {
-  currentPage.value = page
-}
+// const handlePageChange = (page) => {
+//   currentPage.value = page
+// }
 
 const clickedRow = (row) => {
   console.log(row.name)
 }
 
 const pagination = reactive({
-  total: computed(() => itemsUnsorted.value.length),
-  perPage: 5,
-  page: 0
+  totalRecordCount: computed(() => itemsUnsorted.value.length)
+  // perPageOptions: { 0: 'All', 5: '5', 10: '10', 15: '15', 25: '25', 50: '50' },
+  // perPageDefault: 5,
+  // initalPage: 0
 })
 
 const loadData = (query) => {
   currentPage.value = query.page
-  perPage.value = query.per_page
+  perPage.value = query.perPage > 0 ? query.perPage : itemsUnsorted.value.length
+  sortByKey.value = query.sortByKey
   // console.log(query)
 }
 
@@ -91,20 +104,21 @@ const loadData = (query) => {
 
 <template>
   <DataTable
-    :rows="itemsPaginated"
+    :rows="dataPaginated"
     :columns="[
       { 'key': 'name', 'sortable': true},
       { 'key': 'progress', 'label': 'Hits', 'sortable': true },
       { 'label': 'Status', 'key': 'progress' }
     ]"
     :pagination="pagination"
-    sn
     @loadData="loadData"
   >
     <template #datatable-tbody-td-2="progressCell">
       <TableBodyCell
         :key="`datatable-tbody-td-${progressCell.uniqueId()}-${progressCell.column.label}`"
+        class="progress-cell"
         :name="progressCell.column.key"
+        :data-label="progressCell.column.label"
         :rdata1="progressCell.column"
       >
         <progress

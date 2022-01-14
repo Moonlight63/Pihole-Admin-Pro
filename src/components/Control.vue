@@ -25,7 +25,7 @@ const props = defineProps({
     default: null
   },
   options: {
-    type: Array,
+    type: [Array, Object],
     default: null
   },
   type: {
