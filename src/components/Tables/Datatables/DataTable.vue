@@ -15,10 +15,6 @@ import TableBodyCell from './Components/Table/TableBodyCell.vue'
 const debounce = (callback, wait = 400) => {
   let timeout
 
-  // if (!callback || !Object.getPrototypeOf(callback) === Object.caller) {
-  //   return
-  // }
-
   return (...args) => {
     // This is perfectly valid code, but eslint incorectly matches it.
     // https://github.com/standard/eslint-plugin-standard/issues/12#issuecomment-323561586
@@ -32,17 +28,63 @@ const debounce = (callback, wait = 400) => {
 const props = defineProps({
   rows: { type: Array, required: true },
   columns: { type: Array, required: true },
+  filter: { type: [Boolean, String], required: false, default: null },
+  sortation: { type: Object, required: false, default: null },
   pagination: { type: Object, required: false, default: null },
-  filter: { type: Boolean, required: false, default: false },
   loading: { type: Boolean, required: false, default: false },
   query: { type: Object, required: false, default: () => ({}) },
   hoverable: { type: Boolean, required: false, default: false },
-  clickable: { type: Boolean, required: false, default: false }
+  clickable: { type: Boolean, required: false, default: false },
+  paginationOptions: {
+    type: [Object, Array, Boolean],
+    required: false,
+    default: () => ({
+      0: 'All',
+      5: '5',
+      10: '10',
+      15: '15',
+      25: '25',
+      50: '50'
+    })
+  },
+  paginationData: { type: Array, required: false, default: null }
+})
+
+const dataFiltered = computed(() => {
+  if (props.filter !== null || props.filter === false) {
+    console.log('External Filtering!')
+    return props.rows
+  } else {
+    console.log('Internal Filtering!')
+    emit('output:filteredData', props.rows)
+    return props.rows
+  }
+})
+
+const dataSorted = computed(() => {
+  if (props.sortation !== null) {
+    if (props.filter !== null) {
+      console.log('No Sorting!')
+      return props.rows
+    }
+    console.log('External Sorting!')
+    return props.sortation.sortedInput || {}
+  } else {
+    console.log('Internal Sorting!')
+    return dataFiltered.value
+  }
+})
+
+const renderRows = computed(() => {
+  return dataSorted.value
 })
 
 const emit = defineEmits([
   'loadData',
-  'rowClicked'
+  'rowClicked',
+  'update:filter',
+  'output:filteredData',
+  'update:sortation'
 ])
 
 const tableQuery = reactive({
@@ -55,7 +97,7 @@ const tableQuery = reactive({
 
 const showPagination = computed(() => !!props.pagination)
 const totalData = computed(() => props.pagination.totalRecordCount || props.rows.length)
-const tableRows = computed(() => props.rows)
+const tableRows = computed(() => renderRows.value)
 const tableColumns = computed(() => {
   const newArr = []
   for (const idx in props.columns) {
@@ -79,7 +121,7 @@ const tableColumns = computed(() => {
   }
   return newArr
 })
-// const paginatedRowIndex = computed(() => showPagination.value ? tableQuery.perPage * (tableQuery.page) : 0)
+
 const uniqueId = () => Math.floor(Math.random() * 100)
 
 const fireDataLoad = () => {
@@ -98,17 +140,31 @@ const handleOnSearchChange = debounce((value) => {
   tableQuery.search = value
   tableQuery.sortByKey = ''
   tableQuery.page = 0
+
+  if (props.filter !== null) {
+    emit('update:filter', value)
+  }
 })
 const handleOnPaginationSizeChange = (value) => {
   tableQuery.perPage = value
 }
+
 const handleChangeSort = (sortBy) => {
   if (sortBy === tableQuery.sortByKey) {
     tableQuery.sortAccending = !tableQuery.sortAccending
   } else {
     tableQuery.sortByKey = sortBy
   }
+
+  if (props.sortation !== null) {
+    emit('update:sortation', {
+      ...props.sortation,
+      sortByKey: tableQuery.sortByKey || '',
+      accending: tableQuery.sortAccending || false
+    })
+  }
 }
+
 const rowClickHandler = (row) => {
   if (props.clickable || !props.hoverable) {
     return
@@ -120,12 +176,6 @@ const rowClickHandler = (row) => {
 
 <template>
   <div class="">
-    <!-- <Filter
-      v-if="filter && topPagination"
-      :search="tableQuery.search"
-      @input="handleOnSearchChange"
-    /> -->
-
     <Level>
       <Field class="w-24">
         <Control
@@ -133,7 +183,7 @@ const rowClickHandler = (row) => {
           :options="pagination.perPageOptions || { 0: 'All', 5: '5', 10: '10', 15: '15', 25: '25', 50: '50' }"
         />
       </Field>
-      <Field>
+      <Field v-if="props.filter !== false">
         <Control
           placeholder="Search"
           @update:modelValue="handleOnSearchChange"
@@ -143,15 +193,6 @@ const rowClickHandler = (row) => {
 
     <TableWrapper>
       <TableHead>
-        <!-- <slot
-          v-if="sn"
-          name="thead-sn"
-        >
-          <TableHeadCell
-            v-text="`S.N.`"
-          />
-        </slot> -->
-
         <slot
           name="thead"
           :column="tableColumns"
@@ -178,17 +219,6 @@ const rowClickHandler = (row) => {
           :row-index="rowIndex"
           @clicked="rowClickHandler(row)"
         >
-          <!-- <slot
-            v-if="sn"
-            name="tbody-sn"
-            :sn="rowIndex + 1"
-          >
-            <td
-              class="dt__table__tbody_td_sn"
-              v-text="rowIndex + 1 + paginatedRowIndex"
-            />
-          </slot> -->
-
           <slot
             name="tbody"
             :index="rowIndex"

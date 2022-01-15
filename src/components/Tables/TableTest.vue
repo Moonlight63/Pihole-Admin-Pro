@@ -37,6 +37,9 @@ const dataPaginated = computed(
   () => dataSorted.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
 )
 
+const filter = ref('')
+const sortation = ref({})
+
 const darkMode = computed(() => store.state.darkMode)
 const itemsUnsorted = computed(() => store.state.clients)
 const items = computed(() => itemsUnsorted.value.slice(0).sort((a, b) => parseFloat(b.progress) - parseFloat(a.progress)))
@@ -100,10 +103,16 @@ const loadData = (query) => {
   // console.log(query)
 }
 
+const getFilteredData = (data) => {
+  sortation.value.sortedInput = data
+}
+
 </script>
 
 <template>
+  <!-- v-model:filter="filter" -->
   <DataTable
+    v-model:sortation="sortation"
     :rows="dataPaginated"
     :columns="[
       { 'key': 'name', 'sortable': true},
@@ -112,6 +121,7 @@ const loadData = (query) => {
     ]"
     :pagination="pagination"
     @loadData="loadData"
+    @output:filteredData="getFilteredData"
   >
     <template #datatable-tbody-td-2="progressCell">
       <TableBodyCell
