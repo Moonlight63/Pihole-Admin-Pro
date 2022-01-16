@@ -36,13 +36,13 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  acending: {
+  ascending: {
     type: Boolean,
     default: false
   }
 })
 
-const computedState = computed(() => props.sorting ? props.acending ? mdiSortAscending : mdiSortDescending : mdiSort)
+const computedState = computed(() => props.sorting ? props.ascending ? mdiSortAscending : mdiSortDescending : mdiSort)
 
 const emits = defineEmits(['clicked'])
 

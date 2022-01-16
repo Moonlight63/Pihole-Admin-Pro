@@ -46,6 +46,11 @@ export default createStore({
       if (payload.avatar) {
         state.userAvatar = payload.avatar
       }
+    },
+
+    popClient (state) {
+      console.log('Pop Client')
+      state.clients = state.clients.slice(1)
     }
   },
   actions: {

@@ -1,7 +1,5 @@
 <script setup>
 import { computed, ref, watch, reactive } from 'vue'
-import { useStore } from 'vuex'
-import { mdiEye, mdiTrashCan } from '@mdi/js'
 import Level from '@/components/Level.vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
@@ -11,6 +9,7 @@ import TableHeadCell from './Components/Table/TableHeadCell.vue'
 import TableRow from './Components/Table/TableRow.vue'
 import Pagination from './Components/Pagination/Pagination.vue'
 import TableBodyCell from './Components/Table/TableBodyCell.vue'
+import filterForString from './Components/Filters/deep-text-filter'
 
 const debounce = (callback, wait = 400) => {
   let timeout
@@ -25,6 +24,8 @@ const debounce = (callback, wait = 400) => {
   }
 }
 
+const uniqueId = () => Math.floor(Math.random() * 100)
+
 const props = defineProps({
   rows: { type: Array, required: true },
   columns: { type: Array, required: true },
@@ -32,7 +33,6 @@ const props = defineProps({
   sortation: { type: Object, required: false, default: null },
   pagination: { type: Object, required: false, default: null },
   loading: { type: Boolean, required: false, default: false },
-  query: { type: Object, required: false, default: () => ({}) },
   hoverable: { type: Boolean, required: false, default: false },
   clickable: { type: Boolean, required: false, default: false },
   paginationOptions: {
@@ -46,58 +46,137 @@ const props = defineProps({
       25: '25',
       50: '50'
     })
-  },
-  paginationData: { type: Array, required: false, default: null }
-})
-
-const dataFiltered = computed(() => {
-  if (props.filter !== null || props.filter === false) {
-    console.log('External Filtering!')
-    return props.rows
-  } else {
-    console.log('Internal Filtering!')
-    emit('output:filteredData', props.rows)
-    return props.rows
   }
-})
-
-const dataSorted = computed(() => {
-  if (props.sortation !== null) {
-    if (props.filter !== null) {
-      console.log('No Sorting!')
-      return props.rows
-    }
-    console.log('External Sorting!')
-    return props.sortation.sortedInput || {}
-  } else {
-    console.log('Internal Sorting!')
-    return dataFiltered.value
-  }
-})
-
-const renderRows = computed(() => {
-  return dataSorted.value
 })
 
 const emit = defineEmits([
   'loadData',
   'rowClicked',
   'update:filter',
-  'output:filteredData',
-  'update:sortation'
+  'output:filtered',
+  'update:sortation',
+  'output:sortedData',
+  'update:pagination'
 ])
 
-const tableQuery = reactive({
-  page: props.pagination.initalPage || 0,
-  search: props.query.search || '',
-  perPage: props.pagination.perPageDefault || 10,
-  sortByKey: '',
-  sortAccending: false
+// FILTERING
+const internalFilter = ref('')
+
+const calculatedFilterState = computed(() => {
+  if (props.filter !== null) return props.filter
+  return internalFilter.value
 })
 
-const showPagination = computed(() => !!props.pagination)
-const totalData = computed(() => props.pagination.totalRecordCount || props.rows.length)
-const tableRows = computed(() => renderRows.value)
+const internalFilterFunc = () => {
+  let result = []
+  if (calculatedFilterState.value === '') result = props.rows
+  result = filterForString(props.rows, calculatedFilterState.value)
+  emit('output:filtered', result)
+  return result
+}
+
+const dataFiltered = computed(() => {
+  if (props.filter !== null || props.filter === false) {
+    // console.log('External Filtering!')
+    return props.rows
+  } else {
+    // console.log('Internal Filtering!')
+    return internalFilterFunc()
+  }
+})
+
+// SORTATION
+const internalSort = reactive({
+  sortByKey: '',
+  ascending: false
+})
+
+const calculatedSortState = computed(() => {
+  if (props.sortation !== null) return props.sortation
+  return internalSort
+})
+
+const internalSortFunc = () => {
+  let sorted = []
+  if (calculatedSortState.value.sortByKey === '') {
+    sorted = dataFiltered.value
+  } else {
+    sorted = dataFiltered.value.slice(0).sort((b, a) => {
+      return a[calculatedSortState.value.sortByKey]
+        .toString()
+        .toLowerCase()
+        .localeCompare(b[calculatedSortState.value.sortByKey]
+          .toString()
+          .toLowerCase())
+    })
+  }
+  if (calculatedSortState.value.ascending) sorted.reverse()
+
+  emit('output:sortedData', sorted)
+  return sorted
+}
+
+const dataSorted = computed(() => {
+  if (props.sortation !== null) {
+    if (props.filter !== null) {
+      // console.log('No Sorting!')
+      return props.rows
+    }
+    // console.log('External Sorting!')
+    return props.sortation.sortedInput || []
+  } else {
+    // console.log('Internal Sorting!')
+    return internalSortFunc()
+  }
+})
+
+// PAGINATION
+const internalPaged = reactive({
+  page: 0,
+  perPage: 10
+})
+
+const calculatedPagedState = computed(() => {
+  if (props.paginationOptions === false) return { page: 0, perPage: 0 }
+  if (props.pagination !== null) return props.pagination
+  return internalPaged
+})
+
+const dataPaginated = computed(() => {
+  if (props.paginationOptions === false) return dataSorted.value
+  if (props.pagination !== null) {
+    if (props.filter !== null && props.sortation !== null) {
+      if (props.pagination.pagedInput !== null) {
+        throw new TypeError('Can not use paged input while overriding filter and sorting. Please input data into rows property.')
+      }
+      // console.log('No Paging!')
+      return props.rows
+    }
+    // console.log('External Paging!')
+    return props.pagination.pagedInput || []
+  } else {
+    // console.log('Internal Pagination!')
+    return dataSorted.value.slice(calculatedPagedState.value.perPage * calculatedPagedState.value.page, calculatedPagedState.value.perPage * (calculatedPagedState.value.page + 1))
+  }
+})
+
+const showPagination = computed(() => props.paginationOptions !== false)
+
+const totalData = computed(() => {
+  if (props.pagination !== null) {
+    if (props.filter !== null && props.sortation !== null) {
+      if (!props.pagination.totalRecordCount) {
+        console.error('Binding to pagination without supplying totalRecordCount. Only bind the pagination prop if you intend to override the default behaviour. You must supply a totalRecordCount in order to use external pagination.', 'DataTable.vue')
+        return props.rows.length
+      }
+      return props.pagination.totalRecordCount
+    }
+  }
+  return dataSorted.value.length
+})
+
+const tableRows = computed(() => dataPaginated.value)
+
 const tableColumns = computed(() => {
   const newArr = []
   for (const idx in props.columns) {
@@ -122,45 +201,57 @@ const tableColumns = computed(() => {
   return newArr
 })
 
-const uniqueId = () => Math.floor(Math.random() * 100)
-
-const fireDataLoad = () => {
-  emit('loadData', tableQuery)
-}
-watch(() => ({ ...tableQuery }), () => {
-  fireDataLoad()
-}, {
-  deep: true,
-  immediate: true
-})
-const handlePageChange = (page) => {
-  tableQuery.page = page
-}
 const handleOnSearchChange = debounce((value) => {
-  tableQuery.search = value
-  tableQuery.sortByKey = ''
-  tableQuery.page = 0
-
+  internalFilter.value = value
+  // UnSort
+  handleChangeSort('')
   if (props.filter !== null) {
     emit('update:filter', value)
+  } else {
+    if (props.sortation !== null) {
+      // manually call filter, because it wont be called by sort
+      internalFilterFunc()
+    }
   }
 })
-const handleOnPaginationSizeChange = (value) => {
-  tableQuery.perPage = value
-}
 
 const handleChangeSort = (sortBy) => {
-  if (sortBy === tableQuery.sortByKey) {
-    tableQuery.sortAccending = !tableQuery.sortAccending
+  if (sortBy === internalSort.sortByKey) {
+    internalSort.ascending = !internalSort.ascending
   } else {
-    tableQuery.sortByKey = sortBy
+    internalSort.sortByKey = sortBy
   }
 
   if (props.sortation !== null) {
     emit('update:sortation', {
       ...props.sortation,
-      sortByKey: tableQuery.sortByKey || '',
-      accending: tableQuery.sortAccending || false
+      sortByKey: sortBy || '',
+      ascending: internalSort.ascending || false
+    })
+  } else if (props.pagination !== null) {
+    // manually call sort, because it wont be called by pageination
+    internalSortFunc()
+  }
+}
+
+const handlePageChange = (page) => {
+  internalPaged.page = page
+
+  if (props.pagination !== null) {
+    emit('update:pagination', {
+      ...props.pagination,
+      page: page
+    })
+  }
+}
+
+const handleOnPaginationSizeChange = (value) => {
+  internalPaged.perPage = value
+
+  if (props.pagination !== null) {
+    emit('update:pagination', {
+      ...props.pagination,
+      perPage: value
     })
   }
 }
@@ -172,6 +263,13 @@ const rowClickHandler = (row) => {
   emit('rowClicked', row)
 }
 
+watch(() => props.rows, () => {
+  if (props.filter === null && props.sortation !== null) internalFilterFunc()
+  if (props.sortation === null && props.pagination !== null) internalSortFunc()
+}, {
+  deep: true
+})
+
 </script>
 
 <template>
@@ -179,8 +277,9 @@ const rowClickHandler = (row) => {
     <Level>
       <Field class="w-24">
         <Control
-          v-model="tableQuery.perPage"
-          :options="pagination.perPageOptions || { 0: 'All', 5: '5', 10: '10', 15: '15', 25: '25', 50: '50' }"
+          :model-value="calculatedPagedState.perPage"
+          :options="props.paginationOptions"
+          @update:modelValue="handleOnPaginationSizeChange"
         />
       </Field>
       <Field v-if="props.filter !== false">
@@ -201,8 +300,8 @@ const rowClickHandler = (row) => {
             v-for="(column) in tableColumns"
             :key="`datatable-thead-th-${column.label}`"
             :sortable="column.sortable"
-            :acending="tableQuery.sortAccending"
-            :sorting="tableQuery.sortByKey === column.key"
+            :ascending="calculatedSortState.ascending"
+            :sorting="calculatedSortState.sortByKey === column.key"
             @clicked="handleChangeSort(column.key)"
           >
             {{ column.label }}
@@ -253,8 +352,8 @@ const rowClickHandler = (row) => {
     <div v-if="showPagination">
       <Pagination
         :total="totalData"
-        :current-page="tableQuery.page"
-        :per-page="parseInt(tableQuery.perPage.toString())"
+        :current-page="calculatedPagedState.page"
+        :per-page="parseInt(calculatedPagedState.perPage.toString())"
         @changed="handlePageChange"
       >
         <template #pagination-info="paginationInfo">
