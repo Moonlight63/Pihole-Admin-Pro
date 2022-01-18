@@ -48,9 +48,9 @@ const darkMode = computed(() => store.state.darkMode)
 </script>
 
 <template>
-  <title-bar :title-stack="titleStack" />
-  <hero-bar>Dashboard</hero-bar>
-  <main-section>
+  <TitleBar :title-stack="titleStack" />
+  <HeroBar>Dashboard</HeroBar>
+  <MainSection>
     <!-- <notification
       color="info"
       :icon="mdiGithub"
@@ -73,7 +73,7 @@ const darkMode = computed(() => store.state.darkMode)
       </template>
     </notification> -->
     <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
-      <card-widget
+      <CardWidget
         trend="12%"
         trend-type="up"
         color="text-emerald-500"
@@ -81,7 +81,7 @@ const darkMode = computed(() => store.state.darkMode)
         :number="512"
         label="Clients"
       />
-      <card-widget
+      <CardWidget
         trend="12%"
         trend-type="down"
         color="text-blue-500"
@@ -90,7 +90,7 @@ const darkMode = computed(() => store.state.darkMode)
         prefix="$"
         label="Sales"
       />
-      <card-widget
+      <CardWidget
         trend="Overflow"
         trend-type="alert"
         color="text-red-500"
@@ -103,7 +103,7 @@ const darkMode = computed(() => store.state.darkMode)
 
     <div class="grid grid-cols-1 gap-6 mb-6 xl:grid-cols-2">
       <div class="flex flex-col justify-between">
-        <card-transaction-bar
+        <CardTransactionBar
           v-for="(transaction,index) in transactionBarItems"
           :key="index"
           :amount="transaction.amount"
@@ -115,7 +115,7 @@ const darkMode = computed(() => store.state.darkMode)
         />
       </div>
       <div class="flex flex-col justify-between">
-        <card-client-bar
+        <CardClientBar
           v-for="client in clientBarItems"
           :key="client.id"
           :name="client.name"
@@ -126,12 +126,12 @@ const darkMode = computed(() => store.state.darkMode)
       </div>
     </div>
 
-    <title-sub-bar
+    <TitleSubBar
       :icon="mdiChartPie"
       title="Trends overview"
     />
 
-    <card-component
+    <CardComponent
       title="Performance"
       :icon="mdiFinance"
       :header-icon="mdiReload"
@@ -139,39 +139,39 @@ const darkMode = computed(() => store.state.darkMode)
       @header-icon-click="fillChartData"
     >
       <div v-if="chartData">
-        <line-chart
+        <LineChart
           :data="chartData"
           class="h-96"
         />
       </div>
-    </card-component>
+    </CardComponent>
 
-    <title-sub-bar
+    <TitleSubBar
       :icon="mdiAccountMultiple"
       title="Clients"
     />
 
-    <notification
+    <Notification
       color="info"
       :icon="mdiMonitorCellphone"
     >
       <b>Responsive table.</b> Collapses on mobile
-    </notification>
+    </Notification>
 
-    <card-component
+    <CardComponent
       :icon="mdiMonitorCellphone"
       title="Responsive table"
       has-table
     >
-      <users-table />
-    </card-component>
+      <UsersTable />
+    </CardComponent>
 
-    <card-component
+    <CardComponent
       :icon="mdiMonitorCellphone"
       title="Responsive table"
       has-table
     >
-      <clients-table />
-    </card-component>
-  </main-section>
+      <ClientsTable />
+    </CardComponent>
+  </MainSection>
 </template>

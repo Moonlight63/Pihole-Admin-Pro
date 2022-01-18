@@ -43,7 +43,7 @@ const styleInactive = 'text-gray-300'
 
 <template>
   <li>
-    <component
+    <Component
       :is="componentIs"
       v-slot="vSlot"
       :to="itemTo"
@@ -53,7 +53,7 @@ const styleInactive = 'text-gray-300'
       :class="[isSubmenuList ? 'p-3 text-sm' : 'py-2']"
       @click="menuClick"
     >
-      <icon
+      <Icon
         v-if="item.icon"
         :path="item.icon"
         class="flex-none"
@@ -64,15 +64,15 @@ const styleInactive = 'text-gray-300'
         class="grow"
         :class="[vSlot && vSlot.isExactActive ? styleActive : styleInactive]"
       >{{ item.label }}</span>
-      <icon
+      <Icon
         v-if="hasDropdown"
         :path="dropdownIcon"
         class="flex-none"
         :class="[vSlot && vSlot.isExactActive ? styleActive : styleInactive]"
         w="w-12"
       />
-    </component>
-    <aside-menu-list
+    </Component>
+    <AsideMenuList
       v-if="hasDropdown"
       :menu="item.menu"
       :class="{ 'hidden': !isDropdownActive, 'block bg-gray-700 bg-opacity-50 dark:bg-gray-800 dark:bg-opacity-50': isDropdownActive }"

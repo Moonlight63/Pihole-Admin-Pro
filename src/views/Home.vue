@@ -62,35 +62,35 @@ const darkMode = computed(() => store.state.darkMode)
 </script>
 
 <template>
-  <title-bar :title-stack="titleStack" />
+  <TitleBar :title-stack="titleStack" />
   <!-- <hero-bar>Dashboard</hero-bar> -->
-  <main-section>
-    <card-component
+  <MainSection>
+    <CardComponent
       title="Total Queries Over Last 24 Hours"
       :icon="mdiFinance"
       :header-icon="mdiReload"
       class="mb-6"
       @header-icon-click="fillChartData"
     >
-      <table-test :checkable="true" />
-    </card-component>
+      <TableTest :checkable="true" />
+    </CardComponent>
 
     <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-4">
-      <card-widget
+      <CardWidget
         color="text-emerald-400"
         :icon="mdiEarth"
         :number="512"
         label="Total Queries (8 Clients)"
         bg-color="bg-emerald-500"
       />
-      <card-widget
+      <CardWidget
         color="text-blue-300 dark:text-blue-400"
         :icon="mdiHandBackRight"
         :number="7770"
         label="Queries Blocked"
         bg-color="bg-blue-400 dark:bg-blue-500"
       />
-      <card-widget
+      <CardWidget
         color="text-orange-200 dark:text-orange-300"
         :icon="mdiChartPie"
         :number="82"
@@ -98,7 +98,7 @@ const darkMode = computed(() => store.state.darkMode)
         bg-color="bg-orange-300 dark:bg-orange-400"
         label="Percentage Blocked"
       />
-      <card-widget
+      <CardWidget
         color="text-red-300 dark:text-red-400"
         :icon="mdiViewListOutline"
         :number="2065813"
@@ -137,7 +137,7 @@ const darkMode = computed(() => store.state.darkMode)
       title="Total Queries Over Last 24 Hours"
     /> -->
 
-    <card-component
+    <CardComponent
       title="Total Queries Over Last 24 Hours"
       :icon="mdiFinance"
       :header-icon="mdiReload"
@@ -145,19 +145,19 @@ const darkMode = computed(() => store.state.darkMode)
       @header-icon-click="fillChartData"
     >
       <div v-if="chartData">
-        <bar-chart
+        <BarChart
           :data="chartData"
           class="h-96"
         />
       </div>
-    </card-component>
+    </CardComponent>
 
     <!-- <title-sub-bar
       :icon="mdiChartPie"
       title="Client Activity Over Last 24 Hours"
     /> -->
 
-    <card-component
+    <CardComponent
       title="Client activity over last 24 hours"
       :icon="mdiFinance"
       :header-icon="mdiReload"
@@ -165,15 +165,15 @@ const darkMode = computed(() => store.state.darkMode)
       @header-icon-click="fillChartData"
     >
       <div v-if="chartData2">
-        <bar-chart
+        <BarChart
           :data="chartData2"
           class="h-96"
         />
       </div>
-    </card-component>
+    </CardComponent>
 
     <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
-      <card-component
+      <CardComponent
         title="Query Types"
         :icon="mdiFinance"
         :header-icon="mdiReload"
@@ -181,13 +181,13 @@ const darkMode = computed(() => store.state.darkMode)
         @header-icon-click="fillChartData"
       >
         <div v-if="chartData3">
-          <ring-chart
+          <RingChart
             :data="chartData3"
             class="h-96"
           />
         </div>
-      </card-component>
-      <card-component
+      </CardComponent>
+      <CardComponent
         title="Upstream Servers"
         :icon="mdiFinance"
         :header-icon="mdiReload"
@@ -195,27 +195,27 @@ const darkMode = computed(() => store.state.darkMode)
         @header-icon-click="fillChartData"
       >
         <div v-if="chartData4">
-          <ring-chart
+          <RingChart
             :data="chartData4"
             class="h-96"
           />
         </div>
-      </card-component>
-      <card-component
+      </CardComponent>
+      <CardComponent
         :icon="mdiMonitorCellphone"
         title="Top Allowed Domains"
         has-table
       >
-        <top-domains />
-      </card-component>
+        <TopDomains />
+      </CardComponent>
 
-      <card-component
+      <CardComponent
         :icon="mdiMonitorCellphone"
         title="Top Clients"
         has-table
       >
-        <top-clients />
-      </card-component>
+        <TopClients />
+      </CardComponent>
     </div>
-  </main-section>
+  </MainSection>
 </template>

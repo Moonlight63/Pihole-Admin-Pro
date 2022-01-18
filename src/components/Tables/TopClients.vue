@@ -71,15 +71,15 @@ const checked = (isChecked, client) => {
 </script>
 
 <template>
-  <modal-box
+  <ModalBox
     v-model="isModalActive"
     title="Sample modal"
   >
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
-  </modal-box>
+  </ModalBox>
 
-  <modal-box
+  <ModalBox
     v-model="isModalDangerActive"
     large-title="Please confirm"
     button="danger"
@@ -87,7 +87,7 @@ const checked = (isChecked, client) => {
   >
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
-  </modal-box>
+  </ModalBox>
 
   <div
     v-if="checkedRows.length"
@@ -179,9 +179,9 @@ const checked = (isChecked, client) => {
     </tbody>
   </table>
   <div class="table-pagination">
-    <level>
-      <jb-buttons>
-        <jb-button
+    <Level>
+      <JbButtons>
+        <JbButton
           v-for="page in pagesList"
           :key="page"
           :active="page === currentPage"
@@ -190,8 +190,8 @@ const checked = (isChecked, client) => {
           small
           @click="currentPage = page"
         />
-      </jb-buttons>
+      </JbButtons>
       <small>Page {{ currentPageHuman }} of {{ numPages }}</small>
-    </level>
+    </Level>
   </div>
 </template>

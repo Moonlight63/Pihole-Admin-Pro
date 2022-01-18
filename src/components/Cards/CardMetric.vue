@@ -45,7 +45,7 @@ const darkMode = computed(() => store.state.darkMode)
 </script>
 
 <template>
-  <card-component
+  <CardComponent
     :bg-color="bgColor"
     class="relative"
   >
@@ -55,7 +55,7 @@ const darkMode = computed(() => store.state.darkMode)
         {{ label }}
       </h3>
       <h1 class="text-3xl font-semibold leading-tight">
-        <growing-number
+        <GrowingNumber
           :value="number"
           :prefix="prefix"
           :suffix="suffix"
@@ -63,7 +63,7 @@ const darkMode = computed(() => store.state.darkMode)
       </h1>
     </div>
     <div class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-end z-[0]">
-      <icon
+      <Icon
         v-if="icon"
         :path="icon"
         size="100%"
@@ -73,5 +73,5 @@ const darkMode = computed(() => store.state.darkMode)
       />
     </div>
     <!-- </level> -->
-  </card-component>
+  </CardComponent>
 </template>

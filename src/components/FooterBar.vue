@@ -16,7 +16,7 @@ const isFooterBarVisible = computed(() => !store.state.isFullScreen)
     v-show="isFooterBarVisible"
     class="px-6 py-2 bg-panel"
   >
-    <level>
+    <Level>
       <div class="text-center md:text-left">
         <b><a
           href="#"
@@ -32,6 +32,6 @@ const isFooterBarVisible = computed(() => !store.state.isFullScreen)
         <b>  |  Web Interface  </b>
         <a href="#">v5.9</a>
       </div>
-    </level>
+    </Level>
   </footer>
 </template>

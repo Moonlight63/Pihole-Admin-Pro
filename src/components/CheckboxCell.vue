@@ -18,7 +18,7 @@ watch(checked, newVal => {
 </script>
 
 <template>
-  <component
+  <Component
     :is="type"
     class="checkbox-cell"
   >
@@ -29,5 +29,5 @@ watch(checked, newVal => {
       >
       <span class="check" />
     </label>
-  </component>
+  </Component>
 </template>

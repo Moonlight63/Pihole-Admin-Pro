@@ -13,7 +13,7 @@ defineProps({
 
 <template>
   <section class="p-6">
-    <level>
+    <Level>
       <ul>
         <li
           v-for="(title, index) in titleStack"
@@ -30,7 +30,7 @@ defineProps({
         target="_blank"
         :icon="mdiGithub"
       /> -->
-    </level>
+    </Level>
   </section>
 </template>
 

@@ -42,4 +42,4 @@ function filterForString (dataSet, key) {
   return filtered
 }
 
-module.exports = filterForString
+export { filterForString }

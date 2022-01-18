@@ -1,5 +1,5 @@
-<script setup>
-import { computed, ref, watch, reactive } from 'vue'
+<script setup lang="ts">
+import { computed, ref, watch, reactive, PropType } from 'vue'
 import Level from '@/components/Level.vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
@@ -9,34 +9,31 @@ import TableHeadCell from './Components/Table/TableHeadCell.vue'
 import TableRow from './Components/Table/TableRow.vue'
 import Pagination from './Components/Pagination/Pagination.vue'
 import TableBodyCell from './Components/Table/TableBodyCell.vue'
-import filterForString from './Components/Filters/deep-text-filter'
-
-const debounce = (callback, wait = 400) => {
-  let timeout
-
-  return (...args) => {
-    // This is perfectly valid code, but eslint incorectly matches it.
-    // https://github.com/standard/eslint-plugin-standard/issues/12#issuecomment-323561586
-    // eslint-disable-next-line node/no-callback-literal
-    const next = () => callback(...args)
-    clearTimeout(timeout)
-    timeout = setTimeout(next, wait)
-  }
-}
+import { filterForString } from './Components/Filters/deep-text-filter'
+import { debounce } from './Utils/datatable_utils'
+import type {
+  DataTableRow,
+  DataTableRows,
+  DataTableColumns,
+  DataTableColumn,
+  DataTableSortation,
+  DataTablePagination,
+  DataTablePaginationOptions
+} from './types/DataTableTypes'
 
 const uniqueId = () => Math.floor(Math.random() * 100)
 
 const props = defineProps({
-  rows: { type: Array, required: true },
-  columns: { type: Array, required: true },
+  rows: { type: Array as PropType<DataTableRows>, required: true },
+  columns: { type: Array as PropType<DataTableColumns>, required: true },
   filter: { type: [Boolean, String], required: false, default: null },
-  sortation: { type: Object, required: false, default: null },
-  pagination: { type: Object, required: false, default: null },
+  sortation: { type: Object as PropType<DataTableSortation>, required: false, default: null },
+  pagination: { type: Object as PropType<DataTablePagination>, required: false, default: null },
   loading: { type: Boolean, required: false, default: false },
   hoverable: { type: Boolean, required: false, default: false },
   clickable: { type: Boolean, required: false, default: false },
   paginationOptions: {
-    type: [Object, Array, Boolean],
+    type: [Object, Array, Boolean] as PropType<DataTablePaginationOptions>,
     required: false,
     default: () => ({
       0: 'All',
@@ -86,7 +83,7 @@ const dataFiltered = computed(() => {
 })
 
 // SORTATION
-const internalSort = reactive({
+const internalSort = reactive<DataTableSortation>({
   sortByKey: '',
   ascending: false
 })
@@ -97,7 +94,7 @@ const calculatedSortState = computed(() => {
 })
 
 const internalSortFunc = () => {
-  let sorted = []
+  let sorted: Array<Record<string, unknown>> = []
   if (calculatedSortState.value.sortByKey === '') {
     sorted = dataFiltered.value
   } else {
@@ -138,7 +135,7 @@ const internalPaged = reactive({
 
 const calculatedPagedState = computed(() => {
   if (props.paginationOptions === false) return { page: 0, perPage: 0 }
-  if (props.pagination !== null) return props.pagination
+  if (props.pagination !== null) return { page: 0, perPage: 10, ...props.pagination }
   return internalPaged
 })
 
@@ -146,14 +143,14 @@ const dataPaginated = computed(() => {
   if (props.paginationOptions === false) return dataSorted.value
   if (props.pagination !== null) {
     if (props.filter !== null && props.sortation !== null) {
-      if (props.pagination.pagedInput !== null) {
-        throw new TypeError('Can not use paged input while overriding filter and sorting. Please input data into rows property.')
+      if (props.pagination.pagedInput != null) {
+        console.error('Can not use paged input while overriding filter and sorting. Please input data into rows property.')
       }
       // console.log('No Paging!')
       return props.rows
     }
     // console.log('External Paging!')
-    return props.pagination.pagedInput || []
+    return props.pagination.pagedInput ?? []
   } else {
     // console.log('Internal Pagination!')
     return dataSorted.value.slice(calculatedPagedState.value.perPage * calculatedPagedState.value.page, calculatedPagedState.value.perPage * (calculatedPagedState.value.page + 1))
@@ -165,11 +162,12 @@ const showPagination = computed(() => props.paginationOptions !== false)
 const totalData = computed(() => {
   if (props.pagination !== null) {
     if (props.filter !== null && props.sortation !== null) {
-      if (!props.pagination.totalRecordCount) {
+      if (typeof props.pagination.totalRecordCount === 'number') {
+        return props.pagination.totalRecordCount
+      } else {
         console.error('Binding to pagination without supplying totalRecordCount. Only bind the pagination prop if you intend to override the default behaviour. You must supply a totalRecordCount in order to use external pagination.', 'DataTable.vue')
         return props.rows.length
       }
-      return props.pagination.totalRecordCount
     }
   }
   return dataSorted.value.length
@@ -180,10 +178,10 @@ const tableRows = computed(() => dataPaginated.value)
 const tableColumns = computed(() => {
   const newArr = []
   for (const idx in props.columns) {
-    const column = props.columns[idx]
-    if (Object.getPrototypeOf(column) === String.prototype) {
+    const column: DataTableColumn = props.columns[idx]
+    if (typeof column === 'string') {
       newArr.push({ idx: idx, key: column.toLowerCase(), label: column[0].toUpperCase() + column.substring(1), sortable: false })
-    } else if (Object.getPrototypeOf(column) === Object.prototype) {
+    } else {
       const newObj = { ...column }
       if (!('sortable' in newObj)) {
         newObj.sortable = false
@@ -215,7 +213,7 @@ const handleOnSearchChange = debounce((value) => {
   }
 })
 
-const handleChangeSort = (sortBy) => {
+const handleChangeSort = (sortBy: string) => {
   if (sortBy === internalSort.sortByKey) {
     internalSort.ascending = !internalSort.ascending
   } else {
@@ -234,7 +232,7 @@ const handleChangeSort = (sortBy) => {
   }
 }
 
-const handlePageChange = (page) => {
+const handlePageChange = (page: number) => {
   internalPaged.page = page
 
   if (props.pagination !== null) {
@@ -245,7 +243,7 @@ const handlePageChange = (page) => {
   }
 }
 
-const handleOnPaginationSizeChange = (value) => {
+const handleOnPaginationSizeChange = (value: number) => {
   internalPaged.perPage = value
 
   if (props.pagination !== null) {
@@ -256,7 +254,7 @@ const handleOnPaginationSizeChange = (value) => {
   }
 }
 
-const rowClickHandler = (row) => {
+const rowClickHandler = (row: DataTableRow) => {
   if (props.clickable || !props.hoverable) {
     return
   }

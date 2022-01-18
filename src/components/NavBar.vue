@@ -61,35 +61,35 @@ const menuOpenLg = () => {
     :class="{'ml-60 lg:ml-0':isAsideMobileExpanded}"
   >
     <div class="flex items-stretch flex-1 h-14">
-      <nav-bar-item
+      <NavBarItem
         type="flex lg:hidden"
         @click.prevent="menuToggleMobile"
       >
-        <icon
+        <Icon
           :path="menuToggleMobileIcon"
           size="24"
         />
-      </nav-bar-item>
-      <nav-bar-item
+      </NavBarItem>
+      <NavBarItem
         type="hidden lg:flex xl:hidden"
         @click.prevent="menuOpenLg"
       >
-        <icon
+        <Icon
           :path="mdiMenu"
           size="24"
         />
-      </nav-bar-item>
+      </NavBarItem>
       <!-- <nav-bar-item>
         <nav-bar-search />
       </nav-bar-item> -->
     </div>
     <div class="flex items-stretch flex-none h-14 lg:hidden">
-      <nav-bar-item @click.prevent="menuNavBarToggle">
-        <icon
+      <NavBarItem @click.prevent="menuNavBarToggle">
+        <Icon
           :path="menuNavBarToggleIcon"
           size="24"
         />
-      </nav-bar-item>
+      </NavBarItem>
     </div>
     <div
       class="absolute left-0 w-screen shadow bg-panel top-14 lg:w-auto lg:items-stretch lg:flex lg:grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none "
@@ -126,51 +126,51 @@ const menuOpenLg = () => {
             </nav-bar-item>
           </template>
         </nav-bar-menu> -->
-        <nav-bar-menu has-divider>
-          <user-avatar class="inline-flex w-6 h-6 mr-3" />
+        <NavBarMenu has-divider>
+          <UserAvatar class="inline-flex w-6 h-6 mr-3" />
           <div>
             <span>{{ userName }}</span>
           </div>
 
           <template #dropdown>
-            <nav-bar-item to="/profile">
-              <nav-bar-item-label
+            <NavBarItem to="/profile">
+              <NavBarItemLabel
                 :icon="mdiAccount"
                 label="My Profile"
               />
-            </nav-bar-item>
-            <nav-bar-item>
-              <nav-bar-item-label
+            </NavBarItem>
+            <NavBarItem>
+              <NavBarItemLabel
                 :icon="mdiCogOutline"
                 label="Settings"
               />
-            </nav-bar-item>
-            <nav-bar-item>
-              <nav-bar-item-label
+            </NavBarItem>
+            <NavBarItem>
+              <NavBarItemLabel
                 :icon="mdiEmail"
                 label="Messages"
               />
-            </nav-bar-item>
-            <nav-bar-menu-divider />
-            <nav-bar-item>
-              <nav-bar-item-label
+            </NavBarItem>
+            <NavBarMenuDivider />
+            <NavBarItem>
+              <NavBarItemLabel
                 :icon="mdiLogout"
                 label="Log Out"
               />
-            </nav-bar-item>
+            </NavBarItem>
           </template>
-        </nav-bar-menu>
-        <nav-bar-item
+        </NavBarMenu>
+        <NavBarItem
           has-divider
           is-desktop-icon-only
           @click.prevent="toggleLightDark"
         >
-          <nav-bar-item-label
+          <NavBarItemLabel
             :icon="mdiThemeLightDark"
             label="Light/Dark"
             is-desktop-icon-only
           />
-        </nav-bar-item>
+        </NavBarItem>
         <!-- <nav-bar-item
           href="https://github.com/justboil/admin-one-vue-tailwind"
           has-divider
@@ -182,13 +182,13 @@ const menuOpenLg = () => {
             is-desktop-icon-only
           />
         </nav-bar-item> -->
-        <nav-bar-item is-desktop-icon-only>
-          <nav-bar-item-label
+        <NavBarItem is-desktop-icon-only>
+          <NavBarItemLabel
             :icon="mdiLogout"
             label="Log out"
             is-desktop-icon-only
           />
-        </nav-bar-item>
+        </NavBarItem>
       </div>
     </div>
   </nav>

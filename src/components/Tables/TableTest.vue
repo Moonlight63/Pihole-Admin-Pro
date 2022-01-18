@@ -1,39 +1,40 @@
-<script setup>
-import { computed, ref, reactive } from 'vue'
+<script setup lang="ts">
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import DataTable from '@/components/Tables/Datatables/DataTable.vue'
 import TableBodyCell from './Datatables/Components/Table/TableBodyCell.vue'
+import { DataTableColumns, DataTablePagination, DataTableSortation } from './Datatables/types/DataTableTypes'
 
 const store = useStore()
 
 const dataRaw = computed(() => store.state.clients)
 
-const filter = ref('')
-const sortation = ref({})
-const pagination = ref({
-  // totalRecordCount: computed(() => itemsUnsorted.value.length)
-  // perPageOptions: { 0: 'All', 5: '5', 10: '10', 15: '15', 25: '25', 50: '50' },
-  // perPageDefault: 5,
-  // initalPage: 0
-})
+// const filter = ref('')
+const sortation = ref<DataTableSortation>({})
+// const pagination = ref<DataTablePagination>({
+//   totalRecordCount: computed(() => dataRaw.value.length).value,
+//   pagedInput: dataRaw.value
+// })
 
 const getFilteredData = (data) => {
   sortation.value.sortedInput = data
 }
 
+const columns: DataTableColumns = [
+  { key: 'name', sortable: true },
+  { key: 'progress', label: 'Hits', sortable: true },
+  { label: 'Status', key: 'progress' }
+]
+
 </script>
 
 <template>
-  <!-- v-model:filter="filter" -->
-  <!-- v-model:pagination="pagination" -->
-  <!-- v-model:sortation="sortation" -->
+  <!-- v-model:filter="filter"
+  v-model:pagination="pagination"
+  v-model:sortation="sortation" -->
   <DataTable
     :rows="dataRaw"
-    :columns="[
-      { 'key': 'name', 'sortable': true},
-      { 'key': 'progress', 'label': 'Hits', 'sortable': true },
-      { 'label': 'Status', 'key': 'progress' }
-    ]"
+    :columns="columns"
     @output:filtered="getFilteredData"
   >
     <template #datatable-tbody-td-2="progressCell">

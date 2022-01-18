@@ -16,16 +16,16 @@ const darkModeToggle = () => {
 
 <template>
   <section class="bg-white border-t border-b border-gray-100 p-6 dark:bg-gray-900 dark:border-gray-900 dark:text-white">
-    <level>
+    <Level>
       <h1 class="text-3xl font-semibold leading-tight">
         <slot />
       </h1>
-      <jb-button
+      <JbButton
         :label="darkMode ? 'Light Mode' : 'Dark Mode'"
         :icon="mdiThemeLightDark"
         :outline="darkMode"
         @click="darkModeToggle"
       />
-    </level>
+    </Level>
   </section>
 </template>

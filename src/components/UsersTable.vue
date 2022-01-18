@@ -74,15 +74,15 @@ const doStuff = () => {
 </script>
 
 <template>
-  <modal-box
+  <ModalBox
     v-model="isModalActive"
     title="Sample modal"
   >
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
-  </modal-box>
+  </ModalBox>
 
-  <modal-box
+  <ModalBox
     v-model="isModalDangerActive"
     large-title="Please confirm"
     button="danger"
@@ -90,7 +90,7 @@ const doStuff = () => {
   >
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
-  </modal-box>
+  </ModalBox>
 
   <div
     v-if="checkedRows.length"
@@ -105,13 +105,13 @@ const doStuff = () => {
     </span>
   </div>
 
-  <jb-buttons>
-    <jb-button
+  <JbButtons>
+    <JbButton
       label="Do Stuff"
       :outline="darkMode"
       @click="doStuff()"
     />
-  </jb-buttons>
+  </JbButtons>
 
   <table>
     <thead>
@@ -131,12 +131,12 @@ const doStuff = () => {
         v-for="client in itemsPaginated"
         :key="client.id"
       >
-        <checkbox-cell
+        <CheckboxCell
           v-if="checkable"
           @checked="checked($event, client)"
         />
         <td class="image-cell">
-          <user-avatar
+          <UserAvatar
             :username="client.name"
             class="image"
           />
@@ -160,31 +160,31 @@ const doStuff = () => {
           >{{ client.website }}</small>
         </td>
         <td class="actions-cell">
-          <jb-buttons
+          <JbButtons
             type="justify-start lg:justify-end"
             no-wrap
           >
-            <jb-button
+            <JbButton
               color="success"
               :icon="mdiEye"
               small
               @click="isModalActive = true"
             />
-            <jb-button
+            <JbButton
               color="danger"
               :icon="mdiTrashCan"
               small
               @click="isModalDangerActive = true"
             />
-          </jb-buttons>
+          </JbButtons>
         </td>
       </tr>
     </tbody>
   </table>
   <div class="table-pagination">
-    <level>
-      <jb-buttons>
-        <jb-button
+    <Level>
+      <JbButtons>
+        <JbButton
           v-for="page in pagesList"
           :key="page"
           :active="page === currentPage"
@@ -193,8 +193,8 @@ const doStuff = () => {
           small
           @click="currentPage = page"
         />
-      </jb-buttons>
+      </JbButtons>
       <small>Page {{ currentPageHuman }} of {{ numPages }}</small>
-    </level>
+    </Level>
   </div>
 </template>

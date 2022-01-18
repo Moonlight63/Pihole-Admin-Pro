@@ -37,7 +37,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <nav-bar-item
+  <NavBarItem
     ref="root"
     type="block"
     :has-divider="hasDivider"
@@ -48,7 +48,7 @@ onBeforeUnmount(() => {
   >
     <a class="flex items-center py-2 px-3 bg-gray-100 dark:bg-gray-800 lg:bg-transparent lg:dark:bg-transparent">
       <slot />
-      <icon
+      <Icon
         :path="toggleDropdownIcon"
         class="hidden lg:inline-flex transition-colors"
       />
@@ -61,5 +61,5 @@ onBeforeUnmount(() => {
     >
       <slot name="dropdown" />
     </div>
-  </nav-bar-item>
+  </NavBarItem>
 </template>

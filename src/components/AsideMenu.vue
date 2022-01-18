@@ -38,18 +38,18 @@ const menuClick = (event, item) => {
     :class="[ isAsideMobileExpanded ? 'left-0' : '-left-60', isAsideLgActive ? 'block' : 'lg:hidden xl:block' ]"
   >
     <div class="flex flex-row items-center flex-1 w-full text-menu h-14">
-      <nav-bar-item
+      <NavBarItem
         type="hidden lg:flex xl:hidden"
         active-color="text-menu"
         active
         @click="asideLgClose"
       >
-        <icon
+        <Icon
           :path="mdiMenu"
           class="cursor-pointer"
           size="24"
         />
-      </nav-bar-item>
+      </NavBarItem>
       <div class="flex-1 px-3 text-center">
         <span>Pi-</span> <b class="font-black">Hole</b>
       </div>
@@ -63,7 +63,7 @@ const menuClick = (event, item) => {
         >
           {{ menuGroup }}
         </p>
-        <aside-menu-list
+        <AsideMenuList
           v-else
           :key="`b-${index}`"
           :menu="menuGroup"

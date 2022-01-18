@@ -59,7 +59,7 @@ const submit = e => {
 </script>
 
 <template>
-  <component
+  <Component
     :is="is"
     :class="componentClass"
     class="border border-gray-100 dark:border-gray-900"
@@ -73,7 +73,7 @@ const submit = e => {
         class="flex items-center py-3 font-bold grow"
         :class="[ icon ? 'px-4' : 'px-6' ]"
       >
-        <icon
+        <Icon
           v-if="icon"
           :path="icon"
           class="mr-3"
@@ -87,7 +87,7 @@ const submit = e => {
         aria-label="more options"
         @click.prevent="headerIconClick"
       >
-        <icon :path="computedHeaderIcon" />
+        <Icon :path="computedHeaderIcon" />
       </a>
     </header>
     <div
@@ -102,5 +102,5 @@ const submit = e => {
     >
       <slot />
     </div>
-  </component>
+  </Component>
 </template>

@@ -16,7 +16,7 @@ defineProps({
 </script>
 
 <template>
-  <icon
+  <Icon
     :path="icon"
     class="transition-colors"
   />
