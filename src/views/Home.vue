@@ -56,7 +56,7 @@ onMounted(() => {
 <template>
   <TitleBar :title-stack="titleStack" />
   <MainSection>
-    <CardComponent
+    <!-- <CardComponent
       title="Total Queries Over Last 24 Hours"
       :icon="mdiFinance"
       :header-icon="mdiReload"
@@ -64,7 +64,7 @@ onMounted(() => {
       @header-icon-click="fillChartData"
     >
       <TableTest :checkable="true" />
-    </CardComponent>
+    </CardComponent> -->
 
     <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-4">
       <CardWidget
