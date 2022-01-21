@@ -1,1 +1,1 @@
-export type FunctionType = (...args) => void
+export type FunctionType = (...args: any) => void

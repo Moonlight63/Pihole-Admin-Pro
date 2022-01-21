@@ -1,9 +1,9 @@
 <script setup>
 import FullScreenSection from '@/components/FullScreenSection.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import Divider from '@/components/Divider.vue'
-import JbButton from '@/components/JbButton.vue'
-import JbButtons from '@/components/JbButtons.vue'
+import CardComponent from '@/components/Cards/CardComponent.vue'
+import Divider from '@/components/UI/Divider.vue'
+import JbButton from '@/components/Form/JbButton.vue'
+import JbButtons from '@/components/Form/JbButtons.vue'
 </script>
 
 <template>

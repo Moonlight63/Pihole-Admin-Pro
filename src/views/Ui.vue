@@ -13,19 +13,19 @@ import {
   mdiClose
 } from '@mdi/js'
 import MainSection from '@/components/MainSection.vue'
-import HeroBar from '@/components/HeroBar.vue'
-import TitleBar from '@/components/TitleBar.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import JbButtons from '@/components/JbButtons.vue'
-import JbButton from '@/components/JbButton.vue'
-import Notification from '@/components/Notification.vue'
-import Divider from '@/components/Divider.vue'
-import ModalBox from '@/components/ModalBox.vue'
+import HeroBar from '@/components/Panels/HeroBar.vue'
+import TitleBar from '@/components/Panels/TitleBar.vue'
+import CardComponent from '@/components/Cards/CardComponent.vue'
+import JbButtons from '@/components/Form/JbButtons.vue'
+import JbButton from '@/components/Form/JbButton.vue'
+import Notification from '@/components/UI/Notification.vue'
+import Divider from '@/components/UI/Divider.vue'
+import ModalBox from '@/components/UI/ModalBox.vue'
 import TitledSection from '@/components/TitledSection.vue'
-import Field from '@/components/Field.vue'
-import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
-import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
-import TitleSubBar from '@/components/TitleSubBar.vue'
+import Field from '@/components/Form/Field.vue'
+import CheckRadioPicker from '@/components/Form/CheckRadioPicker.vue'
+import BottomOtherPagesSection from '@/components/UnusedReference/BottomOtherPagesSection.vue'
+import TitleSubBar from '@/components/Panels/TitleSubBar.vue'
 
 const titleStack = ref(['Admin', 'UI Components'])
 
@@ -90,8 +90,8 @@ const darkModeToggle = () => {
   </TitledSection>
 
   <MainSection>
-    <CardComponent class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto">
-      <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
+    <CardComponent class="shadow-2xl md:w-7/12 lg:w-5/12 xl:w-4/12 md:mx-auto">
+      <div class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400">
         <JbButton
           label="Toggle"
           outline
@@ -110,7 +110,7 @@ const darkModeToggle = () => {
       <CardComponent
         title="Confirm modal"
         :header-icon="mdiClose"
-        class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
+        class="shadow-2xl cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 md:mx-auto"
         hoverable
         @click="modalOneActive = true"
       >
@@ -134,7 +134,7 @@ const darkModeToggle = () => {
       </CardComponent>
 
       <CardComponent
-        class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
+        class="shadow-2xl cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 md:mx-auto"
         hoverable
         @click="modalTwoActive = true"
       >
@@ -156,7 +156,7 @@ const darkModeToggle = () => {
       </CardComponent>
 
       <CardComponent
-        class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
+        class="shadow-2xl cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 md:mx-auto"
         hoverable
         @click="modalThreeActive = true"
       >
@@ -447,7 +447,7 @@ const darkModeToggle = () => {
         title="With Title"
         mb=""
       >
-        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
+        <div class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400">
           With title
         </div>
       </CardComponent>
@@ -458,7 +458,7 @@ const darkModeToggle = () => {
         :header-icon="mdiClose"
         mb=""
       >
-        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
+        <div class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400">
           With title & icons
         </div>
       </CardComponent>

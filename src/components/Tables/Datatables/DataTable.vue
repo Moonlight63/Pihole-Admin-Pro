@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, ref, watch, reactive, PropType } from 'vue'
-import Level from '@/components/Level.vue'
-import Field from '@/components/Field.vue'
-import Control from '@/components/Control.vue'
+import Level from '@/components/UI/Level.vue'
+import Field from '@/components/Form/Field.vue'
+import Control from '@/components/Form/Control.vue'
 import TableWrapper from './Components/Table/TableWrapper.vue'
 import TableHead from './Components/Table/TableHead.vue'
 import TableHeadCell from './Components/Table/TableHeadCell.vue'
@@ -60,7 +60,7 @@ const emit = defineEmits([
 const internalFilter = ref('')
 
 const calculatedFilterState = computed(() => {
-  if (props.filter !== null) return props.filter
+  if (props.filter !== null && typeof props.filter === 'string') return props.filter
   return internalFilter.value
 })
 
@@ -83,13 +83,21 @@ const dataFiltered = computed(() => {
 })
 
 // SORTATION
-const internalSort = reactive<DataTableSortation>({
+const internalSort = reactive({
   sortByKey: '',
-  ascending: false
+  ascending: false,
+  sortedInput: undefined
 })
 
 const calculatedSortState = computed(() => {
-  if (props.sortation !== null) return props.sortation
+  // Be explict
+  if (props.sortation !== null) {
+    return {
+      sortByKey: props.sortation.sortByKey ?? '',
+      ascending: props.sortation.ascending ?? false,
+      sortedInput: props.sortation.sortedInput
+    }
+  }
   return internalSort
 })
 
@@ -99,10 +107,10 @@ const internalSortFunc = () => {
     sorted = dataFiltered.value
   } else {
     sorted = dataFiltered.value.slice(0).sort((b, a) => {
-      return a[calculatedSortState.value.sortByKey]
+      return (a[calculatedSortState.value.sortByKey] as object)
         .toString()
         .toLowerCase()
-        .localeCompare(b[calculatedSortState.value.sortByKey]
+        .localeCompare((b[calculatedSortState.value.sortByKey] as object)
           .toString()
           .toLowerCase())
     })
@@ -176,7 +184,12 @@ const totalData = computed(() => {
 const tableRows = computed(() => dataPaginated.value)
 
 const tableColumns = computed(() => {
-  const newArr = []
+  const newArr: Array<{
+    key: string,
+    label: string,
+    sortable: boolean,
+    idx: string
+  }> = []
   for (const idx in props.columns) {
     const column: DataTableColumn = props.columns[idx]
     if (typeof column === 'string') {
@@ -186,14 +199,19 @@ const tableColumns = computed(() => {
       if (!('sortable' in newObj)) {
         newObj.sortable = false
       }
-      if (!('key' in newObj) && ('label' in newObj)) {
+      if (!(newObj.key) && typeof newObj.label === 'string') {
         newObj.key = newObj.label.toLowerCase()
       }
-      if (('key' in newObj) && !('label' in newObj)) {
+      if (!(newObj.label) && typeof newObj.key === 'string') {
         newObj.label = (newObj.key[0].toUpperCase() + newObj.key.substring(1))
       }
-      newObj.idx = idx
-      newArr.push(newObj)
+      // Be explict
+      newArr.push({
+        idx: idx,
+        label: newObj.label as string,
+        key: newObj.key as string,
+        sortable: newObj.sortable as boolean
+      })
     }
   }
   return newArr
@@ -203,6 +221,7 @@ const handleOnSearchChange = debounce((value) => {
   internalFilter.value = value
   // UnSort
   handleChangeSort('')
+  handlePageChange(0)
   if (props.filter !== null) {
     emit('update:filter', value)
   } else {

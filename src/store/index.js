@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
-import { darkModeKey } from '@/config.js'
+import { darkModeKey, apiAddressKey } from '@/config.js'
 
 export default createStore({
   state: {
@@ -19,6 +19,14 @@ export default createStore({
     /* Dark mode */
     darkMode: false,
 
+    /* API Address */
+    apiAddress: 'http://localhost:8080/',
+
+    isConnecting: false,
+    connected: false,
+
+    currentSummary: {},
+
     /* Field focus with ctrl+k (to register only once) */
     isFieldFocusRegistered: false,
 
@@ -33,6 +41,10 @@ export default createStore({
       state[payload.key] = payload.value
 
       // console.log(payload)
+    },
+
+    updateCurrentSummary (state, payload) {
+      state.currentSummary = payload
     },
 
     /* User */
@@ -88,6 +100,43 @@ export default createStore({
         key: 'darkMode',
         value
       })
+    },
+
+    async apiAddress ({ commit, state }, value) {
+      localStorage.setItem(apiAddressKey, value)
+
+      commit('basic', {
+        key: 'apiAddress',
+        value
+      })
+
+      if (state.isConnecting) {
+        throw new Error('Already connecting')
+      }
+
+      commit('basic', {
+        key: 'isConnecting',
+        value: true
+      })
+
+      axios
+        .get(`${value}/api/stats/summary`)
+        .then((r) => {
+          if (r.data) {
+            commit('updateCurrentSummary', r.data)
+            commit('basic', {
+              key: 'isConnecting',
+              value: false
+            })
+          }
+        })
+        .catch(error => {
+          alert(error.message)
+          commit('basic', {
+            key: 'isConnecting',
+            value: false
+          })
+        })
     },
 
     fetch ({ commit, state }, payload) {

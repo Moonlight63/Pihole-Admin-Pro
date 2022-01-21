@@ -2,13 +2,13 @@
 import { ref } from 'vue'
 import { mdiMonitorCellphone, mdiAccountMultiple, mdiTableBorder, mdiTableOff } from '@mdi/js'
 import MainSection from '@/components/MainSection.vue'
-import Notification from '@/components/Notification.vue'
-import ClientsTable from '@/components/ClientsTable.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import TitleBar from '@/components/TitleBar.vue'
-import HeroBar from '@/components/HeroBar.vue'
-import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
-import TitleSubBar from '@/components/TitleSubBar.vue'
+import Notification from '@/components/UI/Notification.vue'
+import ClientsTable from '@/components/UnusedReference/ClientsTable.vue'
+import CardComponent from '@/components/Cards/CardComponent.vue'
+import TitleBar from '@/components/Panels/TitleBar.vue'
+import HeroBar from '@/components/Panels/HeroBar.vue'
+import BottomOtherPagesSection from '@/components/UnusedReference/BottomOtherPagesSection.vue'
+import TitleSubBar from '@/components/Panels/TitleSubBar.vue'
 
 const titleStack = ref(['Admin', 'Tables'])
 </script>

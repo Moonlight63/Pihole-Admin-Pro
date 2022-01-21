@@ -3,16 +3,16 @@ import { ref, reactive } from 'vue'
 import { useStore } from 'vuex'
 import { mdiAccount, mdiAccountCircle, mdiLock, mdiMail, mdiAsterisk, mdiFormTextboxPassword } from '@mdi/js'
 import MainSection from '@/components/MainSection.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import TitleBar from '@/components/TitleBar.vue'
-import Divider from '@/components/Divider.vue'
-import Field from '@/components/Field.vue'
-import Control from '@/components/Control.vue'
-import FilePicker from '@/components/FilePicker.vue'
-import JbButton from '@/components/JbButton.vue'
-import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
-import JbButtons from '@/components/JbButtons.vue'
-import UserCard from '@/components/UserCard.vue'
+import CardComponent from '@/components/Cards/CardComponent.vue'
+import TitleBar from '@/components/Panels/TitleBar.vue'
+import Divider from '@/components/UI/Divider.vue'
+import Field from '@/components/Form/Field.vue'
+import Control from '@/components/Form/Control.vue'
+import FilePicker from '@/components/Form/FilePicker.vue'
+import JbButton from '@/components/Form/JbButton.vue'
+import BottomOtherPagesSection from '@/components/UnusedReference/BottomOtherPagesSection.vue'
+import JbButtons from '@/components/Form/JbButtons.vue'
+import UserCard from '@/components/UnusedReference/UserCard.vue'
 
 const store = useStore()
 
@@ -44,7 +44,7 @@ const submitPass = () => {
   <UserCard />
 
   <MainSection>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
       <CardComponent
         title="Edit Profile"
         :icon="mdiAccountCircle"

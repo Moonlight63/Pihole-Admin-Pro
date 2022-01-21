@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue'
-import TitleBar from '@/components/TitleBar.vue'
-import HeroBar from '@/components/HeroBar.vue'
+import TitleBar from '@/components/Panels/TitleBar.vue'
+import HeroBar from '@/components/Panels/HeroBar.vue'
 import TitledSection from '@/components/TitledSection.vue'
 import MainSection from '@/components/MainSection.vue'
-import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
+import BottomOtherPagesSection from '@/components/UnusedReference/BottomOtherPagesSection.vue'
 
 const titleStack = ref(['Admin', 'Responsive layout'])
 </script>
@@ -19,7 +19,7 @@ const titleStack = ref(['Admin', 'Responsive layout'])
   </TitledSection>
 
   <MainSection>
-    <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
+    <div class="overflow-hidden border-8 border-white shadow-2xl md:w-10/12 md:mx-auto rounded-3xl">
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-mobile.png"
         class="block"
@@ -32,7 +32,7 @@ const titleStack = ref(['Admin', 'Responsive layout'])
   </TitledSection>
 
   <MainSection>
-    <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
+    <div class="overflow-hidden border-8 border-white shadow-2xl md:w-10/12 md:mx-auto rounded-3xl">
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-1024.png"
         class="block"
@@ -41,7 +41,7 @@ const titleStack = ref(['Admin', 'Responsive layout'])
   </MainSection>
 
   <MainSection>
-    <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
+    <div class="overflow-hidden border-8 border-white shadow-2xl md:w-10/12 md:mx-auto rounded-3xl">
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-1024-menu-open.png"
         class="block"
@@ -54,7 +54,7 @@ const titleStack = ref(['Admin', 'Responsive layout'])
   </TitledSection>
 
   <MainSection>
-    <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
+    <div class="overflow-hidden border-8 border-white shadow-2xl md:w-10/12 md:mx-auto rounded-3xl">
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-widescreen.png"
         class="block"

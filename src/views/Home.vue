@@ -1,45 +1,32 @@
-<script setup>
-import { computed, ref, onMounted } from 'vue'
+<script setup lang="ts">
+import { ref, onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
 import {
-  mdiAccountMultiple,
-  mdiCartOutline,
-  mdiChartTimelineVariant,
   mdiFinance,
   mdiMonitorCellphone,
   mdiReload,
-  mdiGithub,
   mdiChartPie,
   mdiHandBackRight,
   mdiEarth,
   mdiViewListOutline
 } from '@mdi/js'
 import * as chartConfig from '@/components/Charts/chart.config.js'
-import LineChart from '@/components/Charts/LineChart.vue'
 import BarChart from '@/components/Charts/BarChart.vue'
 import RingChart from '@/components/Charts/RingChart.vue'
 import MainSection from '@/components/MainSection.vue'
-import TitleBar from '@/components/TitleBar.vue'
-import HeroBar from '@/components/HeroBar.vue'
+import TitleBar from '@/components/Panels/TitleBar.vue'
 import CardWidget from '@/components/Cards/CardMetric.vue'
 import CardComponent from '@/components/Cards/CardComponent.vue'
-import ClientsTable from '@/components/ClientsTable.vue'
 import TopDomains from '@/components/Tables/TopDomains.vue'
 import TopClients from '@/components/Tables/TopClients.vue'
 import TableTest from '@/components/Tables/TableTest.vue'
-import UsersTable from '@/components/UsersTable.vue'
-import Notification from '@/components/Notification.vue'
-import JbButton from '@/components/JbButton.vue'
-import CardTransactionBar from '@/components/CardTransactionBar.vue'
-import CardClientBar from '@/components/CardClientBar.vue'
-import TitleSubBar from '@/components/TitleSubBar.vue'
 
 const titleStack = ref(['Admin', 'Dashboard'])
 
-const chartData = ref(null)
-const chartData2 = ref(null)
-const chartData3 = ref(null)
-const chartData4 = ref(null)
+const chartData = ref<unknown>(null)
+const chartData2 = ref<unknown>(null)
+const chartData3 = ref<unknown>(null)
+const chartData4 = ref<unknown>(null)
 
 const fillChartData = () => {
   chartData.value = chartConfig.sampleChartData(24)
@@ -48,22 +35,26 @@ const fillChartData = () => {
   chartData4.value = chartConfig.sampleChartData(4, 1)
 }
 
+const store = useStore()
+
+const dataRaw = computed(() => store.state.currentSummary)
+
+const quaryData = computed(() => ({
+  clients: dataRaw.value.ftl?.clients?.total || 0,
+  total: dataRaw.value.queries?.total || 0,
+  blocked: dataRaw.value.queries?.blocked || 0,
+  blocked_percent: dataRaw.value.queries?.percent_blocked || 0,
+  domains_blocked: dataRaw.value.queries?.unique_domains || 0
+}))
+
 onMounted(() => {
   fillChartData()
 })
 
-const store = useStore()
-
-const clientBarItems = computed(() => store.state.clients.slice(0, 3))
-
-const transactionBarItems = computed(() => store.state.history.slice(0, 3))
-
-const darkMode = computed(() => store.state.darkMode)
 </script>
 
 <template>
   <TitleBar :title-stack="titleStack" />
-  <!-- <hero-bar>Dashboard</hero-bar> -->
   <MainSection>
     <CardComponent
       title="Total Queries Over Last 24 Hours"
@@ -79,21 +70,21 @@ const darkMode = computed(() => store.state.darkMode)
       <CardWidget
         color="text-emerald-400"
         :icon="mdiEarth"
-        :number="512"
-        label="Total Queries (8 Clients)"
+        :number="quaryData.total"
+        :label="`Total Queries (${quaryData.clients} Clients)`"
         bg-color="bg-emerald-500"
       />
       <CardWidget
         color="text-blue-300 dark:text-blue-400"
         :icon="mdiHandBackRight"
-        :number="7770"
+        :number="quaryData.blocked"
         label="Queries Blocked"
         bg-color="bg-blue-400 dark:bg-blue-500"
       />
       <CardWidget
         color="text-orange-200 dark:text-orange-300"
         :icon="mdiChartPie"
-        :number="82"
+        :number="quaryData.blocked_percent"
         suffix="%"
         bg-color="bg-orange-300 dark:bg-orange-400"
         label="Percentage Blocked"
@@ -101,7 +92,7 @@ const darkMode = computed(() => store.state.darkMode)
       <CardWidget
         color="text-red-300 dark:text-red-400"
         :icon="mdiViewListOutline"
-        :number="2065813"
+        :number="quaryData.domains_blocked"
         label="Blocked Domains"
         bg-color="bg-red-400 dark:bg-red-500"
       />

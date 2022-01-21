@@ -17,8 +17,8 @@
 
 <script setup>
 import { computed } from 'vue'
-import Level from '@/components/Level.vue'
-import Icon from '@/components/Icon.vue'
+import Level from '@/components/UI/Level.vue'
+import Icon from '@/components/UI/Icon.vue'
 import { mdiSort, mdiSortAscending, mdiSortDescending } from '@mdi/js'
 
 const States = {

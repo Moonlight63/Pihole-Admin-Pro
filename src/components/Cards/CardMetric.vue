@@ -3,10 +3,10 @@ import { mdiCog } from '@mdi/js'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import CardComponent from '@/components/Cards/CardComponent.vue'
-import GrowingNumber from '@/components/GrowingNumber.vue'
-import Icon from '@/components/Icon.vue'
-import Level from '@/components/Level.vue'
-import JbButton from '@/components/JbButton.vue'
+import GrowingNumber from '@/components/UI/GrowingNumber.vue'
+import Icon from '@/components/UI/Icon.vue'
+import Level from '@/components/UI/Level.vue'
+import JbButton from '@/components/Form/JbButton.vue'
 
 defineProps({
   number: {

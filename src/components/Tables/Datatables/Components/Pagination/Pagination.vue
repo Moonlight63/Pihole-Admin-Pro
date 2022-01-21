@@ -1,21 +1,16 @@
-<script setup>
-import { computed, ref, watch } from 'vue'
+<script setup lang="ts">
+import { computed, PropType } from 'vue'
 import { useStore } from 'vuex'
-import { mdiEye, mdiTrashCan } from '@mdi/js'
-import Level from '@/components/Level.vue'
-import Field from '@/components/Field.vue'
-import Control from '@/components/Control.vue'
+import Level from '@/components/UI/Level.vue'
 
-import JbButtons from '@/components/JbButtons.vue'
-import JbButton from '@/components/JbButton.vue'
-
-const LEFT = 'left'
+import JbButtons from '@/components/Form/JbButtons.vue'
+import JbButton from '@/components/Form/JbButton.vue'
 
 const props = defineProps({
-  total: { type: Number, required: true },
-  perPage: { type: Number, required: true },
-  currentPage: { type: Number, required: false, default: 0 },
-  maxVisibleButtons: { type: Number, required: false, default: 5 }
+  total: { type: Number as PropType<number>, required: true },
+  perPage: { type: Number as PropType<number>, required: true },
+  currentPage: { type: Number as PropType<number>, required: false, default: 0 },
+  maxVisibleButtons: { type: Number as PropType<number>, required: false, default: 5 }
 })
 
 const emit = defineEmits([
@@ -53,19 +48,20 @@ const pages = computed(() => {
 const isInFirstPage = computed(() => props.currentPage === 0)
 const isInLastPage = computed(() => props.currentPage === totalPages.value - 1)
 
-const goToPageNumber = (page) => {
+const goToPageNumber = (page: number) => {
   emit('changed', page)
 }
 const gotoFirstPage = () => goToPageNumber(0)
 const gotoLastPage = () => goToPageNumber(totalPages.value - 1)
 const gotoNextPage = () => goToPageNumber((props.currentPage >= totalPages.value - 1) ? totalPages.value - 1 : (props.currentPage + 1))
 const gotoPreviousPage = () => goToPageNumber((props.currentPage <= 0) ? 0 : (props.currentPage - 1))
-const showDots = (position = LEFT) => {
-  return false
-  // const number = position === LEFT ? 1 : totalPages.value - 1
-  // const nextNumber = position === LEFT ? 2 : totalPages.value - 1
-  // return !pages.value.includes(number) || !pages.value.includes(nextNumber)
-}
+// const LEFT = 'left'
+// const showDots = (position = LEFT) => {
+//   const number = position === LEFT ? 1 : totalPages.value - 1
+//   const nextNumber = position === LEFT ? 2 : totalPages.value - 1
+//   // return !pages.value.includes(number) || !pages.value.includes(nextNumber)
+//   return false
+// }
 
 </script>
 
@@ -106,7 +102,7 @@ const showDots = (position = LEFT) => {
           small
           @click.prevent="gotoPreviousPage"
         />
-        <template v-if="showDots('left')">
+        <!-- <template v-if="showDots('left')">
           <JbButton
             key="page_0"
             :disabled="isInFirstPage"
@@ -124,7 +120,7 @@ const showDots = (position = LEFT) => {
             label="..."
             small
           />
-        </template>
+        </template> -->
         <JbButton
           v-for="page in pages"
           :key="`pages_${page}`"
@@ -135,7 +131,7 @@ const showDots = (position = LEFT) => {
           small
           @click.prevent="goToPageNumber(page)"
         />
-        <template v-if="showDots('right')">
+        <!-- <template v-if="showDots('right')">
           <JbButton
             key="page_divider_right"
             :disabled="true"
@@ -153,7 +149,7 @@ const showDots = (position = LEFT) => {
             small
             @click.prevent="gotoLastPage"
           />
-        </template>
+        </template> -->
         <JbButton
           key="page_next"
           :disabled="isInLastPage"

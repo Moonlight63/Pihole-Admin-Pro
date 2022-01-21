@@ -63,28 +63,49 @@
 // }
 
 module.exports = (colors) => {
+  const lightMain = colors.gray[100]
+  const darkMain = colors.slate[800]
+  const lightAccent = colors.white
+  const darkAccent = colors.slate[900]
+  const darkAccentHover = colors.slate[800]
+
+  const lightTextMain = colors.slate[300]
+  const darkTextMain = colors.slate[300]
+  const lightTextAccent = colors.slate[300]
+  const darkTextAccent = colors.slate[300]
+  const lightTextInactive = colors.slate[300]
+  const darkTextInactive = colors.slate[300]
+
   return {
-    'main-background-light': colors.blue[500],
-    'main-background-dark': colors.blue[500],
+    'main-background-light': lightMain,
+    'main-background-dark': darkMain,
     'main-text-light': colors.blue[500],
     'main-text-dark': colors.blue[500],
-    'panel-background-light': colors.blue[500],
-    'panel-background-dark': colors.blue[500],
-    'menu-background-light': colors.blue[500],
-    'menu-background-dark': colors.blue[500],
+    'panel-background-light': lightAccent,
+    'panel-background-dark': darkAccent,
+    'menu-background-light': lightAccent,
+    'menu-background-dark': darkAccent,
     'menu-text-light': colors.blue[500],
-    'menu-text-dark': colors.blue[500],
-    'menu-items-background-light': colors.blue[500],
-    'menu-items-background-dark': colors.blue[500],
-    'menu-items-background-light-hover': colors.blue[500],
-    'menu-items-background-dark-hover': colors.blue[500],
-    'menu-items-background-light-focus': colors.blue[500],
-    'menu-items-background-dark-focus': colors.blue[500],
-    'menu-items-subitems-background-light': colors.blue[500],
-    'menu-items-subitems-background-dark': colors.blue[500],
-    'menu-items-subitems-background-light-hover': colors.blue[500],
-    'menu-items-subitems-background-dark-hover': colors.blue[500],
-    'menu-items-subitems-background-light-focus': colors.blue[500],
-    'menu-items-subitems-background-dark-focus': colors.blue[500]
+    'menu-text-dark': colors.white,
+    'menu-accent-text-light': colors.gray[600],
+    'menu-accent-text-dark': colors.slate[400],
+    'menu-items-text-light': colors.gray[800],
+    'menu-items-text-dark': colors.slate[400],
+    'menu-items-active-text-light': colors.black,
+    'menu-items-active-text-dark': colors.white,
+    'menu-items-background-light': 'unset',
+    'menu-items-background-dark': 'unset',
+    'menu-items-active-background-light': colors.blue[500],
+    'menu-items-active-background-dark': colors.blue[500],
+    'menu-items-background-light:hover': colors.blue[500],
+    'menu-items-background-dark:hover': darkAccentHover,
+    'menu-items-background-light:focus': colors.blue[500],
+    'menu-items-background-dark:focus': darkAccentHover,
+    'menu-items-subitems-background-light': colors.gray[100],
+    'menu-items-subitems-background-dark': darkAccentHover,
+    'menu-items-subitems-background-light:hover': colors.blue[500],
+    'menu-items-subitems-background-dark:hover': colors.slate[700],
+    'menu-items-subitems-background-light:focus': colors.blue[500],
+    'menu-items-subitems-background-dark:focus': colors.slate[700]
   }
 }

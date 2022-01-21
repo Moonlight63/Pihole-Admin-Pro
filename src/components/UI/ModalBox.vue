@@ -1,0 +1,91 @@
+<script setup>
+import { computed } from 'vue'
+import { mdiClose } from '@mdi/js'
+import JbButton from '@/components/Form/JbButton.vue'
+import JbButtons from '@/components/Form/JbButtons.vue'
+import CardComponent from '@/components/Cards/CardComponent.vue'
+import Divider from '@/components/UI/Divider.vue'
+import Overlay from '@/components/UI/Overlay.vue'
+
+const props = defineProps({
+  title: {
+    type: String,
+    default: null
+  },
+  largeTitle: {
+    type: String,
+    default: null
+  },
+  button: {
+    type: String,
+    default: 'info'
+  },
+  buttonLabel: {
+    type: String,
+    default: 'Done'
+  },
+  hasCancel: Boolean,
+  modelValue: {
+    type: [String, Number, Boolean],
+    default: null
+  }
+})
+
+const emit = defineEmits(['update:modelValue', 'cancel', 'confirm'])
+
+const value = computed({
+  get: () => props.modelValue,
+  set: value => emit('update:modelValue', value)
+})
+
+const confirmCancel = mode => {
+  value.value = false
+  emit(mode)
+}
+
+const confirm = () => confirmCancel('confirm')
+
+const cancel = () => confirmCancel('cancel')
+</script>
+
+<template>
+  <Overlay
+    v-show="value"
+    @overlay-click="cancel"
+  >
+    <CardComponent
+      v-show="value"
+      :title="title"
+      class="shadow-lg w-full max-h-modal md:w-3/5 lg:w-2/5 z-50"
+      :header-icon="mdiClose"
+      @header-icon-click="cancel"
+    >
+      <div class="space-y-3">
+        <h1
+          v-if="largeTitle"
+          class="text-2xl"
+        >
+          {{ largeTitle }}
+        </h1>
+        <slot />
+      </div>
+
+      <Divider />
+
+      <JbButtons>
+        <JbButton
+          :label="buttonLabel"
+          :color="button"
+          @click="confirm"
+        />
+        <JbButton
+          v-if="hasCancel"
+          label="Cancel"
+          :color="button"
+          outline
+          @click="cancel"
+        />
+      </JbButtons>
+    </CardComponent>
+  </Overlay>
+</template>
