@@ -65,30 +65,21 @@ const pillText = computed(() => props.text ?? `${props.progress}%`)
 </script>
 
 <template>
-  <CardComponent
-    class="mb-6 last:mb-0"
-    hoverable
-  >
+  <CardComponent class="mb-6 last:mb-0" hoverable>
     <Level>
       <Level type="justify-start">
-        <UserAvatar
-          class="w-12 h-12 md:mr-6"
-          :username="name"
-        />
+        <UserAvatar class="w-12 h-12 md:mr-6" :username="name" />
         <div class="text-center md:text-left">
           <h4 class="text-xl">
-            {{ name }} <span class="text-gray-500 dark:text-gray-400">@{{ login }}</span>
+            {{ name }}
+            <span class="text-gray-500 dark:text-gray-400">@{{ login }}</span>
           </h4>
           <p class="text-gray-500 dark:text-gray-400">
             {{ date }}
           </p>
         </div>
       </Level>
-      <Pill
-        :type="pillType"
-        :text="pillText"
-        :icon="pillIcon"
-      />
+      <Pill :type="pillType" :text="pillText" :icon="pillIcon" />
     </Level>
   </CardComponent>
 </template>

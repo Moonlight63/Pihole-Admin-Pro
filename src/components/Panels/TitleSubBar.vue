@@ -24,19 +24,11 @@ const darkMode = computed(() => store.state.darkMode)
 <template>
   <section class="flex items-center justify-between px-6 mb-6 sm:px-0">
     <div class="flex items-center justify-start">
-      <Icon
-        v-if="icon"
-        :path="icon"
-        class="mr-3"
-      />
+      <Icon v-if="icon" :path="icon" class="mr-3" />
       <h1 class="text-2xl">
         {{ title }}
       </h1>
     </div>
-    <JbButton
-      :icon="mdiCog"
-      :outline="darkMode"
-      small
-    />
+    <JbButton :icon="mdiCog" :outline="darkMode" small />
   </section>
 </template>

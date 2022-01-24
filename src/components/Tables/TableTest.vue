@@ -3,7 +3,11 @@ import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import DataTable from '@/components/Tables/Datatables/DataTable.vue'
 import TableBodyCell from './Datatables/Components/Table/TableBodyCell.vue'
-import { DataTableColumns, DataTablePagination, DataTableSortation } from './Datatables/types/DataTableTypes'
+import {
+  DataTableColumns,
+  DataTablePagination,
+  DataTableSortation
+} from './Datatables/types/DataTableTypes'
 
 const store = useStore()
 
@@ -25,7 +29,6 @@ const columns: DataTableColumns = [
   { key: 'progress', label: 'Hits', sortable: true },
   { label: 'Status', key: 'progress' }
 ]
-
 </script>
 
 <template>
@@ -39,16 +42,15 @@ const columns: DataTableColumns = [
   >
     <template #datatable-tbody-td-2="progressCell">
       <TableBodyCell
-        :key="`datatable-tbody-td-${progressCell.uniqueId()}-${progressCell.column.label}`"
+        :key="`datatable-tbody-td-${progressCell.uniqueId()}-${
+          progressCell.column.label
+        }`"
         class="progress-cell"
         :name="progressCell.column.key"
         :data-label="progressCell.column.label"
         :rdata1="progressCell.column"
       >
-        <progress
-          max="100"
-          :value="progressCell.row.progress"
-        >
+        <progress max="100" :value="progressCell.row.progress">
           {{ progressCell.row.progress }}
         </progress>
       </TableBodyCell>

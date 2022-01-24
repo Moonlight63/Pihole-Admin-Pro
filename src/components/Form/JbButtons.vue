@@ -18,7 +18,7 @@ export default {
       default: '-mb-3'
     }
   },
-  render () {
+  render() {
     const hasSlot = this.$slots && this.$slots.default
 
     const parentClass = [
@@ -36,18 +36,23 @@ export default {
       'div',
       { class: parentClass },
       hasSlot
-        ? this.$slots.default().map(element => {
-          if (element && element.children && typeof element.children === 'object') {
-            return h(
-              element,
-              {},
-              element.children.map(child => {
-                return h(child, { class: [this.classAddon] })
-              }))
-          }
+        ? this.$slots.default().map((element) => {
+            if (
+              element &&
+              element.children &&
+              typeof element.children === 'object'
+            ) {
+              return h(
+                element,
+                {},
+                element.children.map((child) => {
+                  return h(child, { class: [this.classAddon] })
+                })
+              )
+            }
 
-          return h(element, { class: [this.classAddon] })
-        })
+            return h(element, { class: [this.classAddon] })
+          })
         : null
     )
   }

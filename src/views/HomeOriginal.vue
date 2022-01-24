@@ -48,7 +48,7 @@ const darkMode = computed(() => store.state.darkMode)
 </script>
 
 <template>
-  <TitleBar :title-stack="titleStack" />
+  <TitleBar :titleStack="titleStack" />
   <HeroBar>Dashboard</HeroBar>
   <MainSection>
     <!-- <notification
@@ -75,7 +75,7 @@ const darkMode = computed(() => store.state.darkMode)
     <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
       <CardWidget
         trend="12%"
-        trend-type="up"
+        trendType="up"
         color="text-emerald-500"
         :icon="mdiAccountMultiple"
         :number="512"
@@ -83,7 +83,7 @@ const darkMode = computed(() => store.state.darkMode)
       />
       <CardWidget
         trend="12%"
-        trend-type="down"
+        trendType="down"
         color="text-blue-500"
         :icon="mdiCartOutline"
         :number="7770"
@@ -92,7 +92,7 @@ const darkMode = computed(() => store.state.darkMode)
       />
       <CardWidget
         trend="Overflow"
-        trend-type="alert"
+        trendType="alert"
         color="text-red-500"
         :icon="mdiChartTimelineVariant"
         :number="256"
@@ -104,7 +104,7 @@ const darkMode = computed(() => store.state.darkMode)
     <div class="grid grid-cols-1 gap-6 mb-6 xl:grid-cols-2">
       <div class="flex flex-col justify-between">
         <CardTransactionBar
-          v-for="(transaction,index) in transactionBarItems"
+          v-for="(transaction, index) in transactionBarItems"
           :key="index"
           :amount="transaction.amount"
           :date="transaction.date"
@@ -126,42 +126,30 @@ const darkMode = computed(() => store.state.darkMode)
       </div>
     </div>
 
-    <TitleSubBar
-      :icon="mdiChartPie"
-      title="Trends overview"
-    />
+    <TitleSubBar :icon="mdiChartPie" title="Trends overview" />
 
     <CardComponent
       title="Performance"
       :icon="mdiFinance"
-      :header-icon="mdiReload"
+      :headerIcon="mdiReload"
       class="mb-6"
-      @header-icon-click="fillChartData"
+      @headerIconClick="fillChartData"
     >
       <div v-if="chartData">
-        <LineChart
-          :data="chartData"
-          class="h-96"
-        />
+        <LineChart :data="chartData" class="h-96" />
       </div>
     </CardComponent>
 
-    <TitleSubBar
-      :icon="mdiAccountMultiple"
-      title="Clients"
-    />
+    <TitleSubBar :icon="mdiAccountMultiple" title="Clients" />
 
-    <Notification
-      color="info"
-      :icon="mdiMonitorCellphone"
-    >
+    <Notification color="info" :icon="mdiMonitorCellphone">
       <b>Responsive table.</b> Collapses on mobile
     </Notification>
 
     <CardComponent
       :icon="mdiMonitorCellphone"
       title="Responsive table"
-      has-table
+      hasTable
     >
       <UsersTable />
     </CardComponent>
@@ -169,7 +157,7 @@ const darkMode = computed(() => store.state.darkMode)
     <CardComponent
       :icon="mdiMonitorCellphone"
       title="Responsive table"
-      has-table
+      hasTable
     >
       <ClientsTable />
     </CardComponent>

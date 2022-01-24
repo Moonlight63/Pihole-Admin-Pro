@@ -16,19 +16,23 @@ const emit = defineEmits(['menu-click'])
 
 const isDropdownActive = ref(false)
 
-const componentIs = computed(() => props.item.to ? 'router-link' : 'a')
+const componentIs = computed(() => (props.item.to ? 'router-link' : 'a'))
 
 const hasDropdown = computed(() => !!props.item.menu)
 
-const dropdownIcon = computed(() => isDropdownActive.value ? mdiMinus : mdiPlus)
+const dropdownIcon = computed(() =>
+  isDropdownActive.value ? mdiMinus : mdiPlus
+)
 
 const itemTo = computed(() => props.item.to || null)
 
 const itemHref = computed(() => props.item.href || null)
 
-const itemTarget = computed(() => componentIs.value === 'a' && props.item.target ? props.item.target : null)
+const itemTarget = computed(() =>
+  componentIs.value === 'a' && props.item.target ? props.item.target : null
+)
 
-const menuClick = event => {
+const menuClick = (event) => {
   emit('menu-click', event, props.item)
 
   if (hasDropdown.value) {
@@ -61,8 +65,8 @@ const styleInactive = 'text-menu-items'
               ? 'bg-menu-items-subitems-active'
               : 'bg-menu-items-active'
             : isSubmenuList
-              ? 'bg-menu-items-subitems'
-              : 'bg-menu-items'
+            ? 'bg-menu-items-subitems'
+            : 'bg-menu-items'
         ]"
       >
         <Icon
@@ -75,7 +79,8 @@ const styleInactive = 'text-menu-items'
         <span
           class="grow"
           :class="[vSlot && vSlot.isExactActive ? styleActive : styleInactive]"
-        >{{ item.label }}</span>
+          >{{ item.label }}</span
+        >
         <Icon
           v-if="hasDropdown"
           :path="dropdownIcon"
@@ -88,8 +93,8 @@ const styleInactive = 'text-menu-items'
     <AsideMenuList
       v-if="hasDropdown"
       :menu="item.menu"
-      :class="{ 'hidden': !isDropdownActive, 'block': isDropdownActive }"
-      is-submenu-list
+      :class="{ hidden: !isDropdownActive, block: isDropdownActive }"
+      isSubmenuList
     />
   </li>
 </template>

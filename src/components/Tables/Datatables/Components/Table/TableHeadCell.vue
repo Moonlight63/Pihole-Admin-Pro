@@ -7,10 +7,7 @@
   >
     <Level>
       <slot />
-      <Icon
-        v-if="sortable"
-        :path="computedState"
-      />
+      <Icon v-if="sortable" :path="computedState" />
     </Level>
   </th>
 </template>
@@ -42,8 +39,13 @@ const props = defineProps({
   }
 })
 
-const computedState = computed(() => props.sorting ? props.ascending ? mdiSortAscending : mdiSortDescending : mdiSort)
+const computedState = computed(() =>
+  props.sorting
+    ? props.ascending
+      ? mdiSortAscending
+      : mdiSortDescending
+    : mdiSort
+)
 
 const emits = defineEmits(['clicked'])
-
 </script>

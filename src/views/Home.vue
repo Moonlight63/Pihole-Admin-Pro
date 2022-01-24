@@ -11,15 +11,6 @@ import {
   mdiViewListOutline
 } from '@mdi/js'
 import * as chartConfig from '@/components/Charts/chart.config.js'
-import BarChart from '@/components/Charts/BarChart.vue'
-import RingChart from '@/components/Charts/RingChart.vue'
-import MainSection from '@/components/MainSection.vue'
-import TitleBar from '@/components/Panels/TitleBar.vue'
-import CardWidget from '@/components/Cards/CardMetric.vue'
-import CardComponent from '@/components/Cards/CardComponent.vue'
-import TopDomains from '@/components/Tables/TopDomains.vue'
-import TopClients from '@/components/Tables/TopClients.vue'
-import TableTest from '@/components/Tables/TableTest.vue'
 
 const titleStack = ref(['Admin', 'Dashboard'])
 
@@ -50,21 +41,20 @@ const quaryData = computed(() => ({
 onMounted(() => {
   fillChartData()
 })
-
 </script>
 
 <template>
-  <TitleBar :title-stack="titleStack" />
+  <TitleBar :titleStack="titleStack" />
   <MainSection>
-    <!-- <CardComponent
+    <CardComponent
       title="Total Queries Over Last 24 Hours"
       :icon="mdiFinance"
-      :header-icon="mdiReload"
+      :headerIcon="mdiReload"
       class="mb-6"
-      @header-icon-click="fillChartData"
+      @headerIconClick="fillChartData"
     >
       <TableTest :checkable="true" />
-    </CardComponent> -->
+    </CardComponent>
 
     <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-4">
       <CardWidget
@@ -72,21 +62,21 @@ onMounted(() => {
         :icon="mdiEarth"
         :number="quaryData.total"
         :label="`Total Queries (${quaryData.clients} Clients)`"
-        bg-color="bg-emerald-500"
+        bgColor="bg-emerald-500"
       />
       <CardWidget
         color="text-blue-300 dark:text-blue-400"
         :icon="mdiHandBackRight"
         :number="quaryData.blocked"
         label="Queries Blocked"
-        bg-color="bg-blue-400 dark:bg-blue-500"
+        bgColor="bg-blue-400 dark:bg-blue-500"
       />
       <CardWidget
         color="text-orange-200 dark:text-orange-300"
         :icon="mdiChartPie"
         :number="quaryData.blocked_percent"
         suffix="%"
-        bg-color="bg-orange-300 dark:bg-orange-400"
+        bgColor="bg-orange-300 dark:bg-orange-400"
         label="Percentage Blocked"
       />
       <CardWidget
@@ -94,7 +84,7 @@ onMounted(() => {
         :icon="mdiViewListOutline"
         :number="quaryData.domains_blocked"
         label="Blocked Domains"
-        bg-color="bg-red-400 dark:bg-red-500"
+        bgColor="bg-red-400 dark:bg-red-500"
       />
     </div>
 
@@ -131,15 +121,12 @@ onMounted(() => {
     <CardComponent
       title="Total Queries Over Last 24 Hours"
       :icon="mdiFinance"
-      :header-icon="mdiReload"
+      :headerIcon="mdiReload"
       class="mb-6"
-      @header-icon-click="fillChartData"
+      @headerIconClick="fillChartData"
     >
       <div v-if="chartData">
-        <BarChart
-          :data="chartData"
-          class="h-96"
-        />
+        <BarChart :data="chartData" class="h-96" />
       </div>
     </CardComponent>
 
@@ -151,15 +138,12 @@ onMounted(() => {
     <CardComponent
       title="Client activity over last 24 hours"
       :icon="mdiFinance"
-      :header-icon="mdiReload"
+      :headerIcon="mdiReload"
       class="mb-6"
-      @header-icon-click="fillChartData"
+      @headerIconClick="fillChartData"
     >
       <div v-if="chartData2">
-        <BarChart
-          :data="chartData2"
-          class="h-96"
-        />
+        <BarChart :data="chartData2" class="h-96" />
       </div>
     </CardComponent>
 
@@ -167,44 +151,34 @@ onMounted(() => {
       <CardComponent
         title="Query Types"
         :icon="mdiFinance"
-        :header-icon="mdiReload"
+        :headerIcon="mdiReload"
         class="mb-6"
-        @header-icon-click="fillChartData"
+        @headerIconClick="fillChartData"
       >
         <div v-if="chartData3">
-          <RingChart
-            :data="chartData3"
-            class="h-96"
-          />
+          <RingChart :data="chartData3" class="h-96" />
         </div>
       </CardComponent>
       <CardComponent
         title="Upstream Servers"
         :icon="mdiFinance"
-        :header-icon="mdiReload"
+        :headerIcon="mdiReload"
         class="mb-6"
-        @header-icon-click="fillChartData"
+        @headerIconClick="fillChartData"
       >
         <div v-if="chartData4">
-          <RingChart
-            :data="chartData4"
-            class="h-96"
-          />
+          <RingChart :data="chartData4" class="h-96" />
         </div>
       </CardComponent>
       <CardComponent
         :icon="mdiMonitorCellphone"
         title="Top Allowed Domains"
-        has-table
+        hasTable
       >
         <TopDomains />
       </CardComponent>
 
-      <CardComponent
-        :icon="mdiMonitorCellphone"
-        title="Top Clients"
-        has-table
-      >
+      <CardComponent :icon="mdiMonitorCellphone" title="Top Clients" hasTable>
         <TopClients />
       </CardComponent>
     </div>

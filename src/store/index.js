@@ -37,18 +37,18 @@ export default createStore({
   },
   mutations: {
     /* A fit-them-all commit */
-    basic (state, payload) {
+    basic(state, payload) {
       state[payload.key] = payload.value
 
       // console.log(payload)
     },
 
-    updateCurrentSummary (state, payload) {
+    updateCurrentSummary(state, payload) {
       state.currentSummary = payload
     },
 
     /* User */
-    user (state, payload) {
+    user(state, payload) {
       if (payload.name) {
         state.userName = payload.name
       }
@@ -60,16 +60,18 @@ export default createStore({
       }
     },
 
-    popClient (state) {
+    popClient(state) {
       console.log('Pop Client')
       state.clients = state.clients.slice(1)
     }
   },
   actions: {
-    asideMobileToggle ({ commit, state }, payload = null) {
+    asideMobileToggle({ commit, state }, payload = null) {
       const isShow = payload !== null ? payload : !state.isAsideMobileExpanded
 
-      document.getElementById('app').classList[isShow ? 'add' : 'remove']('ml-60', 'lg:ml-0')
+      document
+        .getElementById('app')
+        .classList[isShow ? 'add' : 'remove']('ml-60', 'lg:ml-0')
 
       document.documentElement.classList[isShow ? 'add' : 'remove']('m-clipped')
 
@@ -79,17 +81,22 @@ export default createStore({
       })
     },
 
-    asideLgToggle ({ commit, state }, payload = null) {
-      commit('basic', { key: 'isAsideLgActive', value: payload !== null ? payload : !state.isAsideLgActive })
+    asideLgToggle({ commit, state }, payload = null) {
+      commit('basic', {
+        key: 'isAsideLgActive',
+        value: payload !== null ? payload : !state.isAsideLgActive
+      })
     },
 
-    fullScreenToggle ({ commit, state }, value) {
+    fullScreenToggle({ commit, state }, value) {
       commit('basic', { key: 'isFullScreen', value })
 
-      document.documentElement.classList[value ? 'add' : 'remove']('full-screen')
+      document.documentElement.classList[value ? 'add' : 'remove'](
+        'full-screen'
+      )
     },
 
-    darkMode ({ commit, state }) {
+    darkMode({ commit, state }) {
       const value = !state.darkMode
 
       document.documentElement.classList[value ? 'add' : 'remove']('dark')
@@ -102,7 +109,7 @@ export default createStore({
       })
     },
 
-    async apiAddress ({ commit, state }, value) {
+    async apiAddress({ commit, state }, value) {
       localStorage.setItem(apiAddressKey, value)
 
       commit('basic', {
@@ -130,7 +137,7 @@ export default createStore({
             })
           }
         })
-        .catch(error => {
+        .catch((error) => {
           alert(error.message)
           commit('basic', {
             key: 'isConnecting',
@@ -139,7 +146,7 @@ export default createStore({
         })
     },
 
-    fetch ({ commit, state }, payload) {
+    fetch({ commit, state }, payload) {
       axios
         .get(`data-sources/${payload}.json`)
         .then((r) => {
@@ -150,12 +157,12 @@ export default createStore({
             })
           }
         })
-        .catch(error => {
+        .catch((error) => {
           alert(error.message)
         })
     },
 
-    getusers ({ commit, state }, payload) {
+    getusers({ commit, state }, payload) {
       axios
         .get('https://jsonplaceholder.typicode.com/users')
         .then((r) => {
@@ -167,12 +174,10 @@ export default createStore({
             })
           }
         })
-        .catch(error => {
+        .catch((error) => {
           alert(error.message)
         })
     }
-
   },
-  modules: {
-  }
+  modules: {}
 })

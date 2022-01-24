@@ -25,8 +25,8 @@ const menuClick = (event, item) => {
       v-for="(item, index) in menu"
       :key="index"
       :item="item"
-      :is-submenu-list="isSubmenuList"
-      @menu-click="menuClick"
+      :isSubmenuList="isSubmenuList"
+      @menuClick="menuClick"
     />
   </ul>
 </template>

@@ -35,10 +35,10 @@ const emit = defineEmits(['update:modelValue', 'cancel', 'confirm'])
 
 const value = computed({
   get: () => props.modelValue,
-  set: value => emit('update:modelValue', value)
+  set: (value) => emit('update:modelValue', value)
 })
 
-const confirmCancel = mode => {
+const confirmCancel = (mode) => {
   value.value = false
   emit(mode)
 }
@@ -49,22 +49,16 @@ const cancel = () => confirmCancel('cancel')
 </script>
 
 <template>
-  <Overlay
-    v-show="value"
-    @overlay-click="cancel"
-  >
+  <Overlay v-show="value" @overlayClick="cancel">
     <CardComponent
       v-show="value"
       :title="title"
       class="shadow-lg w-full max-h-modal md:w-3/5 lg:w-2/5 z-50"
-      :header-icon="mdiClose"
-      @header-icon-click="cancel"
+      :headerIcon="mdiClose"
+      @headerIconClick="cancel"
     >
       <div class="space-y-3">
-        <h1
-          v-if="largeTitle"
-          class="text-2xl"
-        >
+        <h1 v-if="largeTitle" class="text-2xl">
           {{ largeTitle }}
         </h1>
         <slot />
@@ -73,11 +67,7 @@ const cancel = () => confirmCancel('cancel')
       <Divider />
 
       <JbButtons>
-        <JbButton
-          :label="buttonLabel"
-          :color="button"
-          @click="confirm"
-        />
+        <JbButton :label="buttonLabel" :color="button" @click="confirm" />
         <JbButton
           v-if="hasCancel"
           label="Cancel"

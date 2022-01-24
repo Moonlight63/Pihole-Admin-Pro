@@ -38,13 +38,17 @@ const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
 
 const userName = computed(() => store.state.userName)
 
-const menuToggleMobileIcon = computed(() => isAsideMobileExpanded.value ? mdiBackburger : mdiForwardburger)
+const menuToggleMobileIcon = computed(() =>
+  isAsideMobileExpanded.value ? mdiBackburger : mdiForwardburger
+)
 
 const menuToggleMobile = () => store.dispatch('asideMobileToggle')
 
 const isMenuNavBarActive = ref(false)
 
-const menuNavBarToggleIcon = computed(() => isMenuNavBarActive.value ? mdiClose : mdiDotsVertical)
+const menuNavBarToggleIcon = computed(() =>
+  isMenuNavBarActive.value ? mdiClose : mdiDotsVertical
+)
 
 const menuNavBarToggle = () => {
   isMenuNavBarActive.value = !isMenuNavBarActive.value
@@ -59,39 +63,24 @@ const menuOpenLg = () => {
   <nav
     v-show="isNavBarVisible"
     class="fixed top-0 left-0 right-0 z-30 flex w-screen border-b border-gray-100 bg-panel h-14 transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:border-gray-800"
-    :class="{'ml-60 lg:ml-0':isAsideMobileExpanded}"
+    :class="{ 'ml-60 lg:ml-0': isAsideMobileExpanded }"
   >
     <div class="flex items-stretch flex-1 h-14">
-      <NavBarItem
-        type="flex lg:hidden"
-        @click.prevent="menuToggleMobile"
-      >
-        <Icon
-          :path="menuToggleMobileIcon"
-          size="24"
-        />
+      <NavBarItem type="flex lg:hidden" @click.prevent="menuToggleMobile">
+        <Icon :path="menuToggleMobileIcon" size="24" />
       </NavBarItem>
-      <NavBarItem
-        type="hidden lg:flex xl:hidden"
-        @click.prevent="menuOpenLg"
-      >
-        <Icon
-          :path="mdiMenu"
-          size="24"
-        />
+      <NavBarItem type="hidden lg:flex xl:hidden" @click.prevent="menuOpenLg">
+        <Icon :path="mdiMenu" size="24" />
       </NavBarItem>
       <NavBarApiUrl />
     </div>
     <div class="flex items-stretch flex-none h-14 lg:hidden">
       <NavBarItem @click.prevent="menuNavBarToggle">
-        <Icon
-          :path="menuNavBarToggleIcon"
-          size="24"
-        />
+        <Icon :path="menuNavBarToggleIcon" size="24" />
       </NavBarItem>
     </div>
     <div
-      class="absolute left-0 w-screen shadow bg-panel top-14 lg:w-auto lg:items-stretch lg:flex lg:grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none "
+      class="absolute left-0 w-screen shadow bg-panel top-14 lg:w-auto lg:items-stretch lg:flex lg:grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none"
       :class="[isMenuNavBarActive ? 'block' : 'hidden']"
     >
       <div
@@ -125,7 +114,7 @@ const menuOpenLg = () => {
             </nav-bar-item>
           </template>
         </nav-bar-menu> -->
-        <NavBarMenu has-divider>
+        <NavBarMenu hasDivider>
           <UserAvatar class="inline-flex w-6 h-6 mr-3" />
           <div>
             <span>{{ userName }}</span>
@@ -133,41 +122,29 @@ const menuOpenLg = () => {
 
           <template #dropdown>
             <NavBarItem to="/profile">
-              <NavBarItemLabel
-                :icon="mdiAccount"
-                label="My Profile"
-              />
+              <NavBarItemLabel :icon="mdiAccount" label="My Profile" />
             </NavBarItem>
             <NavBarItem>
-              <NavBarItemLabel
-                :icon="mdiCogOutline"
-                label="Settings"
-              />
+              <NavBarItemLabel :icon="mdiCogOutline" label="Settings" />
             </NavBarItem>
             <NavBarItem>
-              <NavBarItemLabel
-                :icon="mdiEmail"
-                label="Messages"
-              />
+              <NavBarItemLabel :icon="mdiEmail" label="Messages" />
             </NavBarItem>
             <NavBarMenuDivider />
             <NavBarItem>
-              <NavBarItemLabel
-                :icon="mdiLogout"
-                label="Log Out"
-              />
+              <NavBarItemLabel :icon="mdiLogout" label="Log Out" />
             </NavBarItem>
           </template>
         </NavBarMenu>
         <NavBarItem
-          has-divider
-          is-desktop-icon-only
+          hasDivider
+          isDesktopIconOnly
           @click.prevent="toggleLightDark"
         >
           <NavBarItemLabel
             :icon="mdiThemeLightDark"
             label="Light/Dark"
-            is-desktop-icon-only
+            isDesktopIconOnly
           />
         </NavBarItem>
         <!-- <nav-bar-item
@@ -181,11 +158,11 @@ const menuOpenLg = () => {
             is-desktop-icon-only
           />
         </nav-bar-item> -->
-        <NavBarItem is-desktop-icon-only>
+        <NavBarItem isDesktopIconOnly>
           <NavBarItemLabel
             :icon="mdiLogout"
             label="Log out"
-            is-desktop-icon-only
+            isDesktopIconOnly
           />
         </NavBarItem>
       </div>

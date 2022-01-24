@@ -19,7 +19,11 @@ store.dispatch('getusers', 'myusers')
 /* Dark mode */
 const localStorageDarkModeValue = localStorage.getItem(darkModeKey)
 
-if ((localStorageDarkModeValue === null && window.matchMedia('(prefers-color-scheme: dark)').matches) || localStorageDarkModeValue === '1') {
+if (
+  (localStorageDarkModeValue === null &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+  localStorageDarkModeValue === '1'
+) {
   store.dispatch('darkMode')
 }
 
@@ -33,12 +37,12 @@ if (localStorageApiAddressValue !== null) {
 const defaultDocumentTitle = 'Pi-Hole Admin Pro'
 
 /* Collapse mobile aside menu on route change */
-router.beforeEach(to => {
+router.beforeEach((to) => {
   store.dispatch('asideMobileToggle', false)
   store.dispatch('asideLgToggle', false)
 })
 
-router.afterEach(to => {
+router.afterEach((to) => {
   /* Set document title from route meta */
   if (to.meta && to.meta.title) {
     document.title = `${to.meta.title} — ${defaultDocumentTitle}`

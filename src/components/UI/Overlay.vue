@@ -8,7 +8,7 @@ defineProps({
 
 const emit = defineEmits(['overlay-click'])
 
-const overlayClick = event => {
+const overlayClick = (event) => {
   emit('overlay-click', event)
 }
 </script>
@@ -19,12 +19,12 @@ const overlayClick = event => {
     :class="zIndex"
   >
     <Transition
-      enter-active-class="transition duration-150 ease-in"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition duration-150 ease-in"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
+      enterActiveClass="transition duration-150 ease-in"
+      enterFromClass="opacity-0"
+      enterToClass="opacity-100"
+      leaveActiveClass="transition duration-150 ease-in"
+      leaveFromClass="opacity-100"
+      leaveToClass="opacity-0"
     >
       <div
         class="absolute inset-0 bg-gradient-to-tr from-gray-700 via-gray-900 to-gray-700 opacity-90"
@@ -32,10 +32,10 @@ const overlayClick = event => {
       />
     </Transition>
     <Transition
-      enter-active-class="transition duration-100 ease-out"
-      enter-from-class="transform scale-95 opacity-0"
-      enter-to-class="transform scale-100 opacity-100"
-      leave-active-class="animate-fadeOut"
+      enterActiveClass="transition duration-100 ease-out"
+      enterFromClass="transform scale-95 opacity-0"
+      enterToClass="transform scale-100 opacity-100"
+      leaveActiveClass="animate-fadeOut"
     >
       <slot />
     </Transition>

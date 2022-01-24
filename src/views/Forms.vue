@@ -46,14 +46,11 @@ const submit = () => {
 </script>
 
 <template>
-  <TitleBar :title-stack="titleStack" />
+  <TitleBar :titleStack="titleStack" />
   <HeroBar>Forms</HeroBar>
 
   <MainSection>
-    <TitleSubBar
-      :icon="mdiBallotOutline"
-      title="Forms example"
-    />
+    <TitleSubBar :icon="mdiBallotOutline" title="Forms example" />
     <CardComponent
       title="Forms"
       :icon="mdiBallot"
@@ -61,21 +58,11 @@ const submit = () => {
       @submit.prevent="submit"
     >
       <Field label="Grouped with icons">
-        <Control
-          v-model="form.name"
-          :icon="mdiAccount"
-        />
-        <Control
-          v-model="form.email"
-          type="email"
-          :icon="mdiMail"
-        />
+        <Control v-model="form.name" :icon="mdiAccount" />
+        <Control v-model="form.email" type="email" :icon="mdiMail" />
       </Field>
 
-      <Field
-        label="With help line"
-        help="Do not enter the leading zero"
-      >
+      <Field label="With help line" help="Do not enter the leading zero">
         <Control
           v-model="form.phone"
           type="tel"
@@ -84,55 +71,29 @@ const submit = () => {
       </Field>
 
       <Field label="Dropdown">
-        <Control
-          v-model="form.department"
-          :options="selectOptions"
-        />
+        <Control v-model="form.department" :options="selectOptions" />
       </Field>
 
       <Divider />
 
-      <Field
-        label="Question"
-        help="Your question. Max 255 characters"
-      >
-        <Control
-          type="textarea"
-          placeholder="Explain how we can help you"
-        />
+      <Field label="Question" help="Your question. Max 255 characters">
+        <Control type="textarea" placeholder="Explain how we can help you" />
       </Field>
 
       <Divider />
 
       <JbButtons>
-        <JbButton
-          type="submit"
-          color="info"
-          label="Submit"
-        />
-        <JbButton
-          type="reset"
-          color="info"
-          outline
-          label="Reset"
-        />
+        <JbButton type="submit" color="info" label="Submit" />
+        <JbButton type="reset" color="info" outline label="Reset" />
       </JbButtons>
     </CardComponent>
   </MainSection>
 
-  <TitledSection>
-    Custom elements
-  </TitledSection>
+  <TitledSection> Custom elements </TitledSection>
 
   <MainSection>
-    <CardComponent
-      title="Custom elements"
-      :icon="mdiBallotOutline"
-    >
-      <Field
-        label="Checkbox"
-        wrap-body
-      >
+    <CardComponent title="Custom elements" :icon="mdiBallotOutline">
+      <Field label="Checkbox" wrapBody>
         <CheckRadioPicker
           v-model="customElementsForm.checkbox"
           name="sample-checkbox"
@@ -142,10 +103,7 @@ const submit = () => {
 
       <Divider />
 
-      <Field
-        label="Radio"
-        wrap-body
-      >
+      <Field label="Radio" wrapBody>
         <CheckRadioPicker
           v-model="customElementsForm.radio"
           name="sample-radio"

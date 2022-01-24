@@ -19,7 +19,11 @@ const darkMode = computed(() => store.state.darkMode)
 
 const itemsUnsorted = computed(() => store.state.clients)
 
-const items = computed(() => itemsUnsorted.value.slice(0).sort((a, b) => parseFloat(b.progress) - parseFloat(a.progress)))
+const items = computed(() =>
+  itemsUnsorted.value
+    .slice(0)
+    .sort((a, b) => parseFloat(b.progress) - parseFloat(a.progress))
+)
 
 const isModalActive = ref(false)
 
@@ -31,8 +35,11 @@ const currentPage = ref(0)
 
 const checkedRows = ref([])
 
-const itemsPaginated = computed(
-  () => items.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
+const itemsPaginated = computed(() =>
+  items.value.slice(
+    perPage.value * currentPage.value,
+    perPage.value * (currentPage.value + 1)
+  )
 )
 
 const numPages = computed(() => Math.ceil(items.value.length / perPage.value))
@@ -52,7 +59,7 @@ const pagesList = computed(() => {
 const remove = (arr, cb) => {
   const newArr = []
 
-  arr.forEach(item => {
+  arr.forEach((item) => {
     if (!cb(item)) {
       newArr.push(item)
     }
@@ -65,34 +72,28 @@ const checked = (isChecked, client) => {
   if (isChecked) {
     checkedRows.value.push(client)
   } else {
-    checkedRows.value = remove(checkedRows.value, row => row.id === client.id)
+    checkedRows.value = remove(checkedRows.value, (row) => row.id === client.id)
   }
 }
 </script>
 
 <template>
-  <ModalBox
-    v-model="isModalActive"
-    title="Sample modal"
-  >
+  <ModalBox v-model="isModalActive" title="Sample modal">
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
   </ModalBox>
 
   <ModalBox
     v-model="isModalDangerActive"
-    large-title="Please confirm"
+    largeTitle="Please confirm"
     button="danger"
-    has-cancel
+    hasCancel
   >
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
   </ModalBox>
 
-  <div
-    v-if="checkedRows.length"
-    class="p-3 bg-gray-50 dark:bg-gray-800"
-  >
+  <div v-if="checkedRows.length" class="p-3 bg-gray-50 dark:bg-gray-800">
     <span
       v-for="checkedRow in checkedRows"
       :key="checkedRow.id"
@@ -111,24 +112,15 @@ const checked = (isChecked, client) => {
       </tr>
     </thead>
     <tbody>
-      <tr
-        v-for="client in itemsPaginated"
-        :key="client.id"
-      >
+      <tr v-for="client in itemsPaginated" :key="client.id">
         <td data-label="Domain">
           {{ client.name }}
         </td>
         <td data-label="Hits">
           {{ client.progress }}
         </td>
-        <td
-          data-label="Progress"
-          class="progress-cell"
-        >
-          <progress
-            max="100"
-            :value="client.progress"
-          >
+        <td data-label="Progress" class="progress-cell">
+          <progress max="100" :value="client.progress">
             {{ client.progress }}
           </progress>
         </td>

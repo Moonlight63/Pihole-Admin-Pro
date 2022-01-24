@@ -9,16 +9,26 @@ import JbButton from '@/components/Form/JbButton.vue'
 const props = defineProps({
   total: { type: Number as PropType<number>, required: true },
   perPage: { type: Number as PropType<number>, required: true },
-  currentPage: { type: Number as PropType<number>, required: false, default: 0 },
-  maxVisibleButtons: { type: Number as PropType<number>, required: false, default: 5 }
+  currentPage: {
+    type: Number as PropType<number>,
+    required: false,
+    default: 0
+  },
+  maxVisibleButtons: {
+    type: Number as PropType<number>,
+    required: false,
+    default: 5
+  }
 })
 
-const emit = defineEmits([
-  'changed'
-])
+const emit = defineEmits(['changed'])
 
-const currentStart = computed(() => (props.currentPage) * props.perPage + 1)
-const currentEnd = computed(() => props.total > ((props.currentPage + 1) * props.perPage) ? ((props.currentPage + 1) * props.perPage) : props.total)
+const currentStart = computed(() => props.currentPage * props.perPage + 1)
+const currentEnd = computed(() =>
+  props.total > (props.currentPage + 1) * props.perPage
+    ? (props.currentPage + 1) * props.perPage
+    : props.total
+)
 const totalPages = computed(() => Math.ceil(props.total / props.perPage))
 const store = useStore()
 const darkMode = computed(() => store.state.darkMode)
@@ -28,13 +38,15 @@ const startPage = computed(() => {
     return 0
   }
 
-  if (props.currentPage > (totalPages.value - props.maxVisibleButtons)) {
+  if (props.currentPage > totalPages.value - props.maxVisibleButtons) {
     return totalPages.value - props.maxVisibleButtons
   }
 
   return props.currentPage - 1
 })
-const endPage = computed(() => Math.min(startPage.value + props.maxVisibleButtons - 1, totalPages.value - 1))
+const endPage = computed(() =>
+  Math.min(startPage.value + props.maxVisibleButtons - 1, totalPages.value - 1)
+)
 const pages = computed(() => {
   const range = []
   for (let i = startPage.value; i <= endPage.value; i += 1) {
@@ -53,8 +65,14 @@ const goToPageNumber = (page: number) => {
 }
 const gotoFirstPage = () => goToPageNumber(0)
 const gotoLastPage = () => goToPageNumber(totalPages.value - 1)
-const gotoNextPage = () => goToPageNumber((props.currentPage >= totalPages.value - 1) ? totalPages.value - 1 : (props.currentPage + 1))
-const gotoPreviousPage = () => goToPageNumber((props.currentPage <= 0) ? 0 : (props.currentPage - 1))
+const gotoNextPage = () =>
+  goToPageNumber(
+    props.currentPage >= totalPages.value - 1
+      ? totalPages.value - 1
+      : props.currentPage + 1
+  )
+const gotoPreviousPage = () =>
+  goToPageNumber(props.currentPage <= 0 ? 0 : props.currentPage - 1)
 // const LEFT = 'left'
 // const showDots = (position = LEFT) => {
 //   const number = position === LEFT ? 1 : totalPages.value - 1
@@ -62,14 +80,10 @@ const gotoPreviousPage = () => goToPageNumber((props.currentPage <= 0) ? 0 : (pr
 //   // return !pages.value.includes(number) || !pages.value.includes(nextNumber)
 //   return false
 // }
-
 </script>
 
 <template>
-  <div
-    v-if="totalPages"
-    class="table-pagination"
-  >
+  <div v-if="totalPages" class="table-pagination">
     <Level>
       <div v-if="total">
         <slot
@@ -79,7 +93,8 @@ const gotoPreviousPage = () => goToPageNumber((props.currentPage <= 0) ? 0 : (pr
           :total="total"
         >
           <small>
-            Showing {{ currentStart }} to {{ currentEnd }} of {{ total }} results.
+            Showing {{ currentStart }} to {{ currentEnd }} of
+            {{ total }} results.
           </small>
         </slot>
       </div>

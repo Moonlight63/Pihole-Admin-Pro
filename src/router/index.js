@@ -21,7 +21,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "tables" */ '@/views/Tables.vue')
+    component: () =>
+      import(/* webpackChunkName: "tables" */ '@/views/Tables.vue')
   },
   {
     meta: {
@@ -37,7 +38,8 @@ const routes = [
     },
     path: '/profile',
     name: 'profile',
-    component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
+    component: () =>
+      import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
   },
   {
     meta: {
@@ -53,7 +55,8 @@ const routes = [
     },
     path: '/responsive',
     name: 'responsive',
-    component: () => import(/* webpackChunkName: "responsive" */ '@/views/Responsive.vue')
+    component: () =>
+      import(/* webpackChunkName: "responsive" */ '@/views/Responsive.vue')
   },
   {
     meta: {
@@ -78,7 +81,7 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     return savedPosition || { top: 0 }
   }
 })

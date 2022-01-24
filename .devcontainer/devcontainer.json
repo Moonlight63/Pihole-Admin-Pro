@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.205.2/containers/vue
 {
-	"name": "Vue (Community)",
+	"name": "VuePiholeAdmin",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": "..",
@@ -19,11 +19,7 @@
 		"2gua.rainbow-brackets",
 		"oderwat.indent-rainbow",
 		"heybourn.headwind",
-		// "vmsynkov.colonize",
-		"johnsoncodehk.volar",
-		"tabnine.tabnine-vscode",
-		"christian-kohler.path-intellisense",
-		"steoates.autoimport"
+		"johnsoncodehk.volar"
 	],
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -38,6 +34,5 @@
 	"remoteUser": "node",
 	"features": {
 		"git": "latest",
-		"sshd": "latest"
 	}
 }

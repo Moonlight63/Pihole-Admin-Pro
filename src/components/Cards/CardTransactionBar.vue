@@ -1,6 +1,11 @@
 <script setup>
 import { computed } from 'vue'
-import { mdiCashMinus, mdiCashPlus, mdiReceipt, mdiCreditCardOutline } from '@mdi/js'
+import {
+  mdiCashMinus,
+  mdiCashPlus,
+  mdiReceipt,
+  mdiCreditCardOutline
+} from '@mdi/js'
 import CardComponent from '@/components/Cards/CardComponent.vue'
 import Level from '@/components/UI/Level.vue'
 import Pill from '@/components/UI/Pill.vue'
@@ -59,21 +64,12 @@ const icon = computed(() => {
 </script>
 
 <template>
-  <CardComponent
-    class="mb-6 last:mb-0"
-    hoverable
-  >
+  <CardComponent class="mb-6 last:mb-0" hoverable>
     <Level>
       <Level type="justify-start">
-        <IconRounded
-          :icon="icon.icon"
-          :type="icon.type"
-          class="md:mr-6"
-        />
+        <IconRounded :icon="icon.icon" :type="icon.type" class="md:mr-6" />
         <div class="text-center space-y-1 md:text-left md:mr-6">
-          <h4 class="text-xl">
-            ${{ amount }}
-          </h4>
+          <h4 class="text-xl">${{ amount }}</h4>
           <p class="text-gray-500 dark:text-gray-400">
             <b>{{ date }}</b> via {{ business }}
           </p>
@@ -82,15 +78,8 @@ const icon = computed(() => {
       <div class="text-center md:text-right space-y-1">
         <p>{{ name }}</p>
         <div>
-          <Pill
-            type="info"
-            :text="account"
-            small
-          /> <Pill
-            :type="icon.type"
-            :text="type"
-            small
-          />
+          <Pill type="info" :text="account" small />
+          <Pill :type="icon.type" :text="type" small />
         </div>
       </div>
     </Level>

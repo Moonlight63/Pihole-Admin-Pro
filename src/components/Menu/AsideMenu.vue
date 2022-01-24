@@ -24,28 +24,26 @@ const isAsideLgActive = computed(() => store.state.isAsideLgActive)
 const asideLgClose = () => {
   store.dispatch('asideLgToggle', false)
 }
-
 </script>
 
 <template>
   <aside
     v-show="!isFullScreen"
     id="aside"
-    class="fixed top-0 z-40 h-screen bg-menu w-60 transition-position lg:left-0 dark:border-r dark:border-gray-800 "
-    :class="[ isAsideMobileExpanded ? 'left-0' : '-left-60', isAsideLgActive ? 'block' : 'lg:hidden xl:block' ]"
+    class="fixed top-0 z-40 h-screen bg-menu w-60 transition-position lg:left-0 dark:border-r dark:border-gray-800"
+    :class="[
+      isAsideMobileExpanded ? 'left-0' : '-left-60',
+      isAsideLgActive ? 'block' : 'lg:hidden xl:block'
+    ]"
   >
     <div class="flex flex-row items-center flex-1 w-full text-menu h-14">
       <NavBarItem
         type="hidden lg:flex xl:hidden"
-        active-color="text-menu"
+        activeColor="text-menu"
         active
         @click="asideLgClose"
       >
-        <Icon
-          :path="mdiMenu"
-          class="cursor-pointer"
-          size="24"
-        />
+        <Icon :path="mdiMenu" class="cursor-pointer" size="24" />
       </NavBarItem>
       <div class="flex-1 px-3 text-center">
         <span>Pi-</span> <b class="font-black">Hole</b>
@@ -60,11 +58,7 @@ const asideLgClose = () => {
         >
           {{ menuGroup }}
         </p>
-        <AsideMenuList
-          v-else
-          :key="`b-${index}`"
-          :menu="menuGroup"
-        />
+        <AsideMenuList v-else :key="`b-${index}`" :menu="menuGroup" />
       </template>
     </div>
   </aside>

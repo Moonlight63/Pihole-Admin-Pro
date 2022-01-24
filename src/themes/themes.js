@@ -1,7 +1,7 @@
 const plugin = require('tailwindcss/plugin')
 const Theme = require('./theme-default')
 
-function buildObj (names) {
+function buildObj(names) {
   const newObj = {}
 
   for (const className in names) {
@@ -11,7 +11,10 @@ function buildObj (names) {
       if (idx === levels.length - 1) {
         target[levels[idx]] = `var(--${className.replace(':', '-')})`
       } else {
-        target[levels[idx]] = recurse(Object.assign({}, target[levels[idx]]), idx + 1)
+        target[levels[idx]] = recurse(
+          Object.assign({}, target[levels[idx]]),
+          idx + 1
+        )
       }
       return target
     }
@@ -20,8 +23,8 @@ function buildObj (names) {
   return newObj
 }
 
-function buildThemeVars (names, themeName) {
-  const newObj = { }
+function buildThemeVars(names, themeName) {
+  const newObj = {}
 
   for (const className in names) {
     newObj[`--${className.replace(':', '-')}`] = names[className]
@@ -29,22 +32,28 @@ function buildThemeVars (names, themeName) {
   return { [`.${themeName}`]: newObj }
 }
 
-function makeKeyRoot (theme, key, parent) {
+function makeKeyRoot(theme, key, parent) {
   const ordered = {}
   for (const child in theme) {
     const obj = theme[child]
     if (child === key) {
       ordered[parent] = { ...ordered[parent], ...obj }
     } else {
-      if (Object.keys(obj).length !== 0 && Object.getPrototypeOf(obj) === Object.prototype) {
-        ordered[parent] = { ...ordered[parent], ...makeKeyRoot(obj, key, child) }
+      if (
+        Object.keys(obj).length !== 0 &&
+        Object.getPrototypeOf(obj) === Object.prototype
+      ) {
+        ordered[parent] = {
+          ...ordered[parent],
+          ...makeKeyRoot(obj, key, child)
+        }
       }
     }
   }
   return ordered
 }
 
-function createClasses (theme, root, parent, property) {
+function createClasses(theme, root, parent, property) {
   let classes = {}
 
   for (const child in theme) {
@@ -83,9 +92,20 @@ function createClasses (theme, root, parent, property) {
         classes['.dark .' + root] = obj
       }
     } else {
-      if (Object.keys(theme[child]).length !== 0 && Object.getPrototypeOf(theme[child]) === Object.prototype) {
-        const children = createClasses(theme[child], (root ? root + '-' + child : child), child, property)
-        if (Object.keys(children).length !== 0 && Object.getPrototypeOf(children) === Object.prototype) {
+      if (
+        Object.keys(theme[child]).length !== 0 &&
+        Object.getPrototypeOf(theme[child]) === Object.prototype
+      ) {
+        const children = createClasses(
+          theme[child],
+          root ? root + '-' + child : child,
+          child,
+          property
+        )
+        if (
+          Object.keys(children).length !== 0 &&
+          Object.getPrototypeOf(children) === Object.prototype
+        ) {
           classes = { ...classes, ...children }
         }
       }

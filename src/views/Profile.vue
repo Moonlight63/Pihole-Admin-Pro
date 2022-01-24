@@ -1,7 +1,14 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { useStore } from 'vuex'
-import { mdiAccount, mdiAccountCircle, mdiLock, mdiMail, mdiAsterisk, mdiFormTextboxPassword } from '@mdi/js'
+import {
+  mdiAccount,
+  mdiAccountCircle,
+  mdiLock,
+  mdiMail,
+  mdiAsterisk,
+  mdiFormTextboxPassword
+} from '@mdi/js'
 import MainSection from '@/components/MainSection.vue'
 import CardComponent from '@/components/Cards/CardComponent.vue'
 import TitleBar from '@/components/Panels/TitleBar.vue'
@@ -39,7 +46,7 @@ const submitPass = () => {
 </script>
 
 <template>
-  <TitleBar :title-stack="titleStack" />
+  <TitleBar :titleStack="titleStack" />
 
   <UserCard />
 
@@ -51,17 +58,11 @@ const submitPass = () => {
         form
         @submit.prevent="submitProfile"
       >
-        <Field
-          label="Avatar"
-          help="Max 500kb"
-        >
+        <Field label="Avatar" help="Max 500kb">
           <FilePicker />
         </Field>
 
-        <Field
-          label="Name"
-          help="Required. Your name"
-        >
+        <Field label="Name" help="Required. Your name">
           <Control
             v-model="profileForm.name"
             :icon="mdiAccount"
@@ -70,10 +71,7 @@ const submitPass = () => {
             autocomplete="username"
           />
         </Field>
-        <Field
-          label="E-mail"
-          help="Required. Your e-mail"
-        >
+        <Field label="E-mail" help="Required. Your e-mail">
           <Control
             v-model="profileForm.email"
             :icon="mdiMail"
@@ -87,16 +85,8 @@ const submitPass = () => {
         <Divider />
 
         <JbButtons>
-          <JbButton
-            color="info"
-            type="submit"
-            label="Submit"
-          />
-          <JbButton
-            color="info"
-            label="Options"
-            outline
-          />
+          <JbButton color="info" type="submit" label="Submit" />
+          <JbButton color="info" label="Options" outline />
         </JbButtons>
       </CardComponent>
 
@@ -106,10 +96,7 @@ const submitPass = () => {
         form
         @submit.prevent="submitPass"
       >
-        <Field
-          label="Current password"
-          help="Required. Your current password"
-        >
+        <Field label="Current password" help="Required. Your current password">
           <Control
             v-model="passwordForm.password_current"
             :icon="mdiAsterisk"
@@ -122,10 +109,7 @@ const submitPass = () => {
 
         <Divider />
 
-        <Field
-          label="New password"
-          help="Required. New password"
-        >
+        <Field label="New password" help="Required. New password">
           <Control
             v-model="passwordForm.password"
             :icon="mdiFormTextboxPassword"
@@ -153,16 +137,8 @@ const submitPass = () => {
         <Divider />
 
         <JbButtons>
-          <JbButton
-            type="submit"
-            color="info"
-            label="Submit"
-          />
-          <JbButton
-            color="info"
-            label="Options"
-            outline
-          />
+          <JbButton type="submit" color="info" label="Submit" />
+          <JbButton color="info" label="Options" outline />
         </JbButtons>
       </CardComponent>
     </div>

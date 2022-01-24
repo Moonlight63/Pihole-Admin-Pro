@@ -1,6 +1,6 @@
 import { FunctionType } from '../types/FunctionType'
 
-const debounce = (callback: FunctionType, wait = 1) : FunctionType => {
+const debounce = (callback: FunctionType, wait = 1): FunctionType => {
   let timeout: number
 
   return (...args) => {
@@ -13,6 +13,4 @@ const debounce = (callback: FunctionType, wait = 1) : FunctionType => {
   }
 }
 
-export {
-  debounce
-}
+export { debounce }

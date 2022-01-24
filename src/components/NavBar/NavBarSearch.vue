@@ -6,7 +6,7 @@ import Control from '@/components/Form/Control.vue'
   <Control
     ref="root"
     placeholder="Search (ctrl+k)"
-    ctrl-k-focus
+    ctrlKFocus
     transparent
     borderless
   />

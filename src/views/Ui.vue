@@ -37,15 +37,23 @@ const modalThreeActive = ref(false)
 
 const notificationSettingsModel = ref([])
 
-const notificationsOutline = computed(() => notificationSettingsModel.value.indexOf('outline') > -1)
+const notificationsOutline = computed(
+  () => notificationSettingsModel.value.indexOf('outline') > -1
+)
 
 const buttonSettingsModel = ref([])
 
-const buttonsOutline = computed(() => buttonSettingsModel.value.indexOf('outline') > -1)
+const buttonsOutline = computed(
+  () => buttonSettingsModel.value.indexOf('outline') > -1
+)
 
-const buttonsSmall = computed(() => buttonSettingsModel.value.indexOf('small') > -1)
+const buttonsSmall = computed(
+  () => buttonSettingsModel.value.indexOf('small') > -1
+)
 
-const buttonsDisabled = computed(() => buttonSettingsModel.value.indexOf('disabled') > -1)
+const buttonsDisabled = computed(
+  () => buttonSettingsModel.value.indexOf('disabled') > -1
+)
 
 const store = useStore()
 
@@ -58,58 +66,46 @@ const darkModeToggle = () => {
   <ModalBox
     v-model="modalOneActive"
     title="Please confirm action"
-    button-label="Confirm"
-    has-cancel
+    buttonLabel="Confirm"
+    hasCancel
   >
     <p>This is sample modal</p>
   </ModalBox>
 
   <ModalBox
     v-model="modalTwoActive"
-    large-title="Unhandled exception"
+    largeTitle="Unhandled exception"
     button="danger"
     shake
   >
     <p>This is sample modal</p>
   </ModalBox>
 
-  <ModalBox
-    v-model="modalThreeActive"
-    large-title="Success"
-    button="success"
-  >
+  <ModalBox v-model="modalThreeActive" largeTitle="Success" button="success">
     <p>This is sample modal</p>
   </ModalBox>
 
-  <TitleBar :title-stack="titleStack" />
+  <TitleBar :titleStack="titleStack" />
 
   <HeroBar>UI Components</HeroBar>
 
-  <TitledSection first>
-    Dark mode
-  </TitledSection>
+  <TitledSection first> Dark mode </TitledSection>
 
   <MainSection>
     <CardComponent class="shadow-2xl md:w-7/12 lg:w-5/12 xl:w-4/12 md:mx-auto">
       <div class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400">
-        <JbButton
-          label="Toggle"
-          outline
-          @click="darkModeToggle"
-        />
+        <JbButton label="Toggle" outline @click="darkModeToggle" />
       </div>
     </CardComponent>
   </MainSection>
 
-  <TitledSection>
-    Modal examples
-  </TitledSection>
+  <TitledSection> Modal examples </TitledSection>
 
   <MainSection>
     <div class="space-y-12">
       <CardComponent
         title="Confirm modal"
-        :header-icon="mdiClose"
+        :headerIcon="mdiClose"
         class="shadow-2xl cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 md:mx-auto"
         hoverable
         @click="modalOneActive = true"
@@ -121,15 +117,8 @@ const darkModeToggle = () => {
         <Divider />
 
         <JbButtons>
-          <JbButton
-            label="Confirm"
-            color="info"
-          />
-          <JbButton
-            label="Cancel"
-            color="info"
-            outline
-          />
+          <JbButton label="Confirm" color="info" />
+          <JbButton label="Cancel" color="info" outline />
         </JbButtons>
       </CardComponent>
 
@@ -139,19 +128,14 @@ const darkModeToggle = () => {
         @click="modalTwoActive = true"
       >
         <div class="space-y-3">
-          <h1 class="text-2xl">
-            Unhandled exception
-          </h1>
+          <h1 class="text-2xl">Unhandled exception</h1>
           <p>Click to see in action</p>
         </div>
 
         <Divider />
 
         <JbButtons>
-          <JbButton
-            label="Done"
-            color="danger"
-          />
+          <JbButton label="Done" color="danger" />
         </JbButtons>
       </CardComponent>
 
@@ -161,26 +145,19 @@ const darkModeToggle = () => {
         @click="modalThreeActive = true"
       >
         <div class="space-y-3">
-          <h1 class="text-2xl">
-            Success
-          </h1>
+          <h1 class="text-2xl">Success</h1>
           <p>Click to see in action</p>
         </div>
 
         <Divider />
 
-        <JbButton
-          label="Done"
-          color="success"
-        />
+        <JbButton label="Done" color="success" />
       </CardComponent>
     </div>
   </MainSection>
 
   <TitledSection custom>
-    <h1 class="text-2xl text-gray-500 dark:text-gray-400">
-      Notifications
-    </h1>
+    <h1 class="text-2xl text-gray-500 dark:text-gray-400">Notifications</h1>
     <div class="flex items-center justify-center mt-6">
       <CheckRadioPicker
         v-model="notificationSettingsModel"
@@ -286,7 +263,11 @@ const darkModeToggle = () => {
           v-model="buttonSettingsModel"
           name="buttons-switch"
           type="switch"
-          :options="{ outline: 'Outline', small: 'Small', disabled: 'Disabled' }"
+          :options="{
+            outline: 'Outline',
+            small: 'Small',
+            disabled: 'Disabled'
+          }"
         />
       </Field>
 
@@ -442,12 +423,11 @@ const darkModeToggle = () => {
   <TitledSection>Cards</TitledSection>
 
   <MainSection>
-    <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2 ">
-      <CardComponent
-        title="With Title"
-        mb=""
-      >
-        <div class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400">
+    <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
+      <CardComponent title="With Title" mb="">
+        <div
+          class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400"
+        >
           With title
         </div>
       </CardComponent>
@@ -455,19 +435,18 @@ const darkModeToggle = () => {
       <CardComponent
         title="Title & Icons"
         :icon="mdiMonitorCellphone"
-        :header-icon="mdiClose"
+        :headerIcon="mdiClose"
         mb=""
       >
-        <div class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400">
+        <div
+          class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400"
+        >
           With title & icons
         </div>
       </CardComponent>
     </div>
 
-    <TitleSubBar
-      :icon="mdiAlertCircle"
-      title="Empty variation"
-    />
+    <TitleSubBar :icon="mdiAlertCircle" title="Empty variation" />
 
     <CardComponent empty />
   </MainSection>

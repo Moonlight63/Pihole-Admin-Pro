@@ -28,7 +28,9 @@ const props = defineProps({
   }
 })
 
-const spanClass = computed(() => `inline-flex justify-center items-center ${props.w} ${props.h}`)
+const spanClass = computed(
+  () => `inline-flex justify-center items-center ${props.w} ${props.h}`
+)
 const svgWidth = computed(() => {
   if (props.sizeW || props.sizeH) {
     return props.sizeW
@@ -51,10 +53,7 @@ const svgHeight = computed(() => {
       :height="svgHeight"
       class="inline-block"
     >
-      <path
-        fill="currentColor"
-        :d="path"
-      />
+      <path fill="currentColor" :d="path" />
     </svg>
   </span>
 </template>

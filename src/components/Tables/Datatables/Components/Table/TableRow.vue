@@ -10,7 +10,6 @@
 </template>
 
 <script setup>
-
 const emits = defineEmits(['clicked'])
 const props = defineProps({
   clickable: {
@@ -19,5 +18,4 @@ const props = defineProps({
     default: true
   }
 })
-
 </script>

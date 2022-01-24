@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/* eslint-disable prettier/prettier */
 import { computed, ref, watch, reactive, PropType } from 'vue'
 import Level from '@/components/UI/Level.vue'
 import Field from '@/components/Form/Field.vue'
@@ -294,7 +295,7 @@ watch(() => props.rows, () => {
     <Level>
       <Field class="w-24">
         <Control
-          :model-value="calculatedPagedState.perPage"
+          :modelValue="calculatedPagedState.perPage"
           :options="props.paginationOptions"
           @update:modelValue="handleOnPaginationSizeChange"
         />
@@ -332,7 +333,7 @@ watch(() => props.rows, () => {
           :key="`datatable-row-${uniqueId()}-${rowIndex}`"
           :hoverable="hoverable"
           :clickable="clickable"
-          :row-index="rowIndex"
+          :rowIndex="rowIndex"
           @clicked="rowClickHandler(row)"
         >
           <slot
@@ -359,7 +360,7 @@ watch(() => props.rows, () => {
 
         <TableRow
           v-if="tableRows.length === 0"
-          :row-index="0"
+          :rowIndex="0"
         >
           <slot name="empty" />
         </TableRow>
@@ -369,8 +370,8 @@ watch(() => props.rows, () => {
     <div v-if="showPagination">
       <Pagination
         :total="totalData"
-        :current-page="calculatedPagedState.page"
-        :per-page="parseInt(calculatedPagedState.perPage.toString())"
+        :currentPage="calculatedPagedState.page"
+        :perPage="parseInt(calculatedPagedState.perPage.toString())"
         @changed="handlePageChange"
       >
         <template #pagination-info="paginationInfo">

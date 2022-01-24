@@ -19,9 +19,11 @@ const props = defineProps({
   }
 })
 
-const componentClass = computed(() => props.outline
-  ? colorsOutline[props.color]
-  : [colorsBg[props.color], colorsBorders[props.color]])
+const componentClass = computed(() =>
+  props.outline
+    ? colorsOutline[props.color]
+    : [colorsBg[props.color], colorsBorders[props.color]]
+)
 
 const isDismissed = ref(false)
 
@@ -56,14 +58,13 @@ const darkMode = computed(() => store.state.darkMode)
         />
         <span class="text-center md:text-left"><slot /></span>
       </div>
-      <slot
-        v-if="hasRightSlot"
-        name="right"
-      />
+      <slot v-if="hasRightSlot" name="right" />
       <JbButton
         v-else
         :icon="mdiClose"
-        :outline="outline || (darkMode && ['white', 'light'].indexOf(color) < 0)"
+        :outline="
+          outline || (darkMode && ['white', 'light'].indexOf(color) < 0)
+        "
         small
         @click="dismiss"
       />

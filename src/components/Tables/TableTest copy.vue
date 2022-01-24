@@ -31,10 +31,20 @@ const currentPage = ref(0)
 const dataRaw = computed(() => store.state.clients)
 const dataSorted = computed(() => {
   if (sortByKey.value === '') return dataRaw.value
-  return dataRaw.value.slice(0).sort((a, b) => a[sortByKey.value].toString().toLowerCase().localeCompare(b[sortByKey.value].toString().toLowerCase()))
+  return dataRaw.value
+    .slice(0)
+    .sort((a, b) =>
+      a[sortByKey.value]
+        .toString()
+        .toLowerCase()
+        .localeCompare(b[sortByKey.value].toString().toLowerCase())
+    )
 })
-const dataPaginated = computed(
-  () => dataSorted.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
+const dataPaginated = computed(() =>
+  dataSorted.value.slice(
+    perPage.value * currentPage.value,
+    perPage.value * (currentPage.value + 1)
+  )
 )
 
 const filter = ref('')
@@ -42,14 +52,21 @@ const sortation = ref({})
 
 const darkMode = computed(() => store.state.darkMode)
 const itemsUnsorted = computed(() => store.state.clients)
-const items = computed(() => itemsUnsorted.value.slice(0).sort((a, b) => parseFloat(b.progress) - parseFloat(a.progress)))
+const items = computed(() =>
+  itemsUnsorted.value
+    .slice(0)
+    .sort((a, b) => parseFloat(b.progress) - parseFloat(a.progress))
+)
 const isModalActive = ref(false)
 const isModalDangerActive = ref(false)
 const checkedRows = ref([])
 // const totalRecordCount = computed(() => itemsUnsorted.value.length)
 
-const itemsPaginated = computed(
-  () => items.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
+const itemsPaginated = computed(() =>
+  items.value.slice(
+    perPage.value * currentPage.value,
+    perPage.value * (currentPage.value + 1)
+  )
 )
 
 const numPages = computed(() => Math.ceil(items.value.length / perPage.value))
@@ -65,7 +82,7 @@ const pagesList = computed(() => {
 
 const remove = (arr, cb) => {
   const newArr = []
-  arr.forEach(item => {
+  arr.forEach((item) => {
     if (!cb(item)) {
       newArr.push(item)
     }
@@ -77,7 +94,7 @@ const checked = (isChecked, client) => {
   if (isChecked) {
     checkedRows.value.push(client)
   } else {
-    checkedRows.value = remove(checkedRows.value, row => row.id === client.id)
+    checkedRows.value = remove(checkedRows.value, (row) => row.id === client.id)
   }
 }
 
@@ -102,7 +119,6 @@ const loadData = (query) => {
 const getFilteredData = (data) => {
   sortation.value.sortedInput = data
 }
-
 </script>
 
 <template>
@@ -112,25 +128,24 @@ const getFilteredData = (data) => {
   <DataTable
     :rows="dataRaw"
     :columns="[
-      { 'key': 'name', 'sortable': true},
-      { 'key': 'progress', 'label': 'Hits', 'sortable': true },
-      { 'label': 'Status', 'key': 'progress' }
+      { key: 'name', sortable: true },
+      { key: 'progress', label: 'Hits', sortable: true },
+      { label: 'Status', key: 'progress' }
     ]"
     @loadData="loadData"
     @output:filteredData="getFilteredData"
   >
     <template #datatable-tbody-td-2="progressCell">
       <TableBodyCell
-        :key="`datatable-tbody-td-${progressCell.uniqueId()}-${progressCell.column.label}`"
+        :key="`datatable-tbody-td-${progressCell.uniqueId()}-${
+          progressCell.column.label
+        }`"
         class="progress-cell"
         :name="progressCell.column.key"
         :data-label="progressCell.column.label"
         :rdata1="progressCell.column"
       >
-        <progress
-          max="100"
-          :value="progressCell.row.progress"
-        >
+        <progress max="100" :value="progressCell.row.progress">
           {{ progressCell.row.progress }}
         </progress>
       </TableBodyCell>

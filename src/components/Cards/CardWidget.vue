@@ -51,20 +51,12 @@ const darkMode = computed(() => store.state.darkMode)
 
 <template>
   <CardComponent>
-    <Level
-      v-if="trend"
-      class="mb-3"
-      mobile
-    >
-      <TrendPill
-        :trend="trend"
-        :trend-type="trendType"
-        small
-      />
+    <Level v-if="trend" class="mb-3" mobile>
+      <TrendPill :trend="trend" :trendType="trendType" small />
       <JbButton
         :icon="mdiCog"
-        icon-w="w-4"
-        icon-h="h-4"
+        iconW="w-4"
+        iconH="h-4"
         :color="darkMode ? 'white' : 'light'"
         :outline="darkMode"
         small
@@ -76,21 +68,10 @@ const darkMode = computed(() => store.state.darkMode)
           {{ label }}
         </h3>
         <h1 class="text-3xl font-semibold leading-tight">
-          <GrowingNumber
-            :value="number"
-            :prefix="prefix"
-            :suffix="suffix"
-          />
+          <GrowingNumber :value="number" :prefix="prefix" :suffix="suffix" />
         </h1>
       </div>
-      <Icon
-        v-if="icon"
-        :path="icon"
-        size="48"
-        w=""
-        h="h-16"
-        :class="color"
-      />
+      <Icon v-if="icon" :path="icon" size="48" w="" h="h-16" :class="color" />
     </Level>
   </CardComponent>
 </template>

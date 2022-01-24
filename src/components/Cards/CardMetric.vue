@@ -45,24 +45,19 @@ const darkMode = computed(() => store.state.darkMode)
 </script>
 
 <template>
-  <CardComponent
-    :bg-color="bgColor"
-    class="relative"
-  >
+  <CardComponent :bgColor="bgColor" class="relative">
     <!-- <level mobile> -->
     <div class="z-[1] relative">
       <h3 class="text-lg leading-tight">
         {{ label }}
       </h3>
       <h1 class="text-3xl font-semibold leading-tight">
-        <GrowingNumber
-          :value="number"
-          :prefix="prefix"
-          :suffix="suffix"
-        />
+        <GrowingNumber :value="number" :prefix="prefix" :suffix="suffix" />
       </h1>
     </div>
-    <div class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-end z-[0]">
+    <div
+      class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-end z-[0]"
+    >
       <Icon
         v-if="icon"
         :path="icon"

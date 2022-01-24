@@ -7,18 +7,10 @@ import JbButtons from '@/components/Form/JbButtons.vue'
 </script>
 
 <template>
-  <FullScreenSection
-    v-slot="{ cardClass, cardRounded }"
-    bg="error"
-  >
-    <CardComponent
-      :class="cardClass"
-      :rounded="cardRounded"
-    >
+  <FullScreenSection v-slot="{ cardClass, cardRounded }" bg="error">
+    <CardComponent :class="cardClass" :rounded="cardRounded">
       <div class="space-y-3">
-        <h1 class="text-2xl">
-          Unhandled exception
-        </h1>
+        <h1 class="text-2xl">Unhandled exception</h1>
 
         <p>An Error Occurred</p>
       </div>
@@ -26,11 +18,7 @@ import JbButtons from '@/components/Form/JbButtons.vue'
       <Divider />
 
       <JbButtons>
-        <JbButton
-          label="Done"
-          to="/"
-          color="danger"
-        />
+        <JbButton label="Done" to="/" color="danger" />
       </JbButtons>
     </CardComponent>
   </FullScreenSection>

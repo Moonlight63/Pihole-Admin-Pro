@@ -25,20 +25,14 @@ const submit = () => {
 </script>
 
 <template>
-  <FullScreenSection
-    v-slot="{ cardClass, cardRounded }"
-    bg="login"
-  >
+  <FullScreenSection v-slot="{ cardClass, cardRounded }" bg="login">
     <CardComponent
       :class="cardClass"
       :rounded="cardRounded"
       form
       @submit.prevent="submit"
     >
-      <Field
-        label="Login"
-        help="Please enter your login"
-      >
+      <Field label="Login" help="Please enter your login">
         <Control
           v-model="form.login"
           :icon="mdiAccount"
@@ -47,10 +41,7 @@ const submit = () => {
         />
       </Field>
 
-      <Field
-        label="Password"
-        help="Please enter your password"
-      >
+      <Field label="Password" help="Please enter your password">
         <Control
           v-model="form.pass"
           :icon="mdiAsterisk"
@@ -69,17 +60,8 @@ const submit = () => {
       <Divider />
 
       <JbButtons>
-        <JbButton
-          type="submit"
-          color="info"
-          label="Login"
-        />
-        <JbButton
-          to="/"
-          color="info"
-          outline
-          label="Back"
-        />
+        <JbButton type="submit" color="info" label="Login" />
+        <JbButton to="/" color="info" outline label="Back" />
       </JbButtons>
     </CardComponent>
   </FullScreenSection>

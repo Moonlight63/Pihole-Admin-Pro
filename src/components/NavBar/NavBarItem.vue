@@ -45,7 +45,9 @@ const componentClass = computed(() => {
     'relative',
     'cursor-pointer',
     'hover:text-blue-500',
-    props.active ? props.activeColor : 'text-black dark:text-white dark:hover:text-gray-400'
+    props.active
+      ? props.activeColor
+      : 'text-black dark:text-white dark:hover:text-gray-400'
   ]
 
   if (props.type === 'block') {
@@ -80,7 +82,7 @@ const activeClass = computed(() => {
     :class="componentClass"
     :to="to"
     :href="href"
-    :exact-active-class="activeClass"
+    :exactActiveClass="activeClass"
   >
     <slot />
   </Component>

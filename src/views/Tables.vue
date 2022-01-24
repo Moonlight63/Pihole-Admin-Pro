@@ -1,6 +1,11 @@
 <script setup>
 import { ref } from 'vue'
-import { mdiMonitorCellphone, mdiAccountMultiple, mdiTableBorder, mdiTableOff } from '@mdi/js'
+import {
+  mdiMonitorCellphone,
+  mdiAccountMultiple,
+  mdiTableBorder,
+  mdiTableOff
+} from '@mdi/js'
 import MainSection from '@/components/MainSection.vue'
 import Notification from '@/components/UI/Notification.vue'
 import ClientsTable from '@/components/UnusedReference/ClientsTable.vue'
@@ -14,13 +19,10 @@ const titleStack = ref(['Admin', 'Tables'])
 </script>
 
 <template>
-  <TitleBar :title-stack="titleStack" />
+  <TitleBar :titleStack="titleStack" />
   <HeroBar>Tables</HeroBar>
   <MainSection>
-    <Notification
-      color="info"
-      :icon="mdiMonitorCellphone"
-    >
+    <Notification color="info" :icon="mdiMonitorCellphone">
       <b>Responsive table.</b> Collapses on mobile
     </Notification>
 
@@ -28,39 +30,24 @@ const titleStack = ref(['Admin', 'Tables'])
       class="mb-6"
       title="Clients"
       :icon="mdiAccountMultiple"
-      has-table
+      hasTable
     >
       <ClientsTable checkable />
     </CardComponent>
 
-    <TitleSubBar
-      :icon="mdiTableBorder"
-      title="Wrapped variation"
-    />
+    <TitleSubBar :icon="mdiTableBorder" title="Wrapped variation" />
 
-    <Notification
-      color="success"
-      :icon="mdiTableBorder"
-    >
+    <Notification color="success" :icon="mdiTableBorder">
       <b>Tightly wrapped</b> &mdash; table header becomes card header
     </Notification>
 
-    <CardComponent
-      class="mb-6"
-      has-table
-    >
+    <CardComponent class="mb-6" hasTable>
       <ClientsTable checkable />
     </CardComponent>
 
-    <TitleSubBar
-      :icon="mdiTableOff"
-      title="Empty variation"
-    />
+    <TitleSubBar :icon="mdiTableOff" title="Empty variation" />
 
-    <Notification
-      color="danger"
-      :icon="mdiTableOff"
-    >
+    <Notification color="danger" :icon="mdiTableOff">
       <b>Empty table.</b> When there's nothing to show
     </Notification>
 

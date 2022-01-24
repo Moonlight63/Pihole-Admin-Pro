@@ -7,7 +7,7 @@ export const chartColors = {
   }
 }
 
-const randomChartData = n => {
+const randomChartData = (n) => {
   const data = []
 
   for (let i = 0; i < n; i++) {
@@ -49,7 +49,10 @@ export const sampleChartData = (points = 9, sets = 4) => {
     return {
       labels,
       datasets: [
-        { ...datasetObject('primary', points), backgroundColor: ['#00D1B2', '#209CEE', '#fb923c', '#FF3860'] }
+        {
+          ...datasetObject('primary', points),
+          backgroundColor: ['#00D1B2', '#209CEE', '#fb923c', '#FF3860']
+        }
       ]
     }
   }
