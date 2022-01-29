@@ -7,6 +7,9 @@ import { darkModeKey, apiAddressKey } from '@/config.js'
 
 import './css/main.css'
 
+// import icons data genereted by PurgeIcons
+import '@purge-icons/generated'
+
 /* Fetch sample data */
 store.dispatch('fetch', 'clients')
 store.dispatch('fetch', 'history')

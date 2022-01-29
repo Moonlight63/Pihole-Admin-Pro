@@ -1,8 +1,4 @@
 <script setup>
-import { mdiUpload } from '@mdi/js'
-import { computed, ref, watch } from 'vue'
-import JbButton from '@/components/Form/JbButton.vue'
-
 const props = defineProps({
   modelValue: {
     type: [Object, File, Array],
@@ -14,7 +10,7 @@ const props = defineProps({
   },
   icon: {
     type: String,
-    default: mdiUpload
+    default: 'mdi:upload'
   },
   accept: {
     type: String,
@@ -80,7 +76,7 @@ const upload = (event) => {
 </script>
 
 <template>
-  <div class="flex items-stretch justify-start relative">
+  <div class="relative flex items-stretch justify-start">
     <label class="inline-flex">
       <JbButton
         as="a"
@@ -92,14 +88,14 @@ const upload = (event) => {
       <input
         ref="root"
         type="file"
-        class="absolute top-0 left-0 w-full h-full opacity-0 outline-none cursor-pointer -z-1"
+        class="absolute top-0 left-0 w-full h-full outline-none opacity-0 cursor-pointer -z-1"
         :accept="accept"
         @input="upload"
       />
     </label>
     <div v-if="file">
       <span
-        class="inline-flex px-4 py-2 justify-center bg-gray-100 border-gray-200 border rounded-r"
+        class="inline-flex justify-center px-4 py-2 bg-gray-100 border border-gray-200 rounded-r"
         >{{ file.name }}</span
       >
     </div>

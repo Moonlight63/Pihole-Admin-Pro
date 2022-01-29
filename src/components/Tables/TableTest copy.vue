@@ -1,21 +1,5 @@
 <script setup>
-import { computed, ref, reactive } from 'vue'
 import { useStore } from 'vuex'
-import { mdiEye, mdiTrashCan } from '@mdi/js'
-import ModalBox from '@/components/UI/ModalBox.vue'
-import CheckboxCell from '@/components/Form/CheckboxCell.vue'
-import Level from '@/components/UI/Level.vue'
-import JbButtons from '@/components/Form/JbButtons.vue'
-import JbButton from '@/components/Form/JbButton.vue'
-import UserAvatar from '@/components/UnusedReference/UserAvatar.vue'
-import Field from '@/components/Form/Field.vue'
-import Control from '@/components/Form/Control.vue'
-import Pagination from '@/components/Tables/Datatables/Components/Pagination/Pagination.vue'
-import TableHead from '@/components/Tables/Datatables/Components/Table/TableHead.vue'
-import TableHeadCell from '@/components/Tables/Datatables/Components/Table/TableHeadCell.vue'
-import TableRow from '@/components/Tables/Datatables/Components/Table/TableRow.vue'
-import DataTable from '@/components/Tables/Datatables/DataTable.vue'
-import TableBodyCell from './Datatables/Components/Table/TableBodyCell.vue'
 
 // defineProps({
 //   checkable: Boolean
@@ -202,12 +186,12 @@ const getFilteredData = (data) => {
         >
           <JbButton
             color="success"
-            :icon="mdiEye"
+            icon="mdi:eye"
             small
           />
           <JbButton
             color="danger"
-            :icon="mdiTrashCan"
+            icon="mdi:trash-can"
             small
           />
         </JbButtons>

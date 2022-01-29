@@ -1,9 +1,4 @@
 <script setup>
-import { useRouter } from 'vue-router'
-import { mdiGithub } from '@mdi/js'
-import TitledSection from '@/components/TitledSection.vue'
-import Icon from '@/components/UI/Icon.vue'
-
 const router = useRouter()
 
 const routes = router.getRoutes()
@@ -29,7 +24,7 @@ for (const routeIndex in routes) {
 <template>
   <TitledSection last>
     <h1
-      class="flex items-center justify-center flex-col md:flex-row text-2xl text-gray-500 dark:text-gray-400 mb-12"
+      class="flex flex-col items-center justify-center mb-12 text-2xl text-gray-500 md:flex-row dark:text-gray-400"
     >
       <span class="md:mr-3">Please star this project on</span>
       <a
@@ -37,11 +32,11 @@ for (const routeIndex in routes) {
         class="inline-flex items-center justify-center text-blue-500"
         target="_blank"
       >
-        <Icon :path="mdiGithub" size="36" class="mr-1" />
+        <UiIconify icon="mdi:github" class="mr-1 text-4xl" />
         <span>GitHub</span>
       </a>
     </h1>
-    <h1 class="text-2xl text-gray-500 dark:text-gray-400 mb-12">
+    <h1 class="mb-12 text-2xl text-gray-500 dark:text-gray-400">
       Check out other components and layouts at<br />
       <template v-for="(screen, index) in screens" :key="screen.path">
         <RouterLink :to="screen.path" class="text-blue-500">

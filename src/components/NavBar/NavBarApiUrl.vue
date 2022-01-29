@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
-import { mdiLogin } from '@mdi/js'
-import Control from '@/components/Form/Control.vue'
-import NavBarItem from '@/components/NavBar/NavBarItem.vue'
-import NavBarItemLabel from '@/components/NavBar/NavBarItemLabel.vue'
 
 const store = useStore()
 
@@ -32,7 +27,7 @@ const tryConnect = () => {
       class=""
       @click.prevent="tryConnect()"
     >
-      <NavBarItemLabel :icon="mdiLogin" label="Connect" isDesktopIconOnly />
+      <NavBarItemLabel icon="mdi:login" label="Connect" isDesktopIconOnly />
     </NavBarItem>
   </div>
 </template>

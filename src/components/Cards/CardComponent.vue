@@ -1,7 +1,5 @@
 <script setup>
-import { mdiCog } from '@mdi/js'
 import { computed } from 'vue'
-import Icon from '@/components/UI/Icon.vue'
 
 const props = defineProps({
   title: {
@@ -44,7 +42,7 @@ const componentClass = computed(() => {
   return base
 })
 
-const computedHeaderIcon = computed(() => props.headerIcon ?? mdiCog)
+const computedHeaderIcon = computed(() => props.headerIcon ?? 'mdi:cog')
 
 const headerIconClick = () => {
   emit('header-icon-click')
@@ -70,7 +68,7 @@ const submit = (e) => {
         class="flex items-center py-3 font-bold grow"
         :class="[icon ? 'px-4' : 'px-6']"
       >
-        <Icon v-if="icon" :path="icon" class="mr-3" />
+        <UiIconify v-if="icon" :icon="icon" class="mr-3" />
         {{ title }}
       </p>
       <a
@@ -80,7 +78,7 @@ const submit = (e) => {
         aria-label="more options"
         @click.prevent="headerIconClick"
       >
-        <Icon :path="computedHeaderIcon" />
+        <UiIconify :icon="computedHeaderIcon" />
       </a>
     </header>
     <div

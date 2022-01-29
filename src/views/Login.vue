@@ -1,16 +1,4 @@
 <script setup>
-import { reactive } from 'vue'
-import { useRouter } from 'vue-router'
-import { mdiAccount, mdiAsterisk } from '@mdi/js'
-import FullScreenSection from '@/components/FullScreenSection.vue'
-import CardComponent from '@/components/Cards/CardComponent.vue'
-import CheckRadioPicker from '@/components/Form/CheckRadioPicker.vue'
-import Field from '@/components/Form/Field.vue'
-import Control from '@/components/Form/Control.vue'
-import Divider from '@/components/UI/Divider.vue'
-import JbButton from '@/components/Form/JbButton.vue'
-import JbButtons from '@/components/Form/JbButtons.vue'
-
 const form = reactive({
   login: 'john.doe',
   pass: 'highly-secure-password-fYjUw-',
@@ -35,7 +23,7 @@ const submit = () => {
       <Field label="Login" help="Please enter your login">
         <Control
           v-model="form.login"
-          :icon="mdiAccount"
+          icon="mdi:account"
           name="login"
           autocomplete="username"
         />
@@ -44,7 +32,7 @@ const submit = () => {
       <Field label="Password" help="Please enter your password">
         <Control
           v-model="form.pass"
-          :icon="mdiAsterisk"
+          icon="mdi:asterisk"
           type="password"
           name="password"
           autocomplete="current-password"

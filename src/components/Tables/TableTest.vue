@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import DataTable from '@/components/Tables/Datatables/DataTable.vue'
 import TableBodyCell from './Datatables/Components/Table/TableBodyCell.vue'
 import {
   DataTableColumns,
-  DataTablePagination,
   DataTableSortation
 } from './Datatables/types/DataTableTypes'
 
 const store = useStore()
 
 const dataRaw = computed(() => store.state.clients)
+const dataReady = computed(() => !store.state.loadingClients)
 
 // const filter = ref('')
 const sortation = ref<DataTableSortation>({})
@@ -20,7 +19,7 @@ const sortation = ref<DataTableSortation>({})
 //   pagedInput: dataRaw.value
 // })
 
-const getFilteredData = (data) => {
+const getFilteredData = (data: { [x: string]: unknown }[] | undefined) => {
   sortation.value.sortedInput = data
 }
 
@@ -36,11 +35,12 @@ const columns: DataTableColumns = [
   v-model:pagination="pagination"
   v-model:sortation="sortation" -->
   <DataTable
+    v-if="dataReady"
     :rows="dataRaw"
     :columns="columns"
     @output:filtered="getFilteredData"
   >
-    <template #datatable-tbody-td-2="progressCell">
+    <!-- <template #datatable-tbody-td-2="progressCell">
       <TableBodyCell
         :key="`datatable-tbody-td-${progressCell.uniqueId()}-${
           progressCell.column.label
@@ -52,6 +52,15 @@ const columns: DataTableColumns = [
       >
         <progress max="100" :value="progressCell.row.progress">
           {{ progressCell.row.progress }}
+        </progress>
+      </TableBodyCell>
+    </template> -->
+    <template #tbody="{ row }">
+      <TableBodyCell v-text="`${row.name}`" />
+      <TableBodyCell v-text="row.progress" />
+      <TableBodyCell class="progress-cell">
+        <progress max="100" :value="row.progress as number">
+          {{ row.progress }}
         </progress>
       </TableBodyCell>
     </template>

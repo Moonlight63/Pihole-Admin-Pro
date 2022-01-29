@@ -32,6 +32,7 @@ export default createStore({
 
     /* Sample data (commonly used) */
     clients: [],
+    loadingClients: false,
     history: [],
     myusers: []
   },
@@ -147,6 +148,7 @@ export default createStore({
     },
 
     fetch({ commit, state }, payload) {
+      state.loadingClients = true
       axios
         .get(`data-sources/${payload}.json`)
         .then((r) => {
@@ -156,8 +158,10 @@ export default createStore({
               value: r.data.data
             })
           }
+          state.loadingClients = false
         })
         .catch((error) => {
+          state.loadingClients = false
           alert(error.message)
         })
     },

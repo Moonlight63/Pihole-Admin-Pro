@@ -1,17 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
-import {
-  mdiMonitorCellphone,
-  mdiSelectColor,
-  mdiFeather,
-  mdiInformationOutline,
-  mdiCheckCircleOutline,
-  mdiAlertCircle,
-  mdiAlertCircleOutline,
-  mdiOpenInNew,
-  mdiClose
-} from '@mdi/js'
+
 import MainSection from '@/components/MainSection.vue'
 import HeroBar from '@/components/Panels/HeroBar.vue'
 import TitleBar from '@/components/Panels/TitleBar.vue'
@@ -105,7 +95,7 @@ const darkModeToggle = () => {
     <div class="space-y-12">
       <CardComponent
         title="Confirm modal"
-        :headerIcon="mdiClose"
+        headerIcon="mdi:close"
         class="shadow-2xl cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 md:mx-auto"
         hoverable
         @click="modalOneActive = true"
@@ -171,13 +161,13 @@ const darkModeToggle = () => {
   <MainSection>
     <Notification
       color="info"
-      :icon="mdiInformationOutline"
+      icon="mdi:information-outline"
       :outline="notificationsOutline"
     >
       <b>Info state</b>. Notification
       <template #right>
         <JbButton
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           label="Button"
           color="info"
           :outline="notificationsOutline"
@@ -188,13 +178,13 @@ const darkModeToggle = () => {
 
     <Notification
       color="success"
-      :icon="mdiCheckCircleOutline"
+      icon="mdi:check-circle-outline"
       :outline="notificationsOutline"
     >
       <b>Success state</b>. Notification
       <template #right>
         <JbButton
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           label="Button"
           color="success"
           :outline="notificationsOutline"
@@ -205,13 +195,13 @@ const darkModeToggle = () => {
 
     <Notification
       color="warning"
-      :icon="mdiAlertCircleOutline"
+      icon="mdi:alert-circle-outline"
       :outline="notificationsOutline"
     >
       <b>Warning state</b>. Notification
       <template #right>
         <JbButton
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           label="Button"
           color="warning"
           :outline="notificationsOutline"
@@ -222,13 +212,13 @@ const darkModeToggle = () => {
 
     <Notification
       color="danger"
-      :icon="mdiAlertCircle"
+      icon="mdi:alert-circle"
       :outline="notificationsOutline"
     >
       <b>Danger state</b>. Notification
       <template #right>
         <JbButton
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           label="Button"
           color="danger"
           :outline="notificationsOutline"
@@ -239,7 +229,7 @@ const darkModeToggle = () => {
 
     <Notification
       color="white"
-      :icon="mdiSelectColor"
+      icon="mdi:select-color"
       :outline="notificationsOutline"
     >
       <b>White</b>. Notification
@@ -247,7 +237,7 @@ const darkModeToggle = () => {
 
     <Notification
       color="light"
-      :icon="mdiFeather"
+      icon="mdi:feather"
       :outline="notificationsOutline"
     >
       <b>Light</b>. Notification
@@ -324,7 +314,7 @@ const darkModeToggle = () => {
         <JbButton
           color="white"
           label="Button"
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
@@ -332,7 +322,7 @@ const darkModeToggle = () => {
         <JbButton
           color="light"
           label="Button"
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
@@ -340,7 +330,7 @@ const darkModeToggle = () => {
         <JbButton
           color="info"
           label="Button"
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
@@ -348,7 +338,7 @@ const darkModeToggle = () => {
         <JbButton
           color="success"
           label="Button"
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
@@ -356,7 +346,7 @@ const darkModeToggle = () => {
         <JbButton
           color="warning"
           label="Button"
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
@@ -364,7 +354,7 @@ const darkModeToggle = () => {
         <JbButton
           color="danger"
           label="Button"
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
@@ -376,42 +366,42 @@ const darkModeToggle = () => {
       <JbButtons>
         <JbButton
           color="white"
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
         <JbButton
           color="light"
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
         <JbButton
           color="info"
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
         <JbButton
           color="success"
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
         <JbButton
           color="warning"
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
         <JbButton
           color="danger"
-          :icon="mdiOpenInNew"
+          icon="mdi:open-in-new"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
@@ -434,8 +424,8 @@ const darkModeToggle = () => {
 
       <CardComponent
         title="Title & Icons"
-        :icon="mdiMonitorCellphone"
-        :headerIcon="mdiClose"
+        icon="mdi:monitor-cellphone"
+        headerIcon="mdi:close"
         mb=""
       >
         <div
@@ -446,7 +436,7 @@ const darkModeToggle = () => {
       </CardComponent>
     </div>
 
-    <TitleSubBar :icon="mdiAlertCircle" title="Empty variation" />
+    <TitleSubBar icon="mdi:alert-circle" title="Empty variation" />
 
     <CardComponent empty />
   </MainSection>

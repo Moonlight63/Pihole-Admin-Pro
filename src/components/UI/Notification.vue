@@ -1,11 +1,6 @@
 <script setup>
-import { ref, computed, useSlots } from 'vue'
 import { useStore } from 'vuex'
-import { mdiClose } from '@mdi/js'
 import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
-import Level from '@/components/UI/Level.vue'
-import Icon from '@/components/UI/Icon.vue'
-import JbButton from '@/components/Form/JbButton.vue'
 
 const props = defineProps({
   icon: {
@@ -44,24 +39,17 @@ const darkMode = computed(() => store.state.darkMode)
   <div
     v-if="!isDismissed"
     :class="componentClass"
-    class="px-3 py-6 md:py-3 mx-6 md:mx-0 mb-6 last:mb-0 border rounded transition-colors duration-150"
+    class="px-3 py-6 mx-6 mb-6 transition-colors duration-150 border rounded md:py-3 md:mx-0 last:mb-0"
   >
     <Level>
-      <div class="flex flex-col md:flex-row items-center">
-        <Icon
-          v-if="icon"
-          :path="icon"
-          w="w-10 md:w-5"
-          h="h-10 md:h-5"
-          size="24"
-          class="md:mr-2"
-        />
+      <div class="flex flex-col items-center md:flex-row">
+        <UiIconify v-if="icon" :icon="icon" class="text-2xl md:mr-2" />
         <span class="text-center md:text-left"><slot /></span>
       </div>
       <slot v-if="hasRightSlot" name="right" />
       <JbButton
         v-else
-        :icon="mdiClose"
+        icon="mdi:close"
         :outline="
           outline || (darkMode && ['white', 'light'].indexOf(color) < 0)
         "

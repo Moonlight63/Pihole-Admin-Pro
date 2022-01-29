@@ -1,9 +1,4 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { mdiMinus, mdiPlus } from '@mdi/js'
-import Icon from '@/components/UI/Icon.vue'
-import AsideMenuList from '@/components/Menu/AsideMenuList.vue'
-
 const props = defineProps({
   item: {
     type: Object,
@@ -21,7 +16,7 @@ const componentIs = computed(() => (props.item.to ? 'router-link' : 'a'))
 const hasDropdown = computed(() => !!props.item.menu)
 
 const dropdownIcon = computed(() =>
-  isDropdownActive.value ? mdiMinus : mdiPlus
+  isDropdownActive.value ? 'mdi:minus' : 'mdi:plus'
 )
 
 const itemTo = computed(() => props.item.to || null)
@@ -69,24 +64,22 @@ const styleInactive = 'text-menu-items'
             : 'bg-menu-items'
         ]"
       >
-        <Icon
+        <UiIconify
           v-if="item.icon"
-          :path="item.icon"
-          class="flex-none"
+          :icon="item.icon"
+          class="flex-none w-12"
           :class="[vSlot && vSlot.isExactActive ? styleActive : styleInactive]"
-          w="w-12"
         />
         <span
           class="grow"
           :class="[vSlot && vSlot.isExactActive ? styleActive : styleInactive]"
           >{{ item.label }}</span
         >
-        <Icon
+        <UiIconify
           v-if="hasDropdown"
-          :path="dropdownIcon"
-          class="flex-none"
+          :icon="dropdownIcon"
+          class="flex-none w-12"
           :class="[vSlot && vSlot.isExactActive ? styleActive : styleInactive]"
-          w="w-12"
         />
       </div>
     </Component>

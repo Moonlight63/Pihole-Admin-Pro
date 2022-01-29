@@ -1,6 +1,4 @@
 <script setup>
-import Icon from '@/components/UI/Icon.vue'
-
 defineProps({
   icon: {
     type: String,
@@ -15,7 +13,7 @@ defineProps({
 </script>
 
 <template>
-  <Icon :path="icon" class="transition-colors" />
+  <UiIconify :icon="icon" class="transition-colors" />
   <span
     class="px-2 transition-colors"
     :class="{ 'lg:hidden': isDesktopIconOnly }"

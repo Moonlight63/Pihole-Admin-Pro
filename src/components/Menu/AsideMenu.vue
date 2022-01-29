@@ -1,10 +1,5 @@
 <script setup>
-import { computed } from 'vue'
 import { useStore } from 'vuex'
-import { mdiMenu } from '@mdi/js'
-import AsideMenuList from '@/components/Menu/AsideMenuList.vue'
-import NavBarItem from '@/components/NavBar/NavBarItem.vue'
-import Icon from '@/components/UI/Icon.vue'
 
 defineProps({
   menu: {
@@ -43,7 +38,7 @@ const asideLgClose = () => {
         active
         @click="asideLgClose"
       >
-        <Icon :path="mdiMenu" class="cursor-pointer" size="24" />
+        <UiIconify icon="mdi:menu" class="text-2xl cursor-pointer" />
       </NavBarItem>
       <div class="flex-1 px-3 text-center">
         <span>Pi-</span> <b class="font-black">Hole</b>

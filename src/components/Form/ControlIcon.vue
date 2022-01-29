@@ -1,6 +1,4 @@
 <script setup>
-import Icon from '@/components/UI/Icon.vue'
-
 defineProps({
   icon: {
     type: String,
@@ -14,10 +12,9 @@ defineProps({
 </script>
 
 <template>
-  <Icon
-    :path="icon"
-    w="w-10"
-    :h="h"
-    class="absolute top-0 left-0 z-10 pointer-events-none text-gray-500 dark:text-gray-400"
+  <UiIconify
+    :icon="icon"
+    :class="h"
+    class="absolute top-0 left-0 z-10 w-10 text-gray-500 pointer-events-none dark:text-gray-400"
   />
 </template>

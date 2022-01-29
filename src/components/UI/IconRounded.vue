@@ -12,14 +12,6 @@ const props = defineProps({
     type: String,
     required: true
   },
-  w: {
-    type: String,
-    default: 'w-12'
-  },
-  h: {
-    type: String,
-    default: 'h-12'
-  },
   bg: Boolean
 })
 
@@ -31,12 +23,5 @@ const iconStyle = computed(() =>
 </script>
 
 <template>
-  <Icon
-    :path="icon"
-    :w="w"
-    :h="h"
-    size="24"
-    class="rounded-full"
-    :class="iconStyle"
-  />
+  <UiIconify :icon="icon" class="text-2xl rounded-full" :class="iconStyle" />
 </template>

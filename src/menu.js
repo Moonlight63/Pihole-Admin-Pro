@@ -1,23 +1,9 @@
-import {
-  mdiAccountCircle,
-  mdiDesktopMac,
-  mdiGithub,
-  mdiLock,
-  mdiAlertCircle,
-  mdiMonitorShimmer,
-  mdiSquareEditOutline,
-  mdiTable,
-  mdiViewList,
-  mdiTelevisionGuide,
-  mdiResponsive
-} from '@mdi/js'
-
 export default [
   'General',
   [
     {
       to: '/',
-      icon: mdiDesktopMac,
+      icon: 'mdi:desktop-mac',
       label: 'Dashboard'
     }
   ],
@@ -26,43 +12,43 @@ export default [
     {
       to: '/tables',
       label: 'Tables',
-      icon: mdiTable,
+      icon: 'mdi:table',
       updateMark: true
     },
     {
       to: '/forms',
       label: 'Forms',
-      icon: mdiSquareEditOutline
+      icon: 'mdi:square-edit-outline'
     },
     {
       to: '/ui',
       label: 'UI',
-      icon: mdiTelevisionGuide
+      icon: 'mdi:television-guide'
     },
     {
       to: '/responsive',
       label: 'Responsive',
-      icon: mdiResponsive
+      icon: 'mdi:responsive'
     },
     {
       to: '/profile',
       label: 'Profile',
-      icon: mdiAccountCircle
+      icon: 'mdi:account-circle'
     },
     {
       to: '/login',
       label: 'Login',
-      icon: mdiLock
+      icon: 'mdi:lock'
     },
     {
       to: '/error',
       label: 'Error',
-      icon: mdiAlertCircle
+      icon: 'mdi:alert-circle'
     },
     {
       label: 'Submenus',
       subLabel: 'Submenus Example',
-      icon: mdiViewList,
+      icon: 'mdi:view-list',
       menu: [
         {
           label: 'Sub-item One'
@@ -78,13 +64,13 @@ export default [
     {
       href: 'https://justboil.me/tailwind-admin-templates/vue-dashboard/',
       label: 'Premium version',
-      icon: mdiMonitorShimmer,
+      icon: 'mdi:monitor-shimmer',
       target: '_blank'
     },
     {
       href: 'https://github.com/justboil/admin-one-vue-tailwind',
       label: 'GitHub',
-      icon: mdiGithub,
+      icon: 'mdi:github',
       target: '_blank'
     }
   ]
@@ -95,22 +81,22 @@ export default [
 //   [
 //     {
 //       to: '/',
-//       icon: mdiDesktopMac,
+//       icon: 'mdi:desktop-mac',
 //       label: 'Dashboard'
 //     },
 //     {
 //       to: '/somepage',
-//       icon: mdiDesktopMac,
+//       icon: 'mdi:desktop-mac',
 //       label: 'Queries'
 //     },
 //     {
 //       to: '/somepage',
-//       icon: mdiDesktopMac,
+//       icon: 'mdi:desktop-mac',
 //       label: 'Whitelist'
 //     },
 //     {
 //       to: '/somepage',
-//       icon: mdiDesktopMac,
+//       icon: 'mdi:desktop-mac',
 //       label: 'Blacklist'
 //     }
 //   ],
@@ -119,13 +105,13 @@ export default [
 //     {
 //       to: '/tables',
 //       label: 'Graphics',
-//       icon: mdiTable,
+//       icon: 'mdi:table',
 //       updateMark: true
 //     },
 //     {
 //       to: '/forms',
 //       label: 'Queries',
-//       icon: mdiSquareEditOutline
+//       icon: 'mdi:square-edit-outline'
 //     }
 //   ],
 //   'Management',
@@ -133,7 +119,7 @@ export default [
 //     {
 //       label: 'Groups',
 //       subLabel: 'Submenus Example',
-//       icon: mdiViewList,
+//       icon: 'mdi:view-list',
 //       menu: [
 //         {
 //           label: 'Sub-item One'
@@ -146,7 +132,7 @@ export default [
 //     {
 //       label: 'Disable',
 //       subLabel: 'Submenus Example',
-//       icon: mdiViewList,
+//       icon: 'mdi:view-list',
 //       menu: [
 //         {
 //           label: 'Sub-item One'
@@ -159,7 +145,7 @@ export default [
 //     {
 //       label: 'Tools',
 //       subLabel: 'Submenus Example',
-//       icon: mdiViewList,
+//       icon: 'mdi:view-list',
 //       menu: [
 //         {
 //           label: 'Sub-item One'
@@ -172,7 +158,7 @@ export default [
 //     {
 //       label: 'DNS',
 //       subLabel: 'Submenus Example',
-//       icon: mdiViewList,
+//       icon: 'mdi:view-list',
 //       menu: [
 //         {
 //           label: 'Sub-item One'
@@ -185,13 +171,13 @@ export default [
 //     {
 //       href: 'https://justboil.me/tailwind-admin-templates/vue-dashboard/',
 //       label: 'Settings',
-//       icon: mdiMonitorShimmer,
+//       icon: 'mdi:monitor-shimmer',
 //       target: '_blank'
 //     },
 //     {
 //       href: 'https://github.com/justboil/admin-one-vue-tailwind',
 //       label: 'Logout',
-//       icon: mdiGithub,
+//       icon: 'mdi:github',
 //       target: '_blank'
 //     }
 //   ],
@@ -200,19 +186,19 @@ export default [
 //     {
 //       href: 'https://justboil.me/tailwind-admin-templates/vue-dashboard/',
 //       label: 'Documentation',
-//       icon: mdiMonitorShimmer,
+//       icon: 'mdi:monitor-shimmer',
 //       target: '_blank'
 //     },
 //     {
 //       href: 'https://github.com/justboil/admin-one-vue-tailwind',
 //       label: 'GitHub',
-//       icon: mdiGithub,
+//       icon: 'mdi:github',
 //       target: '_blank'
 //     },
 //     {
 //       href: 'https://github.com/justboil/admin-one-vue-tailwind',
 //       label: 'Donate',
-//       icon: mdiGithub,
+//       icon: 'mdi:github',
 //       target: '_blank'
 //     }
 //   ]

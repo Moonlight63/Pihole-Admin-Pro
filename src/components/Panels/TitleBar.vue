@@ -1,8 +1,4 @@
 <script setup>
-import { mdiGithub } from '@mdi/js'
-import Level from '@/components/UI/Level.vue'
-import JbButton from '@/components/Form/JbButton.vue'
-
 defineProps({
   titleStack: {
     type: Array,
@@ -28,7 +24,7 @@ defineProps({
         color="info"
         label="Star on GitHub"
         target="_blank"
-        :icon="mdiGithub"
+        icon="mdi:github"
       /> -->
     </Level>
   </section>

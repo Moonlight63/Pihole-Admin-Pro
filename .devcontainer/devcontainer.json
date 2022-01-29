@@ -10,12 +10,18 @@
 	},
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": {},
+	"settings": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true
+		},
+		"eslint.packageManager": "pnpm"
+	},
 	
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"dbaeumer.vscode-eslint",
 		"bradlc.vscode-tailwindcss",
+		"afzalsayed96.icones",
 		"2gua.rainbow-brackets",
 		"oderwat.indent-rainbow",
 		"heybourn.headwind",

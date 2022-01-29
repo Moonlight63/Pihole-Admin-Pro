@@ -1,11 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import {
-  mdiMonitorCellphone,
-  mdiAccountMultiple,
-  mdiTableBorder,
-  mdiTableOff
-} from '@mdi/js'
 import MainSection from '@/components/MainSection.vue'
 import Notification from '@/components/UI/Notification.vue'
 import ClientsTable from '@/components/UnusedReference/ClientsTable.vue'
@@ -22,22 +16,22 @@ const titleStack = ref(['Admin', 'Tables'])
   <TitleBar :titleStack="titleStack" />
   <HeroBar>Tables</HeroBar>
   <MainSection>
-    <Notification color="info" :icon="mdiMonitorCellphone">
+    <Notification color="info" icon="mdi:monitor-cellphone">
       <b>Responsive table.</b> Collapses on mobile
     </Notification>
 
     <CardComponent
       class="mb-6"
       title="Clients"
-      :icon="mdiAccountMultiple"
+      icon="mdi:account-multiple"
       hasTable
     >
       <ClientsTable checkable />
     </CardComponent>
 
-    <TitleSubBar :icon="mdiTableBorder" title="Wrapped variation" />
+    <TitleSubBar icon="mdi:table-border" title="Wrapped variation" />
 
-    <Notification color="success" :icon="mdiTableBorder">
+    <Notification color="success" icon="mdi:table-border">
       <b>Tightly wrapped</b> &mdash; table header becomes card header
     </Notification>
 
@@ -45,9 +39,9 @@ const titleStack = ref(['Admin', 'Tables'])
       <ClientsTable checkable />
     </CardComponent>
 
-    <TitleSubBar :icon="mdiTableOff" title="Empty variation" />
+    <TitleSubBar icon="mdi:table-off" title="Empty variation" />
 
-    <Notification color="danger" :icon="mdiTableOff">
+    <Notification color="danger" icon="mdi:table-off">
       <b>Empty table.</b> When there's nothing to show
     </Notification>
 

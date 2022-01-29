@@ -1,12 +1,5 @@
 <script setup>
-import { mdiCog } from '@mdi/js'
-import { computed } from 'vue'
 import { useStore } from 'vuex'
-import CardComponent from '@/components/Cards/CardComponent.vue'
-import GrowingNumber from '@/components/UI/GrowingNumber.vue'
-import Icon from '@/components/UI/Icon.vue'
-import Level from '@/components/UI/Level.vue'
-import JbButton from '@/components/Form/JbButton.vue'
 
 defineProps({
   number: {
@@ -56,11 +49,11 @@ const darkMode = computed(() => store.state.darkMode)
       </h1>
     </div>
     <div
-      class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-end z-[0]"
+      class="text-8xl absolute top-0 bottom-0 left-0 right-0 flex items-center justify-end z-[0]"
     >
-      <Icon
+      <UiIconify
         v-if="icon"
-        :path="icon"
+        :icon="icon"
         size="100%"
         w=""
         h="h-full aspect-square"

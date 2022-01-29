@@ -1,12 +1,4 @@
 <script setup>
-import { computed } from 'vue'
-import { mdiClose } from '@mdi/js'
-import JbButton from '@/components/Form/JbButton.vue'
-import JbButtons from '@/components/Form/JbButtons.vue'
-import CardComponent from '@/components/Cards/CardComponent.vue'
-import Divider from '@/components/UI/Divider.vue'
-import Overlay from '@/components/UI/Overlay.vue'
-
 const props = defineProps({
   title: {
     type: String,
@@ -53,8 +45,8 @@ const cancel = () => confirmCancel('cancel')
     <CardComponent
       v-show="value"
       :title="title"
-      class="shadow-lg w-full max-h-modal md:w-3/5 lg:w-2/5 z-50"
-      :headerIcon="mdiClose"
+      class="z-50 w-full shadow-lg max-h-modal md:w-3/5 lg:w-2/5"
+      headerIcon="mdi:close"
       @headerIconClick="cancel"
     >
       <div class="space-y-3">

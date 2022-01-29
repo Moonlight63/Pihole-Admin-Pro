@@ -1,9 +1,4 @@
 <script setup>
-import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
-import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
-import NavBarItem from '@/components/NavBar/NavBarItem.vue'
-import Icon from '@/components/UI/Icon.vue'
-
 defineProps({
   hasDivider: {
     type: Boolean,
@@ -14,7 +9,7 @@ defineProps({
 const isDropdownActive = ref(false)
 
 const toggleDropdownIcon = computed(() =>
-  isDropdownActive.value ? mdiChevronUp : mdiChevronDown
+  isDropdownActive.value ? 'mdi:chevron-up' : 'mdi:chevron-down'
 )
 
 const toggle = () => {
@@ -52,8 +47,8 @@ onBeforeUnmount(() => {
       class="flex items-center px-3 py-2 bg-gray-100 dark:bg-gray-800 lg:bg-transparent lg:dark:bg-transparent"
     >
       <slot />
-      <Icon
-        :path="toggleDropdownIcon"
+      <UiIconify
+        :icon="toggleDropdownIcon"
         class="hidden transition-colors lg:inline-flex"
       />
     </a>

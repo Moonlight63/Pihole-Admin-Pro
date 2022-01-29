@@ -1,15 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
-import {
-  mdiFinance,
-  mdiMonitorCellphone,
-  mdiReload,
-  mdiChartPie,
-  mdiHandBackRight,
-  mdiEarth,
-  mdiViewListOutline
-} from '@mdi/js'
 import * as chartConfig from '@/components/Charts/chart.config.js'
 
 const titleStack = ref(['Admin', 'Dashboard'])
@@ -38,6 +28,10 @@ const quaryData = computed(() => ({
   domains_blocked: dataRaw.value.queries?.unique_domains || 0
 }))
 
+const clientBarItems = computed(() => store.state.clients.slice(0, 3))
+
+const transactionBarItems = computed(() => store.state.history.slice(0, 3))
+
 onMounted(() => {
   fillChartData()
 })
@@ -46,7 +40,7 @@ onMounted(() => {
 <template>
   <TitleBar :titleStack="titleStack" />
   <MainSection>
-    <CardComponent
+    <!-- <CardComponent
       title="Total Queries Over Last 24 Hours"
       :icon="mdiFinance"
       :headerIcon="mdiReload"
@@ -54,44 +48,73 @@ onMounted(() => {
       @headerIconClick="fillChartData"
     >
       <TableTest :checkable="true" />
-    </CardComponent>
-
+    </CardComponent> -->
+    <UiIconify icon="mdi:sort-descending" />
     <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-4">
-      <CardWidget
+      <CardMetric
         color="text-emerald-400"
-        :icon="mdiEarth"
+        icon="ion:earth"
         :number="quaryData.total"
         :label="`Total Queries (${quaryData.clients} Clients)`"
         bgColor="bg-emerald-500"
       />
-      <CardWidget
+      <CardMetric
         color="text-blue-300 dark:text-blue-400"
-        :icon="mdiHandBackRight"
+        icon="ion:hand-right"
         :number="quaryData.blocked"
         label="Queries Blocked"
         bgColor="bg-blue-400 dark:bg-blue-500"
       />
-      <CardWidget
+      <CardMetric
         color="text-orange-200 dark:text-orange-300"
-        :icon="mdiChartPie"
+        icon="ion:pie-chart"
         :number="quaryData.blocked_percent"
         suffix="%"
         bgColor="bg-orange-300 dark:bg-orange-400"
         label="Percentage Blocked"
       />
-      <CardWidget
+      <CardMetric
         color="text-red-300 dark:text-red-400"
-        :icon="mdiViewListOutline"
+        icon="ion:ios-list-box"
         :number="quaryData.domains_blocked"
         label="Blocked Domains"
         bgColor="bg-red-400 dark:bg-red-500"
       />
     </div>
 
-    <!-- <div class="grid grid-cols-1 gap-6 mb-6 xl:grid-cols-2">
+    <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
+      <CardWidget
+        trend="12%"
+        trendType="up"
+        color="text-emerald-500"
+        icon="mdi:account-multiple"
+        :number="512"
+        label="Clients"
+      />
+      <CardWidget
+        trend="12%"
+        trendType="down"
+        color="text-blue-500"
+        icon="mdi:cart-outline"
+        :number="7770"
+        prefix="$"
+        label="Sales"
+      />
+      <CardWidget
+        trend="Overflow"
+        trendType="alert"
+        color="text-red-500"
+        icon="mdi:chart-timeline-variant"
+        :number="256"
+        suffix="%"
+        label="Performance"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 mb-6 xl:grid-cols-2">
       <div class="flex flex-col justify-between">
-        <card-transaction-bar
-          v-for="(transaction,index) in transactionBarItems"
+        <CardTransactionBar
+          v-for="(transaction, index) in transactionBarItems"
           :key="index"
           :amount="transaction.amount"
           :date="transaction.date"
@@ -102,7 +125,7 @@ onMounted(() => {
         />
       </div>
       <div class="flex flex-col justify-between">
-        <card-client-bar
+        <CardClientBar
           v-for="client in clientBarItems"
           :key="client.id"
           :name="client.name"
@@ -111,7 +134,7 @@ onMounted(() => {
           :progress="client.progress"
         />
       </div>
-    </div> -->
+    </div>
 
     <!-- <title-sub-bar
       :icon="mdiChartPie"
@@ -120,8 +143,8 @@ onMounted(() => {
 
     <CardComponent
       title="Total Queries Over Last 24 Hours"
-      :icon="mdiFinance"
-      :headerIcon="mdiReload"
+      icon="mdi:finance"
+      headerIcon="mdi:reload"
       class="mb-6"
       @headerIconClick="fillChartData"
     >
@@ -137,8 +160,8 @@ onMounted(() => {
 
     <CardComponent
       title="Client activity over last 24 hours"
-      :icon="mdiFinance"
-      :headerIcon="mdiReload"
+      icon="mdi:finance"
+      headerIcon="mdi:reload"
       class="mb-6"
       @headerIconClick="fillChartData"
     >
@@ -150,8 +173,8 @@ onMounted(() => {
     <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
       <CardComponent
         title="Query Types"
-        :icon="mdiFinance"
-        :headerIcon="mdiReload"
+        icon="mdi:finance"
+        headerIcon="mdi:reload"
         class="mb-6"
         @headerIconClick="fillChartData"
       >
@@ -161,8 +184,8 @@ onMounted(() => {
       </CardComponent>
       <CardComponent
         title="Upstream Servers"
-        :icon="mdiFinance"
-        :headerIcon="mdiReload"
+        icon="mdi:finance"
+        headerIcon="mdi:reload"
         class="mb-6"
         @headerIconClick="fillChartData"
       >
@@ -171,14 +194,14 @@ onMounted(() => {
         </div>
       </CardComponent>
       <CardComponent
-        :icon="mdiMonitorCellphone"
+        icon="mdi:monitor-cellphone"
         title="Top Allowed Domains"
         hasTable
       >
         <TopDomains />
       </CardComponent>
 
-      <CardComponent :icon="mdiMonitorCellphone" title="Top Clients" hasTable>
+      <CardComponent icon="mdi:monitor-cellphone" title="Top Clients" hasTable>
         <TopClients />
       </CardComponent>
     </div>

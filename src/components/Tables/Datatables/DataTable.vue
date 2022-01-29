@@ -42,7 +42,7 @@ const props = defineProps({
       10: '10',
       15: '15',
       25: '25',
-      50: '50'
+      50: '50',
     })
   }
 })
@@ -333,7 +333,6 @@ watch(() => props.rows, () => {
           :key="`datatable-row-${uniqueId()}-${rowIndex}`"
           :hoverable="hoverable"
           :clickable="clickable"
-          :rowIndex="rowIndex"
           @clicked="rowClickHandler(row)"
         >
           <slot
@@ -341,9 +340,9 @@ watch(() => props.rows, () => {
             :index="rowIndex"
             :row="row"
           >
-            <slot
+            <div
               v-for="(column) in tableColumns"
-              :name="`datatable-tbody-td-${column.idx}`"
+              :key="`datatable-tbody-td-${column.idx}`"
               :column="column"
               :row="row"
               :uniqueId="uniqueId"
@@ -354,13 +353,12 @@ watch(() => props.rows, () => {
                 :data-label="column.label"
                 v-text="row[column.key]"
               />
-            </slot>
+            </div>
           </slot>
         </TableRow>
 
         <TableRow
           v-if="tableRows.length === 0"
-          :rowIndex="0"
         >
           <slot name="empty" />
         </TableRow>

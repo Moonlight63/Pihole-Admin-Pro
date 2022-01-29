@@ -1,5 +1,4 @@
 <script setup>
-import { mdiCog } from '@mdi/js'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import CardComponent from '@/components/Cards/CardComponent.vue'
@@ -54,7 +53,7 @@ const darkMode = computed(() => store.state.darkMode)
     <Level v-if="trend" class="mb-3" mobile>
       <TrendPill :trend="trend" :trendType="trendType" small />
       <JbButton
-        :icon="mdiCog"
+        icon="mdi:cog"
         iconW="w-4"
         iconH="h-4"
         :color="darkMode ? 'white' : 'light'"
@@ -71,7 +70,7 @@ const darkMode = computed(() => store.state.darkMode)
           <GrowingNumber :value="number" :prefix="prefix" :suffix="suffix" />
         </h1>
       </div>
-      <Icon v-if="icon" :path="icon" size="48" w="" h="h-16" :class="color" />
+      <UiIconify v-if="icon" :icon="icon" class="text-5xl" :class="color" />
     </Level>
   </CardComponent>
 </template>

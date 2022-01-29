@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "baseUrl": ".",
     "module": "esnext",
+    "target": "esnext",
     "strict": true,
     "jsx": "preserve",
     "moduleResolution": "node",
@@ -11,12 +12,16 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
     "sourceMap": true,
-    "baseUrl": ".",
     "allowJs": true,
     "noEmit": true,
     "types": [
-      "webpack-env"
+      "vite/client",
+      "vite-plugin-pages/client",
+      "vite-plugin-vue-layouts/client"
     ],
     "paths": {
       "@/*": [
@@ -38,6 +43,8 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".pnpm-store",
+    "dist"
   ]
 }

@@ -7,23 +7,12 @@
   >
     <Level>
       <slot />
-      <Icon v-if="sortable" :path="computedState" />
+      <UiIconify v-if="sortable" :icon="computedState" />
     </Level>
   </th>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import Level from '@/components/UI/Level.vue'
-import Icon from '@/components/UI/Icon.vue'
-import { mdiSort, mdiSortAscending, mdiSortDescending } from '@mdi/js'
-
-const States = {
-  0: mdiSort,
-  1: mdiSortAscending,
-  2: mdiSortDescending
-}
-
 const props = defineProps({
   sortable: {
     type: Boolean,
@@ -42,9 +31,9 @@ const props = defineProps({
 const computedState = computed(() =>
   props.sorting
     ? props.ascending
-      ? mdiSortAscending
-      : mdiSortDescending
-    : mdiSort
+      ? 'mdi:sort-ascending'
+      : 'mdi:sort-descending'
+    : 'mdi:sort'
 )
 
 const emits = defineEmits(['clicked'])

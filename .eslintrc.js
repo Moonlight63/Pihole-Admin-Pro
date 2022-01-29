@@ -10,10 +10,16 @@ module.exports = {
     defineEmits: 'readonly'
   },
 
+  settings: {
+    'import/resolver': {
+      node: { extensions: ['.js', '.mjs', '.ts', '.d.ts'] }
+    }
+  },
+
   extends: [
-    '@vue/standard',
+    'standard',
+    'plugin:@typescript-eslint/recommended',
     'plugin:vue/vue3-recommended',
-    '@vue/typescript/recommended',
     'plugin:prettier/recommended'
   ],
 
@@ -27,6 +33,9 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-unused-vars': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    '@typescript-eslint/no-unused-vars':
+      process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-undef': 'off',
     // I am going against recommended convension here as a matter of
     // preference and consistancy. Vue recomments that props and events
     // be camelCase in component scripts, but kabab-case in component

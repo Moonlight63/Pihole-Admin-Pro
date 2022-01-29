@@ -1,11 +1,5 @@
 <script setup>
 import { computed } from 'vue'
-import {
-  mdiCashMinus,
-  mdiCashPlus,
-  mdiReceipt,
-  mdiCreditCardOutline
-} from '@mdi/js'
 import CardComponent from '@/components/Cards/CardComponent.vue'
 import Level from '@/components/UI/Level.vue'
 import Pill from '@/components/UI/Pill.vue'
@@ -41,23 +35,23 @@ const props = defineProps({
 const icon = computed(() => {
   if (props.type === 'withdrawal') {
     return {
-      icon: mdiCashMinus,
+      icon: 'mdi:cash-minus',
       type: 'danger'
     }
   } else if (props.type === 'deposit') {
     return {
-      icon: mdiCashPlus,
+      icon: 'mdi:cash-plus',
       type: 'success'
     }
   } else if (props.type === 'invoice') {
     return {
-      icon: mdiReceipt,
+      icon: 'mdi:receipt',
       type: 'warning'
     }
   }
 
   return {
-    icon: mdiCreditCardOutline,
+    icon: 'mdi:credit-card-outline',
     type: 'info'
   }
 })
@@ -68,14 +62,14 @@ const icon = computed(() => {
     <Level>
       <Level type="justify-start">
         <IconRounded :icon="icon.icon" :type="icon.type" class="md:mr-6" />
-        <div class="text-center space-y-1 md:text-left md:mr-6">
+        <div class="space-y-1 text-center md:text-left md:mr-6">
           <h4 class="text-xl">${{ amount }}</h4>
           <p class="text-gray-500 dark:text-gray-400">
             <b>{{ date }}</b> via {{ business }}
           </p>
         </div>
       </Level>
-      <div class="text-center md:text-right space-y-1">
+      <div class="space-y-1 text-center md:text-right">
         <p>{{ name }}</p>
         <div>
           <Pill type="info" :text="account" small />

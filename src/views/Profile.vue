@@ -1,14 +1,6 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { useStore } from 'vuex'
-import {
-  mdiAccount,
-  mdiAccountCircle,
-  mdiLock,
-  mdiMail,
-  mdiAsterisk,
-  mdiFormTextboxPassword
-} from '@mdi/js'
 import MainSection from '@/components/MainSection.vue'
 import CardComponent from '@/components/Cards/CardComponent.vue'
 import TitleBar from '@/components/Panels/TitleBar.vue'
@@ -54,7 +46,7 @@ const submitPass = () => {
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
       <CardComponent
         title="Edit Profile"
-        :icon="mdiAccountCircle"
+        icon="mdi:account-circle"
         form
         @submit.prevent="submitProfile"
       >
@@ -65,7 +57,7 @@ const submitPass = () => {
         <Field label="Name" help="Required. Your name">
           <Control
             v-model="profileForm.name"
-            :icon="mdiAccount"
+            icon="mdi:account"
             name="username"
             required
             autocomplete="username"
@@ -74,7 +66,7 @@ const submitPass = () => {
         <Field label="E-mail" help="Required. Your e-mail">
           <Control
             v-model="profileForm.email"
-            :icon="mdiMail"
+            icon="mdi:mail"
             type="email"
             name="email"
             required
@@ -92,14 +84,14 @@ const submitPass = () => {
 
       <CardComponent
         title="Change Password"
-        :icon="mdiLock"
+        icon="mdi:lock"
         form
         @submit.prevent="submitPass"
       >
         <Field label="Current password" help="Required. Your current password">
           <Control
             v-model="passwordForm.password_current"
-            :icon="mdiAsterisk"
+            icon="mdi:asterisk"
             name="password_current"
             type="password"
             required
@@ -112,7 +104,7 @@ const submitPass = () => {
         <Field label="New password" help="Required. New password">
           <Control
             v-model="passwordForm.password"
-            :icon="mdiFormTextboxPassword"
+            icon="mdi:form-textbox-password"
             name="password"
             type="password"
             required
@@ -126,7 +118,7 @@ const submitPass = () => {
         >
           <Control
             v-model="passwordForm.password_confirmation"
-            :icon="mdiFormTextboxPassword"
+            icon="mdi:form-textbox-password"
             name="password_confirmation"
             type="password"
             required

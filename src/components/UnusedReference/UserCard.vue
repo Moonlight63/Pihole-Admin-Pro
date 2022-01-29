@@ -1,12 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
-import { mdiCheckDecagram } from '@mdi/js'
-import Level from '@/components/UI/Level.vue'
-import UserAvatar from '@/components/UnusedReference/UserAvatar.vue'
-import CardComponent from '@/components/Cards/CardComponent.vue'
-import CheckRadioPicker from '@/components/Form/CheckRadioPicker.vue'
-import Pill from '@/components/UI/Pill.vue'
 
 const store = useStore()
 
@@ -34,7 +27,7 @@ const userSwitchVal = ref([])
         </h1>
         <p>Last login <b>12 mins ago</b> from <b>127.0.0.1</b></p>
         <div class="flex justify-center md:block">
-          <Pill text="Verified" type="info" :icon="mdiCheckDecagram" />
+          <Pill text="Verified" type="info" icon="mdi:check-decagram" />
         </div>
       </div>
     </Level>

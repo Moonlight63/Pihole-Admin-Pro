@@ -1,30 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
-import {
-  mdiForwardburger,
-  mdiBackburger,
-  mdiClose,
-  mdiDotsVertical,
-  mdiMenu,
-  mdiClockOutline,
-  mdiCloud,
-  mdiCrop,
-  mdiAccount,
-  mdiCogOutline,
-  mdiEmail,
-  mdiLogout,
-  mdiGithub,
-  mdiThemeLightDark
-} from '@mdi/js'
-import NavBarItem from '@/components/NavBar/NavBarItem.vue'
-import NavBarItemLabel from '@/components/NavBar/NavBarItemLabel.vue'
-import NavBarMenu from '@/components/NavBar/NavBarMenu.vue'
-import NavBarMenuDivider from '@/components/NavBar/NavBarMenuDivider.vue'
-import UserAvatar from '@/components/UnusedReference/UserAvatar.vue'
-import Icon from '@/components/UI/Icon.vue'
-import NavBarSearch from '@/components/NavBar/NavBarSearch.vue'
-import NavBarApiUrl from './NavBarApiUrl.vue'
 
 const store = useStore()
 
@@ -39,7 +14,7 @@ const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
 const userName = computed(() => store.state.userName)
 
 const menuToggleMobileIcon = computed(() =>
-  isAsideMobileExpanded.value ? mdiBackburger : mdiForwardburger
+  isAsideMobileExpanded.value ? 'mdi:backburger' : 'mdi:forwardburger'
 )
 
 const menuToggleMobile = () => store.dispatch('asideMobileToggle')
@@ -47,7 +22,7 @@ const menuToggleMobile = () => store.dispatch('asideMobileToggle')
 const isMenuNavBarActive = ref(false)
 
 const menuNavBarToggleIcon = computed(() =>
-  isMenuNavBarActive.value ? mdiClose : mdiDotsVertical
+  isMenuNavBarActive.value ? 'md:close' : 'mdi:dots-vertical'
 )
 
 const menuNavBarToggle = () => {
@@ -67,16 +42,16 @@ const menuOpenLg = () => {
   >
     <div class="flex items-stretch flex-1 h-14">
       <NavBarItem type="flex lg:hidden" @click.prevent="menuToggleMobile">
-        <Icon :path="menuToggleMobileIcon" size="24" />
+        <UiIconify :icon="menuToggleMobileIcon" class="text-2xl" />
       </NavBarItem>
       <NavBarItem type="hidden lg:flex xl:hidden" @click.prevent="menuOpenLg">
-        <Icon :path="mdiMenu" size="24" />
+        <UiIconify icon="mdi:menu" class="text-2xl" />
       </NavBarItem>
       <NavBarApiUrl />
     </div>
     <div class="flex items-stretch flex-none h-14 lg:hidden">
       <NavBarItem @click.prevent="menuNavBarToggle">
-        <Icon :path="menuNavBarToggleIcon" size="24" />
+        <UiIconify :icon="menuNavBarToggleIcon" class="text-2xl" />
       </NavBarItem>
     </div>
     <div
@@ -122,17 +97,17 @@ const menuOpenLg = () => {
 
           <template #dropdown>
             <NavBarItem to="/profile">
-              <NavBarItemLabel :icon="mdiAccount" label="My Profile" />
+              <NavBarItemLabel icon="mdi:account" label="My Profile" />
             </NavBarItem>
             <NavBarItem>
-              <NavBarItemLabel :icon="mdiCogOutline" label="Settings" />
+              <NavBarItemLabel icon="mdi:cog-outline" label="Settings" />
             </NavBarItem>
             <NavBarItem>
-              <NavBarItemLabel :icon="mdiEmail" label="Messages" />
+              <NavBarItemLabel icon="mdi:email" label="Messages" />
             </NavBarItem>
             <NavBarMenuDivider />
             <NavBarItem>
-              <NavBarItemLabel :icon="mdiLogout" label="Log Out" />
+              <NavBarItemLabel icon="mdi:logout" label="Log Out" />
             </NavBarItem>
           </template>
         </NavBarMenu>
@@ -142,7 +117,7 @@ const menuOpenLg = () => {
           @click.prevent="toggleLightDark"
         >
           <NavBarItemLabel
-            :icon="mdiThemeLightDark"
+            icon="mdi:theme-light-dark"
             label="Light/Dark"
             isDesktopIconOnly
           />
@@ -160,7 +135,7 @@ const menuOpenLg = () => {
         </nav-bar-item> -->
         <NavBarItem isDesktopIconOnly>
           <NavBarItemLabel
-            :icon="mdiLogout"
+            icon="mdi:logout"
             label="Log out"
             isDesktopIconOnly
           />

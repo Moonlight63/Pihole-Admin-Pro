@@ -1,13 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
-import { mdiEye, mdiTrashCan } from '@mdi/js'
-import ModalBox from '@/components/UI/ModalBox.vue'
-import CheckboxCell from '@/components/Form/CheckboxCell.vue'
-import Level from '@/components/UI/Level.vue'
-import JbButtons from '@/components/Form/JbButtons.vue'
-import JbButton from '@/components/Form/JbButton.vue'
-import UserAvatar from '@/components/UnusedReference/UserAvatar.vue'
 
 defineProps({
   checkable: Boolean
@@ -107,28 +99,13 @@ const checked = (isChecked, client) => {
   <table>
     <thead>
       <tr>
-        <!-- <th v-if="checkable" /> -->
-        <!-- <th /> -->
         <th>Client</th>
         <th>Requests</th>
-        <!-- <th>City</th> -->
         <th>Frequency</th>
-        <!-- <th>Created</th> -->
-        <!-- <th /> -->
       </tr>
     </thead>
     <tbody>
       <tr v-for="client in itemsPaginated" :key="client.id">
-        <!-- <checkbox-cell
-          v-if="checkable"
-          @checked="checked($event, client)"
-        /> -->
-        <!-- <td class="image-cell">
-          <user-avatar
-            :username="client.name"
-            class="image"
-          />
-        </td> -->
         <td data-label="Client">
           {{ client.name }}
         </td>
@@ -143,31 +120,6 @@ const checked = (isChecked, client) => {
             {{ client.progress }}
           </progress>
         </td>
-        <!-- <td data-label="Created">
-          <small
-            class="text-gray-500 dark:text-gray-400"
-            :title="client.created"
-          >{{ client.created }}</small>
-        </td>
-        <td class="actions-cell">
-          <jb-buttons
-            type="justify-start lg:justify-end"
-            no-wrap
-          >
-            <jb-button
-              color="success"
-              :icon="mdiEye"
-              small
-              @click="isModalActive = true"
-            />
-            <jb-button
-              color="danger"
-              :icon="mdiTrashCan"
-              small
-              @click="isModalDangerActive = true"
-            />
-          </jb-buttons>
-        </td> -->
       </tr>
     </tbody>
   </table>

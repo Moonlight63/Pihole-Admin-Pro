@@ -1,21 +1,4 @@
 <script setup>
-import { ref, reactive } from 'vue'
-import { mdiBallot, mdiBallotOutline, mdiAccount, mdiMail } from '@mdi/js'
-import MainSection from '@/components/MainSection.vue'
-import TitleBar from '@/components/Panels/TitleBar.vue'
-import CardComponent from '@/components/Cards/CardComponent.vue'
-import CheckRadioPicker from '@/components/Form/CheckRadioPicker.vue'
-import FilePicker from '@/components/Form/FilePicker.vue'
-import HeroBar from '@/components/Panels/HeroBar.vue'
-import Field from '@/components/Form/Field.vue'
-import Control from '@/components/Form/Control.vue'
-import Divider from '@/components/UI/Divider.vue'
-import JbButton from '@/components/Form/JbButton.vue'
-import JbButtons from '@/components/Form/JbButtons.vue'
-import BottomOtherPagesSection from '@/components/UnusedReference/BottomOtherPagesSection.vue'
-import TitledSection from '@/components/TitledSection.vue'
-import TitleSubBar from '@/components/Panels/TitleSubBar.vue'
-
 const titleStack = ref(['Admin', 'Forms'])
 
 const selectOptions = [

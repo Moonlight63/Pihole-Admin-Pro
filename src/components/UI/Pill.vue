@@ -1,7 +1,6 @@
 <script setup>
 import { computed } from 'vue'
 import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
-import Icon from '@/components/UI/Icon.vue'
 
 const props = defineProps({
   text: {
@@ -37,7 +36,7 @@ const componentClass = computed(() => {
 
 <template>
   <div class="inline-flex items-center last:mr-0" :class="componentClass">
-    <Icon v-if="icon" :path="icon" h="h-4" w="w-4" class="mr-2" />
+    <UiIconify v-if="icon" :icon="icon" class="mr-2" />
     <span>{{ text }}</span>
   </div>
 </template>

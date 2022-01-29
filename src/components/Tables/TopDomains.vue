@@ -1,13 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
-import { mdiEye, mdiTrashCan } from '@mdi/js'
-import ModalBox from '@/components/UI/ModalBox.vue'
-import CheckboxCell from '@/components/Form/CheckboxCell.vue'
-import Level from '@/components/UI/Level.vue'
-import JbButtons from '@/components/Form/JbButtons.vue'
-import JbButton from '@/components/Form/JbButton.vue'
-import UserAvatar from '@/components/UnusedReference/UserAvatar.vue'
 
 defineProps({
   checkable: Boolean
