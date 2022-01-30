@@ -25,11 +25,8 @@ const asideLgClose = () => {
   <aside
     v-show="!isFullScreen"
     id="aside"
-    class="fixed top-0 z-40 h-screen bg-menu w-60 transition-position lg:left-0 dark:border-r dark:border-gray-800"
-    :class="[
-      isAsideMobileExpanded ? 'left-0' : '-left-60',
-      isAsideLgActive ? 'block' : 'lg:hidden xl:block'
-    ]"
+    class="absolute top-0 z-40 h-screen bg-menu w-60 transition-position xl:left-0 dark:border-r dark:border-gray-800"
+    :class="isAsideMobileExpanded || isAsideLgActive ? 'left-0' : '-left-60'"
   >
     <div class="flex flex-row items-center flex-1 w-full text-menu h-14">
       <NavBarItem

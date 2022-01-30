@@ -4,11 +4,16 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { darkModeKey, apiAddressKey } from '@/config.js'
+import { createPinia } from 'pinia'
+import { useGlobal } from './store/global'
 
 import './css/main.css'
 
 // import icons data genereted by PurgeIcons
 import '@purge-icons/generated'
+
+// Migrate to Pinia
+const pinia = createPinia()
 
 /* Fetch sample data */
 store.dispatch('fetch', 'clients')
@@ -57,4 +62,6 @@ router.afterEach((to) => {
   store.dispatch('fullScreenToggle', !!to.meta.fullScreen)
 })
 
-createApp(App).use(store).use(router).mount('#app')
+createApp(App).use(store).use(pinia).use(router).mount('#app')
+
+useGlobal()

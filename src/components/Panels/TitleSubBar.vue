@@ -18,7 +18,7 @@ const darkMode = computed(() => store.state.darkMode)
 </script>
 
 <template>
-  <section class="flex items-center justify-between px-6 mb-6 sm:px-0">
+  <section class="flex items-center justify-between px-6 mb-6">
     <div class="flex items-center justify-start">
       <UiIconify v-if="icon" :icon="icon" class="mr-3" />
       <h1 class="text-2xl">

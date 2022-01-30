@@ -1,21 +1,71 @@
+// {
+//   "compilerOptions": {
+//     "baseUrl": ".",
+//     "module": "esnext",
+//     "target": "esnext",
+//     "strict": true,
+//     "jsx": "preserve",
+//     "moduleResolution": "node",
+//     "experimentalDecorators": true,
+//     "skipLibCheck": true,
+//     "esModuleInterop": true,
+//     "allowSyntheticDefaultImports": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "useDefineForClassFields": true,
+//     "resolveJsonModule": true,
+//     "noUnusedLocals": true,
+//     "strictNullChecks": true,
+//     "sourceMap": true,
+//     "allowJs": true,
+//     "noEmit": true,
+//     "types": [
+//       "vite/client",
+//       "vite-plugin-pages/client",
+//       "vite-plugin-vue-layouts/client"
+//     ],
+//     "paths": {
+//       "@/*": [
+//         "src/*"
+//       ]
+//     },
+//     "lib": [
+//       "esnext",
+//       "dom",
+//       "dom.iterable",
+//       "scripthost"
+//     ]
+//   },
+//   "include": [
+//     "src/**/*.ts",
+//     "src/**/*.tsx",
+//     "src/**/*.vue",
+//     "tests/**/*.ts",
+//     "tests/**/*.tsx"
+//   ],
+//   "exclude": [
+//     "node_modules",
+//     ".pnpm-store",
+//     "dist"
+//   ]
+// }
+
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "target": "es5",
     "module": "esnext",
-    "target": "esnext",
+    "isolatedModules" :true,
     "strict": true,
+    "esModuleInterop": true,
+    "incremental": false,
+    "skipLibCheck": true,
     "jsx": "preserve",
     "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "useDefineForClassFields": true,
     "resolveJsonModule": true,
+    "useDefineForClassFields": true,
     "noUnusedLocals": true,
     "strictNullChecks": true,
-    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "noEmit": true,
     "types": [

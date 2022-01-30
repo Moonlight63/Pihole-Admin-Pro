@@ -1,6 +1,6 @@
-body {
+/* body {
   @apply pt-14 xl:pl-60;
-}
+} */
 
 #app {
   @apply w-screen transition-position lg:w-auto;

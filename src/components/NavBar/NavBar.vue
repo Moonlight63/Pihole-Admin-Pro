@@ -7,38 +7,36 @@ const toggleLightDark = () => {
   store.dispatch('darkMode')
 }
 
+const userName = computed(() => store.state.userName)
+
 const isNavBarVisible = computed(() => !store.state.isFullScreen)
 
 const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
-
-const userName = computed(() => store.state.userName)
 
 const menuToggleMobileIcon = computed(() =>
   isAsideMobileExpanded.value ? 'mdi:backburger' : 'mdi:forwardburger'
 )
 
 const menuToggleMobile = () => store.dispatch('asideMobileToggle')
+const menuOpenLg = () => {
+  store.dispatch('asideLgToggle', true)
+}
 
 const isMenuNavBarActive = ref(false)
 
 const menuNavBarToggleIcon = computed(() =>
-  isMenuNavBarActive.value ? 'md:close' : 'mdi:dots-vertical'
+  isMenuNavBarActive.value ? 'mdi:close' : 'mdi:dots-vertical'
 )
 
 const menuNavBarToggle = () => {
   isMenuNavBarActive.value = !isMenuNavBarActive.value
-}
-
-const menuOpenLg = () => {
-  store.dispatch('asideLgToggle', true)
 }
 </script>
 
 <template>
   <nav
     v-show="isNavBarVisible"
-    class="fixed top-0 left-0 right-0 z-30 flex w-screen border-b border-gray-100 bg-panel h-14 transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:border-gray-800"
-    :class="{ 'ml-60 lg:ml-0': isAsideMobileExpanded }"
+    class="absolute top-0 left-0 right-0 z-30 flex w-screen border-b border-gray-100 bg-panel h-14 transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:border-gray-800"
   >
     <div class="flex items-stretch flex-1 h-14">
       <NavBarItem type="flex lg:hidden" @click.prevent="menuToggleMobile">
@@ -61,34 +59,22 @@ const menuOpenLg = () => {
       <div
         class="overflow-y-auto max-h-screen-menu lg:overflow-visible lg:flex lg:items-stretch lg:justify-end lg:ml-auto"
       >
-        <!-- <nav-bar-menu has-divider>
-          <nav-bar-item-label
-            :icon="mdiMenu"
-            label="Sample menu"
-          />
+        <NavBarMenu hasDivider>
+          <NavBarItemLabel :icon="mdiMenu" label="Sample menu" />
 
           <template #dropdown>
-            <nav-bar-item>
-              <nav-bar-item-label
-                :icon="mdiClockOutline"
-                label="Item One"
-              />
-            </nav-bar-item>
-            <nav-bar-item>
-              <nav-bar-item-label
-                :icon="mdiCloud"
-                label="Item Two"
-              />
-            </nav-bar-item>
-            <nav-bar-menu-divider />
-            <nav-bar-item>
-              <nav-bar-item-label
-                :icon="mdiCrop"
-                label="Item Last"
-              />
-            </nav-bar-item>
+            <NavBarItem>
+              <NavBarItemLabel :icon="mdiClockOutline" label="Item One" />
+            </NavBarItem>
+            <NavBarItem>
+              <NavBarItemLabel :icon="mdiCloud" label="Item Two" />
+            </NavBarItem>
+            <NavBarMenuDivider />
+            <NavBarItem>
+              <NavBarItemLabel :icon="mdiCrop" label="Item Last" />
+            </NavBarItem>
           </template>
-        </nav-bar-menu> -->
+        </NavBarMenu>
         <NavBarMenu hasDivider>
           <UserAvatar class="inline-flex w-6 h-6 mr-3" />
           <div>

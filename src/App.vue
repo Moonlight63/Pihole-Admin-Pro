@@ -1,11 +1,11 @@
 <script setup>
-import { computed } from 'vue'
+// import { computed } from 'vue'
 import { useStore } from 'vuex'
-import menu from '@/menu.js'
-import NavBar from '@/components/NavBar/NavBar.vue'
-import AsideMenu from '@/components/Menu/AsideMenu.vue'
-import FooterBar from '@/components/Panels/FooterBar.vue'
-import Overlay from '@/components/UI/Overlay.vue'
+// import menu from '@/menu.js'
+// import NavBar from '@/components/NavBar/NavBar.vue'
+// import AsideMenu from '@/components/Menu/AsideMenu.vue'
+// import FooterBar from '@/components/Panels/FooterBar.vue'
+// import Overlay from '@/components/UI/Overlay.vue'
 
 const store = useStore()
 
@@ -16,15 +16,15 @@ store.commit('user', {
     'https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93'
 })
 
-const isAsideLgActive = computed(() => store.state.isAsideLgActive)
+// const isAsideLgActive = computed(() => store.state.isAsideLgActive)
 
-const overlayClick = () => {
-  store.dispatch('asideLgToggle', false)
-}
+// const overlayClick = () => {
+//   store.dispatch('asideLgToggle', false)
+// }
 </script>
 
 <template>
-  <NavBar />
+  <!-- <NavBar />
   <AsideMenu :menu="menu" />
   <RouterView />
   <FooterBar />
@@ -32,5 +32,6 @@ const overlayClick = () => {
     v-show="isAsideLgActive"
     zIndex="z-30"
     @overlayClick="overlayClick"
-  />
+  /> -->
+  <RouterView />
 </template>
