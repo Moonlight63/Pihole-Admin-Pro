@@ -4,12 +4,10 @@ import { useStore } from 'vuex'
 import Level from '@/components/UI/Level.vue'
 
 const store = useStore()
-
-const isFooterBarVisible = computed(() => !store.state.isFullScreen)
 </script>
 
 <template>
-  <footer v-show="isFooterBarVisible" class="px-6 py-2 bg-panel">
+  <footer class="px-6 py-2 bg-panel">
     <Level>
       <div class="text-center md:text-left">
         <b><a href="#" target="_blank">Donate</a></b>

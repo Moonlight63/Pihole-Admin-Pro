@@ -61,6 +61,7 @@ module.exports = {
         autofix: true
       }
     ],
-    'vue/attribute-hyphenation': ['error', 'never']
+    'vue/attribute-hyphenation': ['error', 'never'],
+    'vue/multi-word-component-names': ['off', 'never']
   }
 }

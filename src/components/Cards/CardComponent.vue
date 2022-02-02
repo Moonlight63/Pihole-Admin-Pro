@@ -16,7 +16,7 @@ const props = defineProps({
   },
   rounded: {
     type: String,
-    default: 'md:rounded-3xl'
+    default: 'md:rounded-2xl'
   },
   bgColor: {
     type: String,

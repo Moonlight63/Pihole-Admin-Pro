@@ -38,6 +38,28 @@ const menuClick = (event) => {
 const styleActive = 'font-bold text-menu-items-active'
 
 const styleInactive = 'text-menu-items'
+
+const enter = (el) => {
+  el.style.height = 'auto'
+  const height = getComputedStyle(el).height
+  el.style.height = 0
+  getComputedStyle(el)
+  setTimeout(() => {
+    el.style.height = height
+  })
+}
+
+const afterEnter = (el) => {
+  el.style.height = 'auto'
+}
+
+const leave = (el) => {
+  el.style.height = getComputedStyle(el).height
+  getComputedStyle(el)
+  setTimeout(() => {
+    el.style.height = 0
+  })
+}
 </script>
 
 <template>
@@ -83,11 +105,19 @@ const styleInactive = 'text-menu-items'
         />
       </div>
     </Component>
-    <AsideMenuList
-      v-if="hasDropdown"
-      :menu="item.menu"
-      :class="{ hidden: !isDropdownActive, block: isDropdownActive }"
-      isSubmenuList
-    />
+    <Transition
+      enterActiveClass="transition-height duration-250 ease-in overflow-hidden"
+      leaveActiveClass="transition-height duration-250 ease-in overflow-hidden"
+      @enter="enter"
+      @afterEnter="afterEnter"
+      @leave="leave"
+    >
+      <AsideMenuList
+        v-if="hasDropdown && isDropdownActive"
+        :menu="item.menu"
+        :class="{ hidden: !isDropdownActive, block: isDropdownActive }"
+        isSubmenuList
+      />
+    </Transition>
   </li>
 </template>

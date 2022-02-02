@@ -15,7 +15,9 @@ module.exports = {
       },
       transitionProperty: {
         position: 'right, left, top, bottom, margin, padding',
-        textColor: 'color'
+        textColor: 'color',
+        height: 'height',
+        width: 'width'
       },
       keyframes: {
         fadeOut: {

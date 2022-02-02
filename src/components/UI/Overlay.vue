@@ -15,14 +15,14 @@ const overlayClick = (event) => {
 
 <template>
   <div
-    class="flex items-center flex-col justify-center overflow-hidden fixed inset-0"
+    class="fixed inset-0 flex flex-col items-center justify-center overflow-hidden"
     :class="zIndex"
   >
     <Transition
-      enterActiveClass="transition duration-150 ease-in"
+      enterActiveClass="transition duration-1000 ease-in"
       enterFromClass="opacity-0"
       enterToClass="opacity-100"
-      leaveActiveClass="transition duration-150 ease-in"
+      leaveActiveClass="transition duration-1000 ease-in"
       leaveFromClass="opacity-100"
       leaveToClass="opacity-0"
     >

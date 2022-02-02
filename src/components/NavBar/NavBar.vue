@@ -1,7 +1,10 @@
 <script setup>
 import { useStore } from 'vuex'
+import { useGlobal } from '@/store/global'
 
 const store = useStore()
+
+const storeG = useGlobal()
 
 const toggleLightDark = () => {
   store.dispatch('darkMode')
@@ -9,18 +12,9 @@ const toggleLightDark = () => {
 
 const userName = computed(() => store.state.userName)
 
-const isNavBarVisible = computed(() => !store.state.isFullScreen)
-
-const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
-
 const menuToggleMobileIcon = computed(() =>
-  isAsideMobileExpanded.value ? 'mdi:backburger' : 'mdi:forwardburger'
+  storeG.isMenuActive ? 'mdi:backburger' : 'mdi:forwardburger'
 )
-
-const menuToggleMobile = () => store.dispatch('asideMobileToggle')
-const menuOpenLg = () => {
-  store.dispatch('asideLgToggle', true)
-}
 
 const isMenuNavBarActive = ref(false)
 
@@ -35,15 +29,12 @@ const menuNavBarToggle = () => {
 
 <template>
   <nav
-    v-show="isNavBarVisible"
     class="absolute top-0 left-0 right-0 z-30 flex w-screen border-b border-gray-100 bg-panel h-14 transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:border-gray-800"
   >
     <div class="flex items-stretch flex-1 h-14">
-      <NavBarItem type="flex lg:hidden" @click.prevent="menuToggleMobile">
-        <UiIconify :icon="menuToggleMobileIcon" class="text-2xl" />
-      </NavBarItem>
-      <NavBarItem type="hidden lg:flex xl:hidden" @click.prevent="menuOpenLg">
-        <UiIconify icon="mdi:menu" class="text-2xl" />
+      <NavBarItem type="flex xl:hidden" @click.prevent="storeG.toggleMenu()">
+        <UiIconify :icon="menuToggleMobileIcon" class="text-2xl lg:hidden" />
+        <UiIconify icon="mdi:menu" class="hidden text-2xl lg:block xl:hidden" />
       </NavBarItem>
       <NavBarApiUrl />
     </div>
@@ -76,10 +67,13 @@ const menuNavBarToggle = () => {
           </template>
         </NavBarMenu>
         <NavBarMenu hasDivider>
-          <UserAvatar class="inline-flex w-6 h-6 mr-3" />
+          <!-- <UserAvatar class="inline-flex w-6 h-6 mr-3" />
           <div>
             <span>{{ userName }}</span>
-          </div>
+          </div> -->
+          <NavBarItemLabel :label="userName">
+            <UserAvatar class="inline-flex w-6 h-6 mr-3" />
+          </NavBarItemLabel>
 
           <template #dropdown>
             <NavBarItem to="/profile">

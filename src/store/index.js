@@ -12,10 +12,6 @@ export default createStore({
     /* fullScreen - fullscreen form layout (e.g. login page) */
     isFullScreen: false,
 
-    /* Aside */
-    isAsideMobileExpanded: false,
-    isAsideLgActive: false,
-
     /* Dark mode */
     darkMode: false,
 
@@ -67,28 +63,6 @@ export default createStore({
     }
   },
   actions: {
-    asideMobileToggle({ commit, state }, payload = null) {
-      const isShow = payload !== null ? payload : !state.isAsideMobileExpanded
-
-      // document
-      //   .getElementById('app')
-      //   .classList[isShow ? 'add' : 'remove']('ml-60', 'lg:ml-0')
-
-      // document.documentElement.classList[isShow ? 'add' : 'remove']('m-clipped')
-
-      commit('basic', {
-        key: 'isAsideMobileExpanded',
-        value: isShow
-      })
-    },
-
-    asideLgToggle({ commit, state }, payload = null) {
-      commit('basic', {
-        key: 'isAsideLgActive',
-        value: payload !== null ? payload : !state.isAsideLgActive
-      })
-    },
-
     fullScreenToggle({ commit, state }, value) {
       commit('basic', { key: 'isFullScreen', value })
 

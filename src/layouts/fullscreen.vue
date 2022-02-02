@@ -1,14 +1,13 @@
 <script setup>
-import { computed } from 'vue'
 import { useStore } from 'vuex'
-import MainSection from '@/components/MainSection.vue'
+import { useRoute } from 'vue-router'
 
-const props = defineProps({
-  bg: {
-    type: String,
-    required: true,
-    validator: (value) => ['login', 'error'].includes(value)
-  }
+const route = useRoute()
+
+const bg = computed(() => {
+  const value = route.meta.bg
+
+  return ['login', 'error'].includes(value) ? value : 'error'
 })
 
 const store = useStore()
@@ -23,7 +22,7 @@ const componentClass = computed(() => {
     errorDark: 'bg-gradient-to-tr from-pink-900 via-red-900 to-yellow-900'
   }
 
-  const bgKey = darkMode.value ? `${props.bg}Dark` : props.bg
+  const bgKey = darkMode.value ? `${bg.value}Dark` : bg.value
 
   return bgs[bgKey] ?? ''
 })
@@ -34,9 +33,20 @@ const componentClass = computed(() => {
     class="flex items-center justify-center h-screen"
     :class="componentClass"
   >
-    <slot
+    <!-- <div class="flex justify-center">
+    <div
+      class="relative w-full h-screen overflow-hidden shadow-xl shadow-black"
+    >
+      <div class="absolute top-0 left-0 w-full h-full transition-position">
+        <div class="w-full h-full"> -->
+    <RouterView />
+    <!-- </div>
+      </div>
+    </div>
+  </div> -->
+    <!-- <slot
       card-class="w-11/12 shadow-2xl md:w-7/12 lg:w-6/12 xl:w-4/12"
       card-rounded="rounded-lg"
-    />
+    /> -->
   </MainSection>
 </template>

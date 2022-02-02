@@ -41,13 +41,16 @@ if (localStorageApiAddressValue !== null) {
   store.dispatch('apiAddress', localStorageApiAddressValue)
 }
 
+createApp(App).use(store).use(pinia).use(router).mount('#app')
+
+const globalStore = useGlobal()
+
 /* Default title tag */
 const defaultDocumentTitle = 'Pi-Hole Admin Pro'
 
 /* Collapse mobile aside menu on route change */
 router.beforeEach((to) => {
-  store.dispatch('asideMobileToggle', false)
-  store.dispatch('asideLgToggle', false)
+  globalStore.toggleMenu(false)
 })
 
 router.afterEach((to) => {
@@ -57,11 +60,4 @@ router.afterEach((to) => {
   } else {
     document.title = defaultDocumentTitle
   }
-
-  /* Full screen mode */
-  store.dispatch('fullScreenToggle', !!to.meta.fullScreen)
 })
-
-createApp(App).use(store).use(pinia).use(router).mount('#app')
-
-useGlobal()
