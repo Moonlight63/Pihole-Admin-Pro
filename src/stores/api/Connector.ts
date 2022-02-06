@@ -20,6 +20,7 @@ export default class Connector {
     }
 
     Connector.instance = new Connector(host)
+    Connector.instance.getBasicData()
     Connector.instance.updateLoop()
     return new Connector(host)
   }

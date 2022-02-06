@@ -3,7 +3,7 @@ import { useApi } from '@/stores/api'
 import { useClients } from '@/stores/clients'
 import * as chartConfig from '@/components/Charts/chart.config.js'
 
-const titleStack = ref(['Admin', 'Dashboard'])
+// const titleStack = ref(['Admin', 'Dashboard'])
 
 const chartData = ref<unknown>(null)
 const chartData2 = ref<unknown>(null)
@@ -41,7 +41,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <TitleBar :titleStack="titleStack" />
+    <!-- <TitleBar :titleStack="titleStack" /> -->
     <MainSection>
       <!-- <CardComponent
       title="Total Queries Over Last 24 Hours"
@@ -52,7 +52,6 @@ onMounted(() => {
     >
       <TableTest :checkable="true" />
     </CardComponent> -->
-      <UiIconify icon="mdi:sort-descending" />
       <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-4">
         <CardMetric
           color="text-emerald-400"
