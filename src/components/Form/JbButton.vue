@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { getButtonColor } from '@/colors.js'
 import Icon from '@/components/UI/Icon.vue'
+import { useGlobal } from '@/stores/global'
 
 const props = defineProps({
   label: {
@@ -36,8 +37,11 @@ const props = defineProps({
     type: String,
     default: null
   },
+  outline: {
+    type: Boolean,
+    default: null
+  },
   small: Boolean,
-  outline: Boolean,
   active: Boolean,
   disabled: Boolean
 })
@@ -66,6 +70,16 @@ const computedType = computed(() => {
   return null
 })
 
+const isDarkMode = computed(() => useGlobal().darkMode)
+
+const isOutlined = computed(() =>
+  props.outline !== null
+    ? props.outline
+    : props.color === 'white'
+    ? isDarkMode.value
+    : false
+)
+
 const labelClass = computed(() => (props.small && props.icon ? 'px-1' : 'px-2'))
 
 const componentClass = computed(() => {
@@ -83,11 +97,14 @@ const componentClass = computed(() => {
     'rounded',
     props.active ? 'ring ring-black dark:ring-white' : 'ring-blue-700',
     props.small ? 'p-1' : 'p-2',
-    getButtonColor(props.color, props.outline, !props.disabled)
+    getButtonColor(props.color, isOutlined.value, !props.disabled)
   ]
 
   if (props.disabled) {
-    base.push('cursor-not-allowed', props.outline ? 'opacity-50' : 'opacity-70')
+    base.push(
+      'cursor-not-allowed',
+      isDarkMode.value ? 'opacity-50' : 'opacity-70'
+    )
   }
 
   return base

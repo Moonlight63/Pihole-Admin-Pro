@@ -1,9 +1,7 @@
 <script setup>
-import { useStore } from 'vuex'
+import { useUsers } from '@/stores/user'
 
-const store = useStore()
-
-const userName = computed(() => store.state.userName)
+const userName = computed(() => useUsers().userName)
 
 const userSwitchVal = ref([])
 </script>

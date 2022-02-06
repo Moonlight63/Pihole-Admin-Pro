@@ -2,7 +2,7 @@
 defineProps({
   icon: {
     type: String,
-    required: true
+    default: null
   },
   label: {
     type: String,
@@ -13,7 +13,8 @@ defineProps({
 </script>
 
 <template>
-  <UiIconify :icon="icon" class="transition-colors" />
+  <slot />
+  <UiIconify v-if="icon" :icon="icon" class="transition-colors" />
   <span
     class="px-2 transition-colors"
     :class="{ 'lg:hidden': isDesktopIconOnly }"

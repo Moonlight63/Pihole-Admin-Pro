@@ -1,30 +1,5 @@
 <script setup>
-import { computed, ref, onMounted } from 'vue'
-import { useStore } from 'vuex'
-import {
-  mdiAccountMultiple,
-  mdiCartOutline,
-  mdiChartTimelineVariant,
-  mdiFinance,
-  mdiMonitorCellphone,
-  mdiReload,
-  mdiGithub,
-  mdiChartPie
-} from '@mdi/js'
-import * as chartConfig from '@/components/Charts/chart.config.js'
-import LineChart from '@/components/Charts/LineChart.vue'
-import MainSection from '@/components/MainSection.vue'
-import TitleBar from '@/components/Panels/TitleBar.vue'
-import HeroBar from '@/components/Panels/HeroBar.vue'
-import CardWidget from '@/components/Cards/CardWidget.vue'
-import CardComponent from '@/components/Cards/CardComponent.vue'
-import ClientsTable from '@/components/UnusedReference/ClientsTable.vue'
-import UsersTable from '@/components/UnusedReference/UsersTable.vue'
-import Notification from '@/components/UI/Notification.vue'
-import JbButton from '@/components/Form/JbButton.vue'
-import CardTransactionBar from '@/components/CardTransactionBar.vue'
-import CardClientBar from '@/components/CardClientBar.vue'
-import TitleSubBar from '@/components/Panels/TitleSubBar.vue'
+import { useClients } from '@/stores/clients'
 
 const titleStack = ref(['Admin', 'Dashboard'])
 
@@ -38,13 +13,11 @@ onMounted(() => {
   fillChartData()
 })
 
-const store = useStore()
+const storeClients = useClients()
 
-const clientBarItems = computed(() => store.state.clients.slice(0, 3))
+const clientBarItems = computed(() => storeClients.clients.slice(0, 3))
 
-const transactionBarItems = computed(() => store.state.history.slice(0, 3))
-
-const darkMode = computed(() => store.state.darkMode)
+const transactionBarItems = computed(() => storeClients.history.slice(0, 3))
 </script>
 
 <template>
@@ -163,3 +136,10 @@ const darkMode = computed(() => store.state.darkMode)
     </CardComponent>
   </MainSection>
 </template>
+
+<route lang="yaml">
+meta:
+  layout: 'default'
+  title: 'Original Home'
+  icon: 'mdi:desktop-mac'
+</route>

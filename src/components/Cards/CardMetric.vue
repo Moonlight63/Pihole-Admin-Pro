@@ -1,6 +1,4 @@
 <script setup>
-import { useStore } from 'vuex'
-
 defineProps({
   number: {
     type: Number,
@@ -31,10 +29,6 @@ defineProps({
     default: undefined
   }
 })
-
-const store = useStore()
-
-const darkMode = computed(() => store.state.darkMode)
 </script>
 
 <template>

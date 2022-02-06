@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { useStore } from 'vuex'
+import { useApi } from '@/stores/api'
+import { useClients } from '@/stores/clients'
 import * as chartConfig from '@/components/Charts/chart.config.js'
 
 const titleStack = ref(['Admin', 'Dashboard'])
@@ -16,9 +17,10 @@ const fillChartData = () => {
   chartData4.value = chartConfig.sampleChartData(4, 1)
 }
 
-const store = useStore()
+const storeApi = useApi()
+const storeClients = useClients()
 
-const dataRaw = computed(() => store.state.currentSummary)
+const dataRaw = computed(() => storeApi.currentSummary)
 
 const quaryData = computed(() => ({
   clients: dataRaw.value.ftl?.clients?.total || 0,
@@ -28,9 +30,9 @@ const quaryData = computed(() => ({
   domains_blocked: dataRaw.value.queries?.unique_domains || 0
 }))
 
-const clientBarItems = computed(() => store.state.clients.slice(0, 3))
+const clientBarItems = computed(() => storeClients.clients.slice(0, 3))
 
-const transactionBarItems = computed(() => store.state.history.slice(0, 3))
+const transactionBarItems = computed(() => storeClients.history.slice(0, 3))
 
 onMounted(() => {
   fillChartData()

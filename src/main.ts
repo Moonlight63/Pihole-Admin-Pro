@@ -2,10 +2,11 @@ import { createApp } from 'vue'
 
 import App from './App.vue'
 import router from './router'
-import store from './store'
 import { darkModeKey, apiAddressKey } from '@/config.js'
 import { createPinia } from 'pinia'
-import { useGlobal } from './store/global'
+import { useGlobal } from './stores/global'
+import { useClients } from './stores/clients'
+import { useServer } from './stores/server'
 
 import './css/main.css'
 
@@ -15,35 +16,30 @@ import '@purge-icons/generated'
 // Migrate to Pinia
 const pinia = createPinia()
 
-/* Fetch sample data */
-store.dispatch('fetch', 'clients')
-store.dispatch('fetch', 'history')
-
-store.dispatch('getusers', 'myusers')
-
-// console.log(store.state.clients)
-// console.log(store.state.users)
-
-/* Dark mode */
-const localStorageDarkModeValue = localStorage.getItem(darkModeKey)
-
-if (
-  (localStorageDarkModeValue === null &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches) ||
-  localStorageDarkModeValue === '1'
-) {
-  store.dispatch('darkMode')
-}
-
-const localStorageApiAddressValue = localStorage.getItem(apiAddressKey)
-
-if (localStorageApiAddressValue !== null) {
-  store.dispatch('apiAddress', localStorageApiAddressValue)
-}
-
-createApp(App).use(store).use(pinia).use(router).mount('#app')
+createApp(App).use(pinia).use(router).mount('#app')
 
 const globalStore = useGlobal()
+const clientsStore = useClients()
+const serverStore = useServer()
+
+/* Dark mode */
+if (
+  (!localStorage[darkModeKey] &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+  localStorage[darkModeKey] === '1'
+) {
+  globalStore.toggleDarkMode(true)
+}
+
+/* Fetch sample data */
+clientsStore.fetchClients()
+clientsStore.fetchHistory()
+clientsStore.getusers()
+
+const localStorageApiAddressValue = localStorage.getItem(apiAddressKey)
+if (localStorageApiAddressValue !== null) {
+  serverStore.connect(localStorageApiAddressValue)
+}
 
 /* Default title tag */
 const defaultDocumentTitle = 'Pi-Hole Admin Pro'

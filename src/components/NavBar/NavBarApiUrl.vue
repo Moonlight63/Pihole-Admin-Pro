@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useStore } from 'vuex'
+import { useServer } from '@/stores/server'
 
-const store = useStore()
+const storeServer = useServer()
 
-const apiAddress = ref(store.state.apiAddress)
+const apiAddress = ref(storeServer.apiAddress)
 
 const tryConnect = () => {
-  store.dispatch('apiAddress', apiAddress.value)
+  storeServer.connect(apiAddress.value)
 }
 </script>
 

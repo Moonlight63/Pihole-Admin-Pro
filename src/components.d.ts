@@ -25,7 +25,6 @@ declare module 'vue' {
     Field: typeof import('./components/Form/Field.vue')['default']
     FilePicker: typeof import('./components/Form/FilePicker.vue')['default']
     FooterBar: typeof import('./components/Panels/FooterBar.vue')['default']
-    FullScreenSection: typeof import('./components/FullScreenSection.vue')['default']
     GrowingNumber: typeof import('./components/UI/GrowingNumber.vue')['default']
     HeroBar: typeof import('./components/Panels/HeroBar.vue')['default']
     Icon: typeof import('./components/UI/Icon.vue')['default']

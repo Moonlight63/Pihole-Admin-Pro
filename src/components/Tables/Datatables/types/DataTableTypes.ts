@@ -41,7 +41,7 @@ type HavinaProblem = {
   idx: string
 }
 
-export {
+export type {
   MandateProps,
   DataTableRow,
   DataTableRows,

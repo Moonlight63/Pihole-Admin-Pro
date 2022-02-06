@@ -1,18 +1,18 @@
 <script setup>
-import { useStore } from 'vuex'
+import { useClients } from '@/stores/clients'
 
 // defineProps({
 //   checkable: Boolean
 // })
 
-const store = useStore()
+const storeClients = useClients()
 
 const sortByKey = ref('')
 const sortAcending = ref(false)
 const perPage = ref(10)
 const currentPage = ref(0)
 
-const dataRaw = computed(() => store.state.clients)
+const dataRaw = computed(() => storeClients.clients)
 const dataSorted = computed(() => {
   if (sortByKey.value === '') return dataRaw.value
   return dataRaw.value

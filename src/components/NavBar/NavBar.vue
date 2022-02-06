@@ -1,19 +1,18 @@
 <script setup>
-import { useStore } from 'vuex'
-import { useGlobal } from '@/store/global'
+import { useGlobal } from '@/stores/global'
+import { useUsers } from '@/stores/user'
 
-const store = useStore()
-
-const storeG = useGlobal()
+const storeGlobal = useGlobal()
+const storeUser = useUsers()
 
 const toggleLightDark = () => {
-  store.dispatch('darkMode')
+  storeGlobal.toggleDarkMode()
 }
 
-const userName = computed(() => store.state.userName)
+const userName = computed(() => storeUser.userName)
 
 const menuToggleMobileIcon = computed(() =>
-  storeG.isMenuActive ? 'mdi:backburger' : 'mdi:forwardburger'
+  storeGlobal.isMenuActive ? 'mdi:backburger' : 'mdi:forwardburger'
 )
 
 const isMenuNavBarActive = ref(false)
@@ -32,7 +31,10 @@ const menuNavBarToggle = () => {
     class="absolute top-0 left-0 right-0 z-30 flex w-screen border-b border-gray-100 bg-panel h-14 transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:border-gray-800"
   >
     <div class="flex items-stretch flex-1 h-14">
-      <NavBarItem type="flex xl:hidden" @click.prevent="storeG.toggleMenu()">
+      <NavBarItem
+        type="flex xl:hidden"
+        @click.prevent="storeGlobal.toggleMenu()"
+      >
         <UiIconify :icon="menuToggleMobileIcon" class="text-2xl lg:hidden" />
         <UiIconify icon="mdi:menu" class="hidden text-2xl lg:block xl:hidden" />
       </NavBarItem>
@@ -51,18 +53,18 @@ const menuNavBarToggle = () => {
         class="overflow-y-auto max-h-screen-menu lg:overflow-visible lg:flex lg:items-stretch lg:justify-end lg:ml-auto"
       >
         <NavBarMenu hasDivider>
-          <NavBarItemLabel :icon="mdiMenu" label="Sample menu" />
+          <NavBarItemLabel icon="mdi:menu" label="Sample menu" />
 
           <template #dropdown>
             <NavBarItem>
-              <NavBarItemLabel :icon="mdiClockOutline" label="Item One" />
+              <NavBarItemLabel icon="mdi:clock-outline" label="Item One" />
             </NavBarItem>
             <NavBarItem>
-              <NavBarItemLabel :icon="mdiCloud" label="Item Two" />
+              <NavBarItemLabel icon="mdi:cloud" label="Item Two" />
             </NavBarItem>
             <NavBarMenuDivider />
             <NavBarItem>
-              <NavBarItemLabel :icon="mdiCrop" label="Item Last" />
+              <NavBarItemLabel icon="mdi:crop" label="Item Last" />
             </NavBarItem>
           </template>
         </NavBarMenu>

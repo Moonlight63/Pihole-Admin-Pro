@@ -1,5 +1,5 @@
 <script setup>
-import { useStore } from 'vuex'
+import { useGlobal } from '@/stores/global'
 
 defineProps({
   icon: {
@@ -12,9 +12,9 @@ defineProps({
   }
 })
 
-const store = useStore()
+const store = useGlobal()
 
-const darkMode = computed(() => store.state.darkMode)
+const darkMode = computed(() => store.darkMode)
 </script>
 
 <template>
@@ -25,6 +25,6 @@ const darkMode = computed(() => store.state.darkMode)
         {{ title }}
       </h1>
     </div>
-    <JbButton icon="mdi:cog" :outline="darkMode" small />
+    <JbButton icon="mdi:cog" small />
   </section>
 </template>

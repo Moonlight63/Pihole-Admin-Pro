@@ -1,5 +1,5 @@
 <script setup>
-import { useGlobal } from '@/store/global'
+import { useGlobal } from '@/stores/global'
 
 defineProps({
   menu: {

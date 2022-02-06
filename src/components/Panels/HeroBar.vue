@@ -1,28 +1,19 @@
 <script setup>
-import { useStore } from 'vuex'
-
-const store = useStore()
-
-const darkMode = computed(() => store.state.darkMode)
-
-const darkModeToggle = () => {
-  store.dispatch('darkMode')
-}
+import { useGlobal } from '@/stores/global'
 </script>
 
 <template>
   <section
-    class="p-6 bg-white border-t border-b border-gray-100 dark:bg-gray-900 dark:border-gray-900 dark:text-white"
+    class="p-6 border-t border-b border-gray-100 bg-panel dark:border-gray-900 dark:text-white"
   >
     <Level>
       <h1 class="text-3xl font-semibold leading-tight">
         <slot />
       </h1>
       <JbButton
-        :label="darkMode ? 'Light Mode' : 'Dark Mode'"
+        :label="useGlobal().darkMode ? 'Light Mode' : 'Dark Mode'"
         icon="mdi:theme-light-dark"
-        :outline="darkMode"
-        @click="darkModeToggle"
+        @click="useGlobal().toggleDarkMode()"
       />
     </Level>
   </section>

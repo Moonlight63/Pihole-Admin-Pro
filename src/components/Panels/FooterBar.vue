@@ -1,10 +1,4 @@
-<script setup>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-import Level from '@/components/UI/Level.vue'
-
-const store = useStore()
-</script>
+<script setup></script>
 
 <template>
   <footer class="px-6 py-2 bg-panel">

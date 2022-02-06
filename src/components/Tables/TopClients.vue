@@ -1,15 +1,11 @@
 <script setup>
-import { useStore } from 'vuex'
+import { useClients } from '@/stores/clients'
 
 defineProps({
   checkable: Boolean
 })
 
-const store = useStore()
-
-const darkMode = computed(() => store.state.darkMode)
-
-const itemsUnsorted = computed(() => store.state.clients)
+const itemsUnsorted = computed(() => useClients().clients)
 
 const items = computed(() =>
   itemsUnsorted.value
@@ -131,7 +127,6 @@ const checked = (isChecked, client) => {
           :key="page"
           :active="page === currentPage"
           :label="page + 1"
-          :outline="darkMode"
           small
           @click="currentPage = page"
         />

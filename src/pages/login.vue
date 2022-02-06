@@ -5,13 +5,6 @@ const form = reactive({
   remember: ['remember']
 })
 
-const props = defineProps({
-  test: {
-    type: String,
-    default: 'NotWorking'
-  }
-})
-
 const router = useRouter()
 
 const submit = () => {
@@ -63,7 +56,7 @@ const submit = () => {
 <route lang="yaml">
 meta:
   layout: 'fullscreen'
-  title: 'Login2'
+  title: 'Login'
   icon: 'mdi:desktop-mac'
   bg: 'login'
   transition: 'bounce'

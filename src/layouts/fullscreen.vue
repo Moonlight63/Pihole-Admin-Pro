@@ -1,5 +1,5 @@
 <script setup>
-import { useStore } from 'vuex'
+import { useGlobal } from '@/stores/global'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -10,9 +10,9 @@ const bg = computed(() => {
   return ['login', 'error'].includes(value) ? value : 'error'
 })
 
-const store = useStore()
+const store = useGlobal()
 
-const darkMode = computed(() => store.state.darkMode)
+const darkMode = computed(() => store.darkMode)
 
 const componentClass = computed(() => {
   const bgs = {

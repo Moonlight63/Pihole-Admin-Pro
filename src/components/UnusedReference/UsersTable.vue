@@ -1,15 +1,11 @@
 <script setup>
-import { useStore } from 'vuex'
+import { useClients } from '@/stores/clients'
 
 defineProps({
   checkable: Boolean
 })
 
-const store = useStore()
-
-const darkMode = computed(() => store.state.darkMode)
-
-const items = computed(() => store.state.myusers)
+const items = computed(() => useClients().myusers)
 
 const isModalActive = ref(false)
 
@@ -94,7 +90,7 @@ const doStuff = () => {
   </div>
 
   <JbButtons>
-    <JbButton label="Do Stuff" :outline="darkMode" @click="doStuff()" />
+    <JbButton label="Do Stuff" @click="doStuff()" />
   </JbButtons>
 
   <table>
@@ -162,7 +158,6 @@ const doStuff = () => {
           :key="page"
           :active="page === currentPage"
           :label="page + 1"
-          :outline="darkMode"
           small
           @click="currentPage = page"
         />

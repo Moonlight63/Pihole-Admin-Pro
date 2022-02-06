@@ -1,21 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { useStore } from 'vuex'
-
-import MainSection from '@/components/MainSection.vue'
-import HeroBar from '@/components/Panels/HeroBar.vue'
-import TitleBar from '@/components/Panels/TitleBar.vue'
-import CardComponent from '@/components/Cards/CardComponent.vue'
-import JbButtons from '@/components/Form/JbButtons.vue'
-import JbButton from '@/components/Form/JbButton.vue'
-import Notification from '@/components/UI/Notification.vue'
-import Divider from '@/components/UI/Divider.vue'
-import ModalBox from '@/components/UI/ModalBox.vue'
-import TitledSection from '@/components/TitledSection.vue'
-import Field from '@/components/Form/Field.vue'
-import CheckRadioPicker from '@/components/Form/CheckRadioPicker.vue'
-import BottomOtherPagesSection from '@/components/UnusedReference/BottomOtherPagesSection.vue'
-import TitleSubBar from '@/components/Panels/TitleSubBar.vue'
+import { useGlobal } from '@/stores/global'
 
 const titleStack = ref(['Admin', 'UI Components'])
 
@@ -44,12 +28,6 @@ const buttonsSmall = computed(
 const buttonsDisabled = computed(
   () => buttonSettingsModel.value.indexOf('disabled') > -1
 )
-
-const store = useStore()
-
-const darkModeToggle = () => {
-  store.dispatch('darkMode')
-}
 </script>
 
 <template>
@@ -84,7 +62,11 @@ const darkModeToggle = () => {
   <MainSection>
     <CardComponent class="shadow-2xl md:w-7/12 lg:w-5/12 xl:w-4/12 md:mx-auto">
       <div class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400">
-        <JbButton label="Toggle" outline @click="darkModeToggle" />
+        <JbButton
+          label="Toggle"
+          outline
+          @click="useGlobal().toggleDarkMode()"
+        />
       </div>
     </CardComponent>
   </MainSection>
@@ -443,3 +425,10 @@ const darkModeToggle = () => {
 
   <BottomOtherPagesSection />
 </template>
+
+<route lang="yaml">
+meta:
+  layout: 'default'
+  title: 'UI'
+  icon: 'mdi:desktop-mac'
+</route>

@@ -11,7 +11,7 @@
 * **SFC** `<script setup>` [Info](https://v3.vuejs.org/api/sfc-script-setup.html)
 * **Dark mode**
 * **Styled** scrollbars
-* SPA with **Vuex** & **Router**
+* SPA with **Pinia** & **Router**
 * **Production CSS** is only **34kb**
 * Reusable components
 * Free under MIT License

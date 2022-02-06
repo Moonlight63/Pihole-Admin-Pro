@@ -1,7 +1,5 @@
 <script setup>
-import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
-import { useStore } from 'vuex'
-import ControlIcon from '@/components/Form/ControlIcon.vue'
+import { useGlobal } from '@/stores/global'
 
 const props = defineProps({
   name: {
@@ -73,7 +71,7 @@ const controlIconH = computed(() =>
   props.type === 'textarea' ? 'h-full' : 'h-12'
 )
 
-const store = useStore()
+const storeGlobal = useGlobal()
 
 const inputEl = ref(null)
 
@@ -88,13 +86,9 @@ if (props.ctrlKFocus) {
   }
 
   onMounted(() => {
-    if (!store.state.isFieldFocusRegistered) {
+    if (!storeGlobal.isFieldFocusRegistered) {
       window.addEventListener('keydown', fieldFocusHook)
-
-      store.commit('basic', {
-        key: 'isFieldFocusRegistered',
-        value: true
-      })
+      storeGlobal.isFieldFocusRegistered = true
     } else {
       // console.error('Duplicate field focus event')
     }
@@ -102,11 +96,7 @@ if (props.ctrlKFocus) {
 
   onBeforeUnmount(() => {
     window.removeEventListener('keydown', fieldFocusHook)
-
-    store.commit('basic', {
-      key: 'isFieldFocusRegistered',
-      value: false
-    })
+    storeGlobal.isFieldFocusRegistered = false
   })
 }
 </script>

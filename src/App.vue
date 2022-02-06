@@ -1,8 +1,8 @@
 <script setup>
-import { useStore } from 'vuex'
-const store = useStore()
+import { useUsers } from './stores/user'
+const userStore = useUsers()
 
-store.commit('user', {
+userStore.user({
   name: 'John Doe',
   email: 'john@example.com',
   avatar:

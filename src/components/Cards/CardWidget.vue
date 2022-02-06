@@ -1,13 +1,4 @@
 <script setup>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-import CardComponent from '@/components/Cards/CardComponent.vue'
-import GrowingNumber from '@/components/UI/GrowingNumber.vue'
-import Icon from '@/components/UI/Icon.vue'
-import Level from '@/components/UI/Level.vue'
-import TrendPill from '@/components/UI/TrendPill.vue'
-import JbButton from '@/components/Form/JbButton.vue'
-
 defineProps({
   number: {
     type: Number,
@@ -42,24 +33,13 @@ defineProps({
     default: null
   }
 })
-
-const store = useStore()
-
-const darkMode = computed(() => store.state.darkMode)
 </script>
 
 <template>
   <CardComponent>
     <Level v-if="trend" class="mb-3" mobile>
       <TrendPill :trend="trend" :trendType="trendType" small />
-      <JbButton
-        icon="mdi:cog"
-        iconW="w-4"
-        iconH="h-4"
-        :color="darkMode ? 'white' : 'light'"
-        :outline="darkMode"
-        small
-      />
+      <JbButton icon="mdi:cog" iconW="w-4" iconH="h-4" small />
     </Level>
     <Level mobile>
       <div>

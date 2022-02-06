@@ -1,6 +1,5 @@
 <script setup>
-import { useStore } from 'vuex'
-import { computed } from 'vue'
+import { useUsers } from '@/stores/user'
 
 const props = defineProps({
   username: {
@@ -17,7 +16,7 @@ const props = defineProps({
   }
 })
 
-const store = useStore()
+const storeUser = useUsers()
 
 const avatar = computed(() =>
   props.username
@@ -25,11 +24,11 @@ const avatar = computed(() =>
         /[^a-z0-9]+/i,
         '-'
       )}.svg`
-    : store.state.userAvatar
+    : storeUser.userAvatar
 )
 
 const name = computed(() =>
-  props.username ? props.username : store.state.userName
+  props.username ? props.username : storeUser.userName
 )
 </script>
 
@@ -38,7 +37,7 @@ const name = computed(() =>
     <img
       :src="avatar"
       :alt="name"
-      class="rounded-full block h-auto w-full max-w-full"
+      class="block w-full h-auto max-w-full rounded-full"
       :class="bg"
     />
   </div>

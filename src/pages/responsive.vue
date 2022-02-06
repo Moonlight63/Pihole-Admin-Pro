@@ -1,11 +1,4 @@
 <script setup>
-import { ref } from 'vue'
-import TitleBar from '@/components/Panels/TitleBar.vue'
-import HeroBar from '@/components/Panels/HeroBar.vue'
-import TitledSection from '@/components/TitledSection.vue'
-import MainSection from '@/components/MainSection.vue'
-import BottomOtherPagesSection from '@/components/UnusedReference/BottomOtherPagesSection.vue'
-
 const titleStack = ref(['Admin', 'Responsive layout'])
 </script>
 
@@ -66,3 +59,10 @@ const titleStack = ref(['Admin', 'Responsive layout'])
 
   <BottomOtherPagesSection />
 </template>
+
+<route lang="yaml">
+meta:
+  layout: 'default'
+  title: 'Responsive'
+  icon: 'mdi:desktop-mac'
+</route>

@@ -1,25 +1,13 @@
 <script setup>
-import { ref, reactive } from 'vue'
-import { useStore } from 'vuex'
-import MainSection from '@/components/MainSection.vue'
-import CardComponent from '@/components/Cards/CardComponent.vue'
-import TitleBar from '@/components/Panels/TitleBar.vue'
-import Divider from '@/components/UI/Divider.vue'
-import Field from '@/components/Form/Field.vue'
-import Control from '@/components/Form/Control.vue'
-import FilePicker from '@/components/Form/FilePicker.vue'
-import JbButton from '@/components/Form/JbButton.vue'
-import BottomOtherPagesSection from '@/components/UnusedReference/BottomOtherPagesSection.vue'
-import JbButtons from '@/components/Form/JbButtons.vue'
-import UserCard from '@/components/UnusedReference/UserCard.vue'
+import { useUsers } from '@/stores/user'
 
-const store = useStore()
+const storeUser = useUsers()
 
 const titleStack = ref(['Admin', 'Profile'])
 
 const profileForm = reactive({
-  name: store.state.userName,
-  email: store.state.userEmail
+  name: storeUser.userName,
+  email: storeUser.userEmail
 })
 
 const passwordForm = reactive({
@@ -29,7 +17,7 @@ const passwordForm = reactive({
 })
 
 const submitProfile = () => {
-  store.commit('user', profileForm)
+  storeUser.user(profileForm)
 }
 
 const submitPass = () => {
@@ -138,3 +126,10 @@ const submitPass = () => {
 
   <BottomOtherPagesSection />
 </template>
+
+<route lang="yaml">
+meta:
+  layout: 'default'
+  title: 'Tables'
+  icon: 'mdi:desktop-mac'
+</route>

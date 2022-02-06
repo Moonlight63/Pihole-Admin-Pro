@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useStore } from 'vuex'
+import { useClients } from '@/stores/clients'
 import DataTable from '@/components/Tables/Datatables/DataTable.vue'
 import TableBodyCell from './Datatables/Components/Table/TableBodyCell.vue'
 import {
@@ -7,10 +7,10 @@ import {
   DataTableSortation
 } from './Datatables/types/DataTableTypes'
 
-const store = useStore()
+const storeClients = useClients()
 
-const dataRaw = computed(() => store.state.clients)
-const dataReady = computed(() => !store.state.loadingClients)
+const dataRaw = computed(() => storeClients.clients)
+const dataReady = computed(() => !storeClients.loadingClients)
 
 // const filter = ref('')
 const sortation = ref<DataTableSortation>({})

@@ -1,7 +1,7 @@
 <script setup>
 import menu from '@/menu.js'
 
-import { useGlobal } from '@/store/global'
+import { useGlobal } from '@/stores/global'
 
 const store = useGlobal()
 </script>

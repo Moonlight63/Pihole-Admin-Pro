@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, PropType } from 'vue'
-import { useStore } from 'vuex'
 import Level from '@/components/UI/Level.vue'
 
 import JbButtons from '@/components/Form/JbButtons.vue'
@@ -30,8 +29,6 @@ const currentEnd = computed(() =>
     : props.total
 )
 const totalPages = computed(() => Math.ceil(props.total / props.perPage))
-const store = useStore()
-const darkMode = computed(() => store.state.darkMode)
 
 const startPage = computed(() => {
   if (props.currentPage === 0) {
@@ -100,11 +97,9 @@ const gotoPreviousPage = () =>
       </div>
 
       <JbButtons v-if="totalPages > 1">
-        <!-- :outline="darkMode" -->
         <JbButton
           key="page_first"
           :disabled="isInFirstPage"
-          :outline="darkMode"
           label="&laquo;"
           small
           @click.prevent="gotoFirstPage"
@@ -112,7 +107,6 @@ const gotoPreviousPage = () =>
         <JbButton
           key="page_previous"
           :disabled="isInFirstPage"
-          :outline="darkMode"
           label="&lsaquo;"
           small
           @click.prevent="gotoPreviousPage"
@@ -122,7 +116,6 @@ const gotoPreviousPage = () =>
             key="page_0"
             :disabled="isInFirstPage"
             :active="isInFirstPage"
-            :outline="darkMode"
             label="1"
             small
             @click.prevent="gotoFirstPage"
@@ -131,7 +124,6 @@ const gotoPreviousPage = () =>
             key="page_divider_left"
             :disabled="true"
             :active="false"
-            :outline="darkMode"
             label="..."
             small
           />
@@ -142,7 +134,6 @@ const gotoPreviousPage = () =>
           :active="page === currentPage"
           :disabled="page === currentPage"
           :label="page + 1"
-          :outline="darkMode"
           small
           @click.prevent="goToPageNumber(page)"
         />
@@ -151,7 +142,6 @@ const gotoPreviousPage = () =>
             key="page_divider_right"
             :disabled="true"
             :active="false"
-            :outline="darkMode"
             label="..."
             small
           />
@@ -160,7 +150,6 @@ const gotoPreviousPage = () =>
             :disabled="isInLastPage"
             :active="isInLastPage"
             :label="totalPages"
-            :outline="darkMode"
             small
             @click.prevent="gotoLastPage"
           />
@@ -168,7 +157,6 @@ const gotoPreviousPage = () =>
         <JbButton
           key="page_next"
           :disabled="isInLastPage"
-          :outline="darkMode"
           label="&rsaquo;"
           small
           @click.prevent="gotoNextPage"
@@ -176,7 +164,6 @@ const gotoPreviousPage = () =>
         <JbButton
           key="page_last"
           :disabled="isInLastPage"
-          :outline="darkMode"
           label="&raquo;"
           small
           @click.prevent="gotoLastPage"

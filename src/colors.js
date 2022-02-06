@@ -52,6 +52,10 @@ export const colorsOutlineHover = {
   info: 'hover:bg-blue-500 hover:text-white'
 }
 
+export const buttonClasses = {
+  standard: 'text-black bg-transparent dark:text-gray-100 dark:bg-white'
+}
+
 export const getButtonColor = (color, isOutlined, hasHover) => {
   const base = [
     isOutlined ? colorsText[color] : colorsBg[color],

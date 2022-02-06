@@ -1,14 +1,4 @@
 <script setup>
-import { ref } from 'vue'
-import MainSection from '@/components/MainSection.vue'
-import Notification from '@/components/UI/Notification.vue'
-import ClientsTable from '@/components/UnusedReference/ClientsTable.vue'
-import CardComponent from '@/components/Cards/CardComponent.vue'
-import TitleBar from '@/components/Panels/TitleBar.vue'
-import HeroBar from '@/components/Panels/HeroBar.vue'
-import BottomOtherPagesSection from '@/components/UnusedReference/BottomOtherPagesSection.vue'
-import TitleSubBar from '@/components/Panels/TitleSubBar.vue'
-
 const titleStack = ref(['Admin', 'Tables'])
 </script>
 
@@ -50,3 +40,10 @@ const titleStack = ref(['Admin', 'Tables'])
 
   <BottomOtherPagesSection />
 </template>
+
+<route lang="yaml">
+meta:
+  layout: 'default'
+  title: 'Tables'
+  icon: 'mdi:desktop-mac'
+</route>

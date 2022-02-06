@@ -1,5 +1,4 @@
 <script setup>
-import { useStore } from 'vuex'
 import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
 
 const props = defineProps({
@@ -29,10 +28,6 @@ const dismiss = () => {
 const slots = useSlots()
 
 const hasRightSlot = computed(() => slots.right)
-
-const store = useStore()
-
-const darkMode = computed(() => store.state.darkMode)
 </script>
 
 <template>
@@ -50,9 +45,7 @@ const darkMode = computed(() => store.state.darkMode)
       <JbButton
         v-else
         icon="mdi:close"
-        :outline="
-          outline || (darkMode && ['white', 'light'].indexOf(color) < 0)
-        "
+        :outline="outline || ['white', 'light'].indexOf(color) < 0"
         small
         @click="dismiss"
       />
