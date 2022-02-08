@@ -83,7 +83,9 @@ import { setupLayouts } from 'virtual:generated-layouts'
 const routes2 = setupLayouts(generatedRoutes)
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(
+    process.env.DEPLOY_ENV === 'GH_PAGES' ? '/pihole-admin-pro/' : '/'
+  ),
   routes: routes2,
   scrollBehavior(to, from, savedPosition) {
     return savedPosition || { top: 0 }
