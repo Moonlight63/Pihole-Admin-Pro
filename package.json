@@ -5,6 +5,7 @@
   "scripts": {
     "lint": "vue-cli-service lint",
     "build": "vite build",
+    "build:dev": "vite build -m development",
     "build:vue": "vue-cli-service build",
     "dev": "vite --host",
     "lint:fix": "vue-cli-service lint --fix",
