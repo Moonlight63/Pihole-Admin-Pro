@@ -10,6 +10,7 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import ViteCompression from 'vite-plugin-compression'
 import Inspect from 'vite-plugin-inspect'
+import Replace from '@rollup/plugin-replace'
 import { minifyHtml } from 'vite-plugin-html'
 
 // https://vitejs.dev/config/
@@ -21,6 +22,11 @@ export default defineConfig({
     }
   },
   plugins: [
+    Replace({
+      __ROUTER_BASE_PATH__:
+        process.env.DEPLOY_ENV === 'GH_PAGES' ? '/pihole-admin-pro/' : '/',
+      __buildDate__: () => JSON.stringify(new Date())
+    }),
     Vue({
       reactivityTransform: true
     }),

@@ -83,9 +83,8 @@ import { setupLayouts } from 'virtual:generated-layouts'
 const routes2 = setupLayouts(generatedRoutes)
 
 const router = createRouter({
-  history: createWebHistory(
-    process.env.DEPLOY_ENV === 'GH_PAGES' ? '/pihole-admin-pro/' : '/'
-  ),
+  // __ROUTER_BASE_PATH__ gets replaced by rollup on build!
+  history: createWebHistory('__ROUTER_BASE_PATH__'),
   routes: routes2,
   scrollBehavior(to, from, savedPosition) {
     return savedPosition || { top: 0 }

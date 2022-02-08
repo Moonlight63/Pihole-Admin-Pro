@@ -32,8 +32,10 @@ export const useClients = defineStore('clients', {
   actions: {
     fetchClients() {
       this.$state.loadingClients = true
+      // We put this on a different line so that rollup can replace the string at build
+      const basepath = '__ROUTER_BASE_PATH__'
       axios
-        .get(`data-sources/clients.json`)
+        .get(basepath + 'data-sources/clients.json')
         .then((r) => {
           if (r.data && r.data.data) {
             this.$state.clients = r.data.data
@@ -47,8 +49,10 @@ export const useClients = defineStore('clients', {
     },
 
     fetchHistory() {
+      // We put this on a different line so that rollup can replace the string at build
+      const basepath = '__ROUTER_BASE_PATH__'
       axios
-        .get(`data-sources/history.json`)
+        .get(basepath + 'data-sources/history.json')
         .then((r) => {
           if (r.data && r.data.data) {
             this.$state.history = r.data.data
