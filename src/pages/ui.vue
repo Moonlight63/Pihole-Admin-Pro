@@ -61,7 +61,7 @@ const buttonsDisabled = computed(
 
   <MainSection>
     <CardComponent class="shadow-2xl md:w-7/12 lg:w-5/12 xl:w-4/12 md:mx-auto">
-      <div class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400">
+      <div class="py-24 text-center text-on-main-muted lg:py-12">
         <JbButton
           label="Toggle"
           outline
@@ -129,7 +129,7 @@ const buttonsDisabled = computed(
   </MainSection>
 
   <TitledSection custom>
-    <h1 class="text-2xl text-gray-500 dark:text-gray-400">Notifications</h1>
+    <h1 class="text-2xl text-on-main-muted">Notifications</h1>
     <div class="flex items-center justify-center mt-6">
       <CheckRadioPicker
         v-model="notificationSettingsModel"
@@ -397,9 +397,7 @@ const buttonsDisabled = computed(
   <MainSection>
     <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
       <CardComponent title="With Title" mb="">
-        <div
-          class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400"
-        >
+        <div class="py-24 text-center text-on-main-muted lg:py-12">
           With title
         </div>
       </CardComponent>
@@ -410,9 +408,7 @@ const buttonsDisabled = computed(
         headerIcon="mdi:close"
         mb=""
       >
-        <div
-          class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400"
-        >
+        <div class="py-24 text-center text-on-main-muted lg:py-12">
           With title & icons
         </div>
       </CardComponent>

@@ -71,9 +71,9 @@ const pillText = computed(() => props.text ?? `${props.progress}%`)
         <div class="text-center md:text-left">
           <h4 class="text-xl">
             {{ name }}
-            <span class="text-gray-500 dark:text-gray-400">@{{ login }}</span>
+            <span class="text-on-main-muted">@{{ login }}</span>
           </h4>
-          <p class="text-gray-500 dark:text-gray-400">
+          <p class="text-on-main-muted">
             {{ date }}
           </p>
         </div>

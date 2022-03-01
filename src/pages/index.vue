@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useApi } from '@/stores/api'
-import { useClients } from '@/stores/clients'
+// import { useClients } from '@/stores/clients'
 import * as chartConfig from '@/components/Charts/chart.config.js'
 
 // const titleStack = ref(['Admin', 'Dashboard'])
@@ -17,8 +17,10 @@ const fillChartData = () => {
   chartData4.value = chartConfig.sampleChartData(4, 1)
 }
 
+const csstest = computed(() => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-primary'))
+
 const storeApi = useApi()
-const storeClients = useClients()
+// const storeClients = useClients()
 
 const dataRaw = computed(() => storeApi.currentSummary)
 
@@ -30,9 +32,9 @@ const quaryData = computed(() => ({
   domains_blocked: dataRaw.value.queries?.unique_domains || 0
 }))
 
-const clientBarItems = computed(() => storeClients.clients.slice(0, 3))
+// const clientBarItems = computed(() => storeClients.clients.slice(0, 3))
 
-const transactionBarItems = computed(() => storeClients.history.slice(0, 3))
+// const transactionBarItems = computed(() => storeClients.history.slice(0, 3))
 
 onMounted(() => {
   fillChartData()
@@ -54,37 +56,41 @@ onMounted(() => {
     </CardComponent> -->
       <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-4">
         <CardMetric
-          color="text-emerald-400"
+          class="text-on-success"
+          color="text-white text-opacity-25"
           icon="ion:earth"
           :number="quaryData.total"
           :label="`Total Queries (${quaryData.clients} Clients)`"
-          bgColor="bg-emerald-500"
+          bgColor="bg-success"
         />
         <CardMetric
-          color="text-blue-300 dark:text-blue-400"
+          class="text-on-primary"
+          color="text-white text-opacity-25"
           icon="ion:hand-right"
           :number="quaryData.blocked"
           label="Queries Blocked"
-          bgColor="bg-blue-400 dark:bg-blue-500"
+          bgColor="bg-primary"
         />
         <CardMetric
-          color="text-orange-200 dark:text-orange-300"
+          class="text-on-warning"
+          color="text-white text-opacity-25"
           icon="ion:pie-chart"
           :number="quaryData.blocked_percent"
           suffix="%"
-          bgColor="bg-orange-300 dark:bg-orange-400"
+          bgColor="bg-warning"
           label="Percentage Blocked"
         />
         <CardMetric
-          color="text-red-300 dark:text-red-400"
+          class="text-on-error"
+          color="text-white text-opacity-25"
           icon="ion:ios-list-box"
           :number="quaryData.domains_blocked"
           label="Blocked Domains"
-          bgColor="bg-red-400 dark:bg-red-500"
+          bgColor="bg-error"
         />
       </div>
 
-      <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
+      <!-- <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
         <CardWidget
           trend="12%"
           trendType="up"
@@ -136,41 +142,19 @@ onMounted(() => {
             :progress="client.progress"
           />
         </div>
-      </div>
+      </div> -->
 
       <!-- <title-sub-bar
       :icon="mdiChartPie"
       title="Total Queries Over Last 24 Hours"
     /> -->
 
-      <CardComponent
-        title="Total Queries Over Last 24 Hours"
-        icon="mdi:finance"
-        headerIcon="mdi:reload"
-        class="mb-6"
-        @headerIconClick="fillChartData"
-      >
-        <div v-if="chartData">
-          <BarChart :data="chartData" class="h-96" />
-        </div>
-      </CardComponent>
+      <CardQueryHistoryChart />
 
       <!-- <title-sub-bar
       :icon="mdiChartPie"
       title="Client Activity Over Last 24 Hours"
     /> -->
-
-      <CardComponent
-        title="Client activity over last 24 hours"
-        icon="mdi:finance"
-        headerIcon="mdi:reload"
-        class="mb-6"
-        @headerIconClick="fillChartData"
-      >
-        <div v-if="chartData2">
-          <BarChart :data="chartData2" class="h-96" />
-        </div>
-      </CardComponent>
 
       <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
         <CardComponent

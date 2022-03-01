@@ -119,11 +119,9 @@ const checked = (isChecked, client) => {
           </progress>
         </td>
         <td data-label="Created">
-          <small
-            class="text-gray-500 dark:text-gray-400"
-            :title="client.created"
-            >{{ client.created }}</small
-          >
+          <small class="text-on-main-muted" :title="client.created">{{
+            client.created
+          }}</small>
         </td>
         <td class="actions-cell">
           <JbButtons type="justify-start lg:justify-end" noWrap>

@@ -14,13 +14,13 @@ const store = useGlobal()
 <template>
   <aside
     id="aside"
-    class="absolute top-0 z-40 h-screen bg-menu w-60 transition-position xl:left-0 dark:border-r dark:border-gray-800"
+    class="absolute top-0 z-40 h-screen border-r-menu bg-menu w-60 transition-position xl:left-0"
     :class="store.isMenuActive ? 'left-0' : '-left-60'"
   >
-    <div class="flex flex-row items-center flex-1 w-full text-menu h-14">
+    <div class="flex flex-row items-center flex-1 w-full text-on-menu h-14">
       <NavBarItem
         type="hidden lg:flex xl:hidden"
-        activeColor="text-menu"
+        activeColor="text-on-menu"
         active
         @click="store.toggleMenu(false)"
       >
@@ -35,7 +35,7 @@ const store = useGlobal()
         <p
           v-if="typeof menuGroup === 'string'"
           :key="`a-${index}`"
-          class="p-3 text-xs uppercase text-menu-accent"
+          class="p-3 text-xs uppercase text-on-menu-muted"
         >
           {{ menuGroup }}
         </p>

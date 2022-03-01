@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 module.exports = {
   content: ['./public/index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  darkMode: 'class', // or 'media' or 'class'
+  // darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
       zIndex: {
@@ -38,6 +39,8 @@ module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
     // require('@tailwindcss/aspect-ratio'),
-    require('./src/themes/themes')
+    // require('./theme.config.ts').plugin
+    require('./theming').plugin
+    // require('./src/themes/themes')
   ]
 }

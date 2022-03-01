@@ -125,11 +125,9 @@ const doStuff = () => {
           {{ client.phone }}
         </td>
         <td data-label="Website">
-          <small
-            class="text-gray-500 dark:text-gray-400"
-            :title="client.website"
-            >{{ client.website }}</small
-          >
+          <small class="text-on-main-muted" :title="client.website">{{
+            client.website
+          }}</small>
         </td>
         <td class="actions-cell">
           <JbButtons type="justify-start lg:justify-end" noWrap>

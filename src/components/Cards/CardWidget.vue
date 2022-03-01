@@ -43,7 +43,7 @@ defineProps({
     </Level>
     <Level mobile>
       <div>
-        <h3 class="text-lg leading-tight text-gray-500 dark:text-gray-400">
+        <h3 class="text-lg leading-tight text-on-main-muted">
           {{ label }}
         </h3>
         <h1 class="text-3xl font-semibold leading-tight">

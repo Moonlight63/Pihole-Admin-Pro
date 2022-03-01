@@ -14,7 +14,7 @@ defineProps({
         <li
           v-for="(title, index) in titleStack"
           :key="index"
-          class="inline-block pr-3 text-2xl text-gray-500 title-stack-item dark:text-gray-400 last:pr-0 last:font-black last:text-black dark:text-gray-100"
+          class="inline-block pr-3 text-2xl title-stack-item text-on-main-muted last:pr-0 last:font-black last:text-on-main"
         >
           {{ title }}
         </li>

@@ -4,7 +4,7 @@ import { useGlobal } from '@/stores/global'
 
 <template>
   <section
-    class="p-6 border-t border-b border-gray-100 bg-panel dark:border-gray-900 dark:text-white"
+    class="p-6 border-t-card border-b-card bg-card"
   >
     <Level>
       <h1 class="text-3xl font-semibold leading-tight">

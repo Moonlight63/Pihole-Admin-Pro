@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const plugin = require('tailwindcss/plugin')
 const Theme = require('./theme-default')
 
@@ -114,8 +115,10 @@ function createClasses(theme, root, parent, property) {
   return classes
 }
 
-module.exports = plugin(function ({ addUtilities, theme }) {
+module.exports = plugin(function ({ addUtilities, addComponents, theme }) {
   // Add your custom styles here
+
+  // console.log('🚀 ~ file: themes.js ~ line 118 ~ theme', theme('colors'))
 
   const classes = buildObj(Theme(theme('colors')))
   const themeVars = buildThemeVars(Theme(theme('colors')), 'theme-default')
@@ -127,4 +130,10 @@ module.exports = plugin(function ({ addUtilities, theme }) {
 
   const newStuff = createClasses(newObj)
   addUtilities({ ...newStuff, ...themeVars })
+
+  // addComponents({
+  //   '.test-component': {
+  //     '@apply bg-pink-500': {}
+  //   }
+  // })
 })

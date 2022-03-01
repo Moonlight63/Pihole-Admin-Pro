@@ -38,6 +38,7 @@ clientsStore.getusers()
 
 const localStorageApiAddressValue = localStorage.getItem(apiAddressKey)
 if (localStorageApiAddressValue !== null) {
+  serverStore.apiAddress = localStorageApiAddressValue
   serverStore.connect(localStorageApiAddressValue)
 }
 

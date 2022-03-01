@@ -24,7 +24,7 @@ for (const routeIndex in routes) {
 <template>
   <TitledSection last>
     <h1
-      class="flex flex-col items-center justify-center mb-12 text-2xl text-gray-500 md:flex-row dark:text-gray-400"
+      class="flex flex-col items-center justify-center mb-12 text-2xl md:flex-row text-on-main-muted"
     >
       <span class="md:mr-3">Please star this project on</span>
       <a
@@ -36,7 +36,7 @@ for (const routeIndex in routes) {
         <span>GitHub</span>
       </a>
     </h1>
-    <h1 class="mb-12 text-2xl text-gray-500 dark:text-gray-400">
+    <h1 class="mb-12 text-2xl text-on-main-muted">
       Check out other components and layouts at<br />
       <template v-for="(screen, index) in screens" :key="screen.path">
         <RouterLink :to="screen.path" class="text-blue-500">
@@ -47,7 +47,7 @@ for (const routeIndex in routes) {
       <br />
       screen samples
     </h1>
-    <h1 class="text-2xl text-gray-500 dark:text-gray-400">
+    <h1 class="text-2xl text-on-main-muted">
       Get more with
       <a
         href="https://justboil.me/tailwind-admin-templates/vue-dashboard/"

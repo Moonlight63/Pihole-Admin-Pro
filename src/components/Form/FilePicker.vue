@@ -95,7 +95,7 @@ const upload = (event) => {
     </label>
     <div v-if="file">
       <span
-        class="inline-flex justify-center px-4 py-2 bg-gray-100 border border-gray-200 rounded-r"
+        class="inline-flex justify-center px-4 py-2 bg-gray-100 border border-gray-200 rounded-r-form"
         >{{ file.name }}</span
       >
     </div>

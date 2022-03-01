@@ -93,8 +93,8 @@ const componentClass = computed(() => {
     'transition-colors',
     'focus:ring',
     'duration-150',
-    'border',
-    'rounded',
+    'border-button',
+    'rounded-button',
     props.active ? 'ring ring-black dark:ring-white' : 'ring-blue-700',
     props.small ? 'p-1' : 'p-2',
     getButtonColor(props.color, isOutlined.value, !props.disabled)

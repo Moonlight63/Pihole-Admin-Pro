@@ -28,7 +28,7 @@ const menuNavBarToggle = () => {
 
 <template>
   <nav
-    class="absolute top-0 left-0 right-0 z-30 flex w-screen border-b border-gray-100 bg-panel h-14 transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:border-gray-800"
+    class="absolute top-0 left-0 right-0 z-30 flex w-screen border-b-menu bg-menu h-14 transition-position xl:pl-60 lg:w-auto lg:items-stretch"
   >
     <div class="flex items-stretch flex-1 h-14">
       <NavBarItem
@@ -46,7 +46,7 @@ const menuNavBarToggle = () => {
       </NavBarItem>
     </div>
     <div
-      class="absolute left-0 w-screen shadow bg-panel top-14 lg:w-auto lg:items-stretch lg:flex lg:grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none"
+      class="absolute left-0 w-screen shadow bg-menu top-14 lg:w-auto lg:items-stretch lg:flex lg:grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none"
       :class="[isMenuNavBarActive ? 'block' : 'hidden']"
     >
       <div
