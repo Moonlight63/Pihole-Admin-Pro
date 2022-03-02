@@ -1,6 +1,6 @@
 const themeSwapper = require('tailwindcss-theme-swapper')
-    , glob = require('glob')
-    , path = require('path')
+    // , glob = require('glob')
+    // , path = require('path')
 
 // Object.defineProperty(exports, "__esModule", { value: true })
 // exports.Theme = void 0
@@ -25,21 +25,22 @@ const swapt = () => {
     // });
 
     
-    
+    const names = []
     require('./themes/index').forEach(file => {
         console.log(file);
         themes.push(file.theme)
+        names.push(file.theme.name)
     })
-    console.log(JSON.stringify(themes));
+    // console.log(JSON.stringify(themes, null, 2));
 
     const thing = themeSwapper({
         themes: themes
     })
-    // console.log(
-    //     '🚀 ~ file: theme.config.js ~ line 54 ~ swapt ~ thing',
-    //     JSON.stringify(thing, null, 2)
-    // )
-
+    console.log(
+        '🚀 ~ file: theme.config.js ~ line 54 ~ swapt ~ thing',
+        JSON.stringify(thing, null, 2)
+    )
+    thing.config.safelist = names
     return thing
 }
 

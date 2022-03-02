@@ -59,7 +59,7 @@ const componentClass = computed(() => {
   }
 
   if (props.hasDivider) {
-    base.push('lg:border-r-menu')
+    base.push('lg:border-r-menu-divider')
   }
 
   if (props.isDesktopIconOnly) {

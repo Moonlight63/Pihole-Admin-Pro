@@ -4,9 +4,9 @@ class Theme {
     constructor(options) {
         // let temp = options
         if (options.name == "base") {
-            options.selectors = ['html']
+            options.selectors = [':root']
         } else {
-            options.selectors = ['html.'+options.name]
+            options.selectors = [':root.'+options.name]
         }
 
         this.theme = options

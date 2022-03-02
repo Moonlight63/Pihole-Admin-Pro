@@ -1,19 +1,19 @@
 progress {
-  @apply h-3 rounded-full overflow-hidden;
+  @apply h-3 overflow-hidden rounded-full bg-main;
 }
 
 progress::-webkit-progress-bar {
-  @apply bg-gray-200;
+  @apply bg-main;
 }
 
 progress::-webkit-progress-value {
-  @apply bg-emerald-500;
+  @apply bg-success;
 }
 
 progress::-moz-progress-bar {
-  @apply bg-emerald-500;
+  @apply bg-success;
 }
 
 progress::-ms-fill {
-  @apply bg-emerald-500 border-0;
+  @apply border-0 bg-success;
 }
