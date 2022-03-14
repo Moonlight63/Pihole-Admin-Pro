@@ -5,7 +5,7 @@ name: Build
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [ develop ]
 
     # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -22,6 +22,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: develop
       - name: Install pnpm # Use pnpm because it has less trouble with peer dependancies, and some of the vue typescript plugins have inconsistant deps.
         uses: pnpm/action-setup@v2.0.1
         with:
