@@ -1,4 +1,11 @@
-<script setup></script>
+<script setup>import { useApi } from '@/stores/api';
+
+
+const apiStore = useApi()
+
+const version = computed(() => apiStore.version)
+
+</script>
 
 <template>
   <footer class="px-6 py-2 bg-card">
@@ -7,13 +14,13 @@
         <b><a href="#" target="_blank">Donate</a></b>
         if you found this useful.
       </div>
-      <div class="md:py-2">
+      <div v-if="version.core" class="md:py-2">
         <b>Pi-hole </b>
-        <a href="#">v5.7</a>
+        <a href="#">{{ version.core.tag }}</a>
         <b> | FTL </b>
-        <a href="#">v5.12.1</a>
+        <a href="#">{{ version.ftl.tag }}</a>
         <b> | Web Interface </b>
-        <a href="#">v5.9</a>
+        <a href="#">{{ version.web.tag }}</a>
       </div>
     </Level>
   </footer>

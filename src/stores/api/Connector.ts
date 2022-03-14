@@ -37,6 +37,7 @@ export default class Connector {
   static async disconnect() {
     try {
       Connector.getInstance().stopLoop()
+      Connector.getInstance().apiStore.$reset()
       Connector.instance = null
     } catch (e) {
       if (e instanceof Error) throw e
@@ -85,7 +86,7 @@ export default class Connector {
 
           this.stopLoop()
         }
-      }, 1000)
+      }, 10000)
     }
   }
 

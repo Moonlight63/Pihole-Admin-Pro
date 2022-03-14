@@ -13,21 +13,24 @@ html::-webkit-scrollbar-thumb, #aside::-webkit-scrollbar-thumb {
 
 html {
   @apply overflow-auto;
-  scrollbar-color: #9ca3af #e5e7eb;
+  scrollbar-color: var(--background-color-main) var(--background-color-card);
 }
 
 html::-webkit-scrollbar-track {
-  @apply bg-gray-200;
+  /* @apply bg-gray-200; */
+  background-color: var(--background-color-card);
 }
 
 html::-webkit-scrollbar-thumb {
-  @apply bg-gray-400;
+  background-color: var(--background-color-main);
+  /* @apply bg-gray-400; */
 }
 
 html::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-500;
+  background-color: var(--background-color-main);
+  /* @apply bg-gray-500; */
 }
-
+/* 
 html.dark {
   scrollbar-color: #374151 #111827;
 }
@@ -42,11 +45,11 @@ html.dark::-webkit-scrollbar-thumb {
 
 html.dark::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-600;
-}
+} */
 
-#aside {
+/* #aside {
   @apply overflow-auto;
-  /*overflow: overlay;*/
+  overflow: overlay;
   scrollbar-color: #4b5563 #111827;
 }
 
@@ -56,9 +59,9 @@ html.dark::-webkit-scrollbar-thumb:hover {
 
 #aside::-webkit-scrollbar-thumb {
   @apply bg-gray-600;
-}
+} */
 
-.dark #aside {
+/* .dark #aside {
   scrollbar-color: #374151 #111827;
 }
 
@@ -68,4 +71,4 @@ html.dark::-webkit-scrollbar-thumb:hover {
 
 .dark #aside::-webkit-scrollbar-thumb {
   @apply bg-gray-700;
-}
+} */

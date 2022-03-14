@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { darkModeKey } from '@/config.js'
+import { themeKey } from '@/config.js'
 
 export const useGlobal = defineStore('main', {
   state: () => {
@@ -9,11 +9,7 @@ export const useGlobal = defineStore('main', {
 
       lockWidth: false,
 
-      /* Dark mode */
-      darkMode:
-        localStorage.getItem(darkModeKey) !== null
-          ? localStorage.getItem(darkModeKey) === '1'
-          : !!window.matchMedia('(prefers-color-scheme: dark)').matches,
+      theme: 'base',
 
       /* Field focus with ctrl+k (to register only once) */
       isFieldFocusRegistered: false
@@ -29,11 +25,19 @@ export const useGlobal = defineStore('main', {
       this.$state.menuActive = value !== undefined ? value : !this.menuActive
     },
 
-    toggleDarkMode(value?: boolean) {
-      const v = value !== undefined ? value : !this.darkMode
-      document.documentElement.classList[v ? 'add' : 'remove']('dark')
-      localStorage.setItem(darkModeKey, v ? '1' : '0')
-      this.$state.darkMode = v
+    // toggleDarkMode(value?: boolean) {
+    //   const v = value !== undefined ? value : !this.darkMode
+    //   document.documentElement.classList[v ? 'add' : 'remove']('dark')
+    //   localStorage.setItem(darkModeKey, v ? '1' : '0')
+    //   this.$state.darkMode = v
+    // },
+
+    changeTheme(value?: string) {
+      const v = value !== undefined ? value : 'base'
+      document.documentElement.classList.remove(this.$state.theme)
+      document.documentElement.classList.add(v)
+      localStorage.setItem(themeKey, v)
+      this.$state.theme = v
     }
   }
 })

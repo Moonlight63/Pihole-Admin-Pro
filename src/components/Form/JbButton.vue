@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { getButtonColor } from '@/colors.js'
 import Icon from '@/components/UI/Icon.vue'
-import { useGlobal } from '@/stores/global'
+// import { useGlobal } from '@/stores/global'
 
 const props = defineProps({
   label: {
@@ -43,7 +43,10 @@ const props = defineProps({
   },
   small: Boolean,
   active: Boolean,
-  disabled: Boolean
+  disabled: {
+    type: Boolean,
+    default: false
+  }
 })
 
 const is = computed(() => {
@@ -70,40 +73,49 @@ const computedType = computed(() => {
   return null
 })
 
-const isDarkMode = computed(() => useGlobal().darkMode)
+// const isDarkMode = computed(() => useGlobal().darkMode)
 
 const isOutlined = computed(() =>
   props.outline !== null
     ? props.outline
-    : props.color === 'white'
-    ? isDarkMode.value
+    // : props.color === 'white'
+    // ? isDarkMode.value
     : false
 )
 
 const labelClass = computed(() => (props.small && props.icon ? 'px-1' : 'px-2'))
 
 const componentClass = computed(() => {
+  // const base = [
+  //   'inline-flex',
+  //   'cursor-pointer',
+  //   'justify-center',
+  //   'items-center',
+  //   'whitespace-nowrap',
+  //   'focus:outline-none',
+  //   'transition-colors',
+  //   'focus:ring',
+  //   'duration-150',
+  //   'border-button',
+  //   'rounded-button',
+  //   props.active ? 'ring ring-black dark:ring-white' : 'ring-blue-700',
+  //   props.small ? 'p-1' : 'p-2',
+  //   getButtonColor(props.color, isOutlined.value, !props.disabled)
+  // ]
   const base = [
-    'inline-flex',
-    'cursor-pointer',
-    'justify-center',
-    'items-center',
-    'whitespace-nowrap',
-    'focus:outline-none',
-    'transition-colors',
-    'focus:ring',
-    'duration-150',
-    'border-button',
-    'rounded-button',
-    props.active ? 'ring ring-black dark:ring-white' : 'ring-blue-700',
-    props.small ? 'p-1' : 'p-2',
-    getButtonColor(props.color, isOutlined.value, !props.disabled)
+    'button',
+    // props.active ? 'ring ring-black dark:ring-white' : 'ring-blue-700',
+    // props.small ? 'p-1' : 'p-2',
+    // getButtonColor(props.color, isOutlined.value, !props.disabled)
+    'button-'+props.color,
+    isOutlined.value ? 'button-outline' : '',
+    props.small ? 'button-sm' : ''
   ]
 
   if (props.disabled) {
     base.push(
       'cursor-not-allowed',
-      isDarkMode.value ? 'opacity-50' : 'opacity-70'
+      'opacity-50'
     )
   }
 
@@ -115,11 +127,11 @@ const componentClass = computed(() => {
   <Component
     :is="is"
     :class="componentClass"
-    :href="href"
+    :href="props.href"
     :type="computedType"
-    :to="to"
-    :target="target"
-    :disabled="disabled"
+    :to="props.to"
+    :target="props.target"
+    :disabled="props.disabled ? true : null"
   >
     <UiIconify v-if="icon" :icon="icon" />
     <span v-if="label" :class="labelClass">{{ label }}</span>

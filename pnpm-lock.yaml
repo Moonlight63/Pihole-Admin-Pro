@@ -48,6 +48,7 @@ specifiers:
   pnpm: ^6.26.1
   postcss: ^8.3.0
   postcss-import: ^14.0.2
+  postcss-nested: ^5.0.6
   prettier: ^2.5.1
   tailwindcss: ^3.0.2
   tailwindcss-theme-swapper: ^0.4.1
@@ -120,6 +121,7 @@ devDependencies:
   pnpm: 6.31.0
   postcss: 8.4.6
   postcss-import: 14.0.2_postcss@8.4.6
+  postcss-nested: 5.0.6_postcss@8.4.6
   prettier: 2.5.1
   tailwindcss: 3.0.23_autoprefixer@10.4.2
   tailwindcss-theme-swapper: 0.4.1_autoprefixer@10.4.2

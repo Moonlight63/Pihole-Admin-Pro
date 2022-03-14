@@ -29,7 +29,7 @@ const quaryData = computed(() => ({
   total: dataRaw.value.queries?.total || 0,
   blocked: dataRaw.value.queries?.blocked || 0,
   blocked_percent: dataRaw.value.queries?.percent_blocked || 0,
-  domains_blocked: dataRaw.value.queries?.unique_domains || 0
+  domains_blocked: dataRaw.value.ftl?.database?.gravity || 0
 }))
 
 // const clientBarItems = computed(() => storeClients.clients.slice(0, 3))
@@ -81,12 +81,12 @@ onMounted(() => {
           label="Percentage Blocked"
         />
         <CardMetric
-          class="text-on-error"
+          class="text-on-danger"
           color="text-white text-opacity-25"
           icon="ion:ios-list-box"
           :number="quaryData.domains_blocked"
           label="Blocked Domains"
-          bgColor="bg-error"
+          bgColor="bg-danger"
         />
       </div>
 

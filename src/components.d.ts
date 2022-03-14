@@ -43,6 +43,7 @@ declare module 'vue' {
     NavBarMenu: typeof import('./components/NavBar/NavBarMenu.vue')['default']
     NavBarMenuDivider: typeof import('./components/NavBar/NavBarMenuDivider.vue')['default']
     NavBarSearch: typeof import('./components/NavBar/NavBarSearch.vue')['default']
+    NavBarThemeSwitch: typeof import('./components/NavBar/NavBarThemeSwitch.vue')['default']
     Notification: typeof import('./components/UI/Notification.vue')['default']
     Overlay: typeof import('./components/UI/Overlay.vue')['default']
     Pagination: typeof import('./components/Tables/Datatables/Components/Pagination/Pagination.vue')['default']

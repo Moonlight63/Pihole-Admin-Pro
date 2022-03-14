@@ -1,15 +1,5 @@
 <script setup>
-// import { ref, watch, computed, onMounted } from 'vue'
-// import {
-//   Chart,
-//   LineElement,
-//   PointElement,
-//   LineController,
-//   LinearScale,
-//   CategoryScale,
-//   Tooltip
-// } from 'chart.js'
-
+import { useGlobal } from '@/stores/global';
 import Chart from 'chart.js/auto'
 import 'chartjs-adapter-date-fns'
 
@@ -17,8 +7,14 @@ const props = defineProps({
   data: {
     type: Object,
     required: true
+  },
+  animate: {
+    type: Boolean,
+    default: true
   }
 })
+
+const theme = computed(() => useGlobal().theme)
 
 const root = ref(null)
 
@@ -28,15 +24,18 @@ function padNumber(num) {
   return ('00' + num).substr(-2, 2)
 }
 
-const csstest = computed(() => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-primary'))
-
-// Chart.register(LineElement, PointElement, LineController, LinearScale, CategoryScale, Tooltip)
+const getCssText = () => getComputedStyle(document.documentElement,null).getPropertyValue('--text-color-on-main')
+const getCssLines = () => getComputedStyle(document.documentElement,null).getPropertyValue('--border-color-divider')
 
 onMounted(() => {
+  const cssText = getCssText()
+  const cssLines = getCssLines()
   chart = new Chart(root.value, {
     type: 'bar',
     data: props.data,
     options: {
+      // animation: shouldAnimate.value,
+      animation: false,
       interaction: {
         mode: 'x'
       },
@@ -49,10 +48,6 @@ onMounted(() => {
           },
           callbacks: {
             title: function (tooltipItem) {
-              console.log(
-                '🚀 ~ file: QueriesChart.vue ~ line 46 ~ onMounted ~ tooltipItem',
-                tooltipItem
-              )
               const label = tooltipItem[0].label
               const time = label.match(/(\d?\d):?(\d?\d?)/)
               const h = parseInt(time[1], 10)
@@ -62,15 +57,6 @@ onMounted(() => {
               return 'Queries from ' + from + ' to ' + to
             },
             label: (tooltipItems) => {
-              console.log(
-                '🚀 ~ file: QueriesChart.vue ~ line 77 ~ onMounted ~ tooltipItems.datasetIndex',
-                tooltipItems
-              )
-              console.log(
-                '🚀 ~ file: QueriesChart.vue ~ line 54 ~ onMounted ~ tooltipItems',
-                tooltipItems.chart.data.datasets
-              )
-
               let percentage = 0
               const current = parseInt(tooltipItems.parsed.y, 10)
               const blocked = parseInt(tooltipItems.parsed._stacks.y[0], 10)
@@ -110,21 +96,25 @@ onMounted(() => {
             },
             tooltipFormat: 'HH:mm'
           },
-          gridLines: {
-            color: '#ccc'
+          grid: {
+            color: cssLines,
+            // tickColor: cssText,
+            borderWidth: 0
           },
           ticks: {
-            fontColor: '#ddd'
+            color: cssText
           }
         },
         y: {
           stacked: true,
           ticks: {
             beginAtZero: true,
-            fontColor: '#ddd'
+            color: cssText
           },
-          gridLines: {
-            color: '#ccc'
+          grid: {
+            color: cssLines,
+            // tickColor: cssText,
+            borderWidth: 0
           }
         }
       }
@@ -133,6 +123,7 @@ onMounted(() => {
 })
 
 const chartData = computed(() => props.data)
+// const shouldAnimate = computed(() => props.animate)
 
 watch(chartData, (data) => {
   if (chart) {
@@ -140,6 +131,25 @@ watch(chartData, (data) => {
     chart.update()
   }
 })
+
+watch(theme, (theme) => {
+  if (chart) {
+    const cssText = getCssText()
+    const cssLines = getCssLines()
+    chart.options.scales.x.grid.color = cssLines
+    chart.options.scales.x.ticks.color = cssText
+    chart.options.scales.y.grid.color = cssLines
+    chart.options.scales.y.ticks.color = cssText
+    chart.update()
+  }
+})
+
+// watch(shouldAnimate, (data) => {
+//   if (chart) {
+//     chart.options.animate = data.value
+//     chart.update()
+//   }
+// })
 </script>
 
 <template>

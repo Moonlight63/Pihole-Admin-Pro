@@ -1,0 +1,60 @@
+.button {
+  @apply inline-flex flex-wrap items-center justify-center flex-shrink-0 text-center transition duration-200 ease-in-out cursor-pointer select-none rounded-button;
+  @apply px-4 py-4 text-sm;
+  line-height: 1em;
+
+  /* disabled */
+  &-disabled,
+  &[disabled] {
+    @apply pointer-events-none;
+  }
+
+  /* shapes */
+  /* &-square {
+    @apply w-12 h-12 p-0;
+  }
+  &-circle {
+    @apply w-12 h-12 p-0 rounded-full;
+  } */
+
+  /* loading */
+  &.loading {
+    &,
+    &:hover {
+      @apply pointer-events-none;
+    }
+    &:before {
+      @apply w-3.5 h-3.5 mr-2 border-2 rounded-full;
+      animation: spin 2s linear infinite;
+      content: "";
+      border-top-color: transparent;
+      border-left-color: transparent;
+      border-bottom-color: currentColor;
+      border-right-color: currentColor;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .button.loading:before {
+    animation: spin 10s linear infinite;
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* group */
+.button-group {
+  @apply flex flex-wrap;
+  & > input[type="radio"].button {
+    @apply appearance-none;
+  }
+  & > input[type="radio"].button:before {
+    content: attr(data-title);
+  }
+}

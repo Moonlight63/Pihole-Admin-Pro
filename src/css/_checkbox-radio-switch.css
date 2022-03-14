@@ -1,5 +1,5 @@
 .checkbox, .radio, .switch {
-  @apply inline-flex items-center cursor-pointer relative;
+  @apply relative inline-flex items-center cursor-pointer;
 }
 
 .checkbox input[type=checkbox], .radio input[type=radio], .switch input[type=checkbox] {
@@ -7,12 +7,12 @@
 }
 
 .checkbox input[type=checkbox]+.check, .radio input[type=radio]+.check, .switch input[type=checkbox]+.check {
-  @apply border-gray-700 border transition-colors duration-200 dark:bg-gray-800;
+  @apply transition-colors duration-200 border-form;
 }
 
-.checkbox input[type=checkbox]:focus+.check, .radio input[type=radio]:focus+.check, .switch input[type=checkbox]:focus+.check {
+/* .checkbox input[type=checkbox]:focus+.check, .radio input[type=radio]:focus+.check, .switch input[type=checkbox]:focus+.check {
   @apply ring ring-blue-700;
-}
+} */
 
 .checkbox input[type=checkbox]+.check, .radio input[type=radio]+.check {
   @apply block w-5 h-5;
@@ -23,7 +23,7 @@
 }
 
 .switch input[type=checkbox]+.check {
-  @apply flex items-center shrink-0 w-12 h-6 p-0.5 bg-gray-200;
+  @apply flex items-center shrink-0 w-12 h-6 p-0.5 bg-form;
 }
 
 .radio input[type=radio]+.check, .switch input[type=checkbox]+.check, .switch input[type=checkbox]+.check:before {
@@ -31,7 +31,7 @@
 }
 
 .checkbox input[type=checkbox]:checked+.check, .radio input[type=radio]:checked+.check {
-  @apply bg-no-repeat bg-center bg-blue-500 border-blue-500 border-4;
+  @apply bg-center bg-no-repeat border-4 bg-primary border-primary;
 }
 
 .checkbox input[type=checkbox]:checked+.check {
@@ -43,17 +43,18 @@
 }
 
 .switch input[type=checkbox]:checked+.check {
-  @apply bg-blue-500 border-blue-500;
+  @apply bg-primary border-primary;
 }
 
 .switch input[type=checkbox]+.check:before {
   content: '';
-  @apply block w-5 h-5 bg-white border border-gray-700;
+  @apply block w-5 h-5 border border-form;
+  background-color: var(--text-color-on-main);
 }
 
 .switch input[type=checkbox]:checked+.check:before {
   transform: translate3d(110%, 0 ,0);
-  @apply border-blue-500;
+  @apply border-primary;
 }
 
 .checkbox .control-label, .radio .control-label, .switch .control-label {

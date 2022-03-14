@@ -29,7 +29,7 @@ for (const routeIndex in routes) {
       <span class="md:mr-3">Please star this project on</span>
       <a
         href="https://github.com/justboil/admin-one-vue-tailwind"
-        class="inline-flex items-center justify-center text-blue-500"
+        class="inline-flex items-center justify-center text-primary"
         target="_blank"
       >
         <UiIconify icon="mdi:github" class="mr-1 text-4xl" />
@@ -39,7 +39,7 @@ for (const routeIndex in routes) {
     <h1 class="mb-12 text-2xl text-on-main-muted">
       Check out other components and layouts at<br />
       <template v-for="(screen, index) in screens" :key="screen.path">
-        <RouterLink :to="screen.path" class="text-blue-500">
+        <RouterLink :to="screen.path" class="text-primary">
           {{ screen.title }}
         </RouterLink>
         <template v-if="index + 1 < screens.length"> , </template>
@@ -52,7 +52,7 @@ for (const routeIndex in routes) {
       <a
         href="https://justboil.me/tailwind-admin-templates/vue-dashboard/"
         target="_blank"
-        class="text-blue-500"
+        class="text-primary"
         >Premium version</a
       >
     </h1>

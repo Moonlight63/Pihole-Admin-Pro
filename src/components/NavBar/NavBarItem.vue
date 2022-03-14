@@ -16,7 +16,7 @@ const props = defineProps({
   },
   activeColor: {
     type: String,
-    default: 'text-blue-600'
+    default: 'text-primary'
   },
   hasDivider: Boolean,
   isDesktopIconOnly: Boolean,

@@ -9,8 +9,9 @@ const baseColors = {
   info: Pallet.cyan[500],
   success: Pallet.emerald[500],
   warning: Pallet.amber[400],
-  error: Pallet.red[500],
-  ghost: '#ffffff00'
+  danger: Pallet.red[500],
+  ghost: '#ffffff00',
+  neutral: Pallet.slate[900],
 }
 
 const backgroundColors = {
@@ -20,11 +21,11 @@ const backgroundColors = {
   form: Pallet.slate[800],
   // Should the menu items just be the same as 'ghost buttons' or keep independant styles? It feels verbose.
   'menu-item': '#00000000',
-  'menu-subitem': Color(baseColors.ghost).lighten(0.2).alpha(0.1).hexa(),
+  'menu-subitem': Color(baseColors.ghost).darken(0.2).alpha(0.1).hexa(),
   'menu-item-active': baseColors.primary,
   'menu-subitem-active': baseColors.primary,
-  'menu-item-hocus': Color(baseColors.ghost).lighten(0.2).alpha(0.1).hexa(),
-  'menu-subitem-hocus': Color(baseColors.ghost).lighten(0.2).alpha(0.2).hexa()
+  'menu-item-hocus': Color(baseColors.ghost).darken(0.2).alpha(0.1).hexa(),
+  'menu-subitem-hocus': Color(baseColors.ghost).darken(0.2).alpha(0.2).hexa()
 }
 
 const textColors = {
@@ -40,19 +41,21 @@ const textColors = {
   'on-info': Pallet.slate[100],
   'on-success': Pallet.slate[100],
   'on-warning': Pallet.slate[100],
-  'on-error': Pallet.slate[100],
+  'on-danger': Pallet.slate[100],
+  'on-neutral': Pallet.slate[300],
 }
 
 const hocusColors = {
   background: {
-    'primary-hocus': Color(baseColors.primary).lighten(0.2).hex(),
-    'secondary-hocus': Color(baseColors.secondary).lighten(0.2).hex(),
-    'accent-hocus': Color(baseColors.accent).lighten(0.2).hex(),
-    'info-hocus': Color(baseColors.info).lighten(0.2).hex(),
-    'success-hocus': Color(baseColors.success).lighten(0.2).hex(),
-    'warning-hocus': Color(baseColors.warning).lighten(0.2).hex(),
-    'error-hocus': Color(baseColors.error).lighten(0.2).hex(),
-    'ghost-hocus': Color(baseColors.ghost).lighten(0.2).alpha(0.25).hexa(),
+    'primary-hocus': Color(baseColors.primary).darken(0.2).hexa(),
+    'secondary-hocus': Color(baseColors.secondary).darken(0.2).hexa(),
+    'accent-hocus': Color(baseColors.accent).darken(0.2).hexa(),
+    'info-hocus': Color(baseColors.info).darken(0.2).hexa(),
+    'success-hocus': Color(baseColors.success).darken(0.2).hexa(),
+    'warning-hocus': Color(baseColors.warning).darken(0.2).hexa(),
+    'danger-hocus': Color(baseColors.danger).darken(0.2).hexa(),
+    'ghost-hocus': Color(baseColors.ghost).darken(0.2).alpha(0.25).hexa(),
+    'neutral-hocus': Color(Pallet.slate[300]).hexa()
   },
   text: {
     'on-primary-hocus': Pallet.slate[100],
@@ -61,7 +64,8 @@ const hocusColors = {
     'on-info-hocus': Pallet.slate[100],
     'on-success-hocus': Pallet.slate[100],
     'on-warning-hocus': Pallet.slate[100],
-    'on-error-hocus': Pallet.slate[100]
+    'on-danger-hocus': Pallet.slate[100],
+    'on-neutral-hocus': Pallet.slate[900]
   }
 }
 
@@ -80,12 +84,25 @@ const theme = new Theme({
     placeholderColor: {
       form: textColors['on-main-muted']
     },
+    outline: {
+      'button-width-neutral': '2px',
+      'button-color-neutral': Color(Pallet.slate[300]).hexa(),
+      'button-color-neutral-hocus': 'var(--background-color-neutral-hocus)',
+    },
     borderColor: {
       card: backgroundColors.card,
       menu: Pallet.slate[800],
       divider: Pallet.slate[800],
       'menu-divider': Pallet.slate[800],
-      form: textColors['on-main-muted']
+      form: textColors['on-main-muted'],
+      ...hocusColors.background
+    },
+    borderWidth: {
+      'button': '2px'
+    },
+    pageBackgrounds: {
+      login: 'bg-gradient-to-tr from-purple-900 via-pink-900 to-red-900',
+      error: 'bg-gradient-to-tr from-pink-900 via-red-900 to-yellow-900'
     }
   }
 })

@@ -1,0 +1,89 @@
+.checkbox {
+  --chkbg: var(--colors-primary);
+  --chkfg: var(--text-color-on-primary);
+  /* @apply w-6 h-6 border rounded-lg appearance-none cursor-pointer border-form border-opacity-20; */
+  @apply w-6 h-6 rounded-lg appearance-none cursor-pointer bg-form border-form;
+  &:focus-visible {
+    /* outline: 2px solid var(--colors-primary);
+    outline-offset: 2px; */
+    outline-style: none;
+  }
+  &:checked,
+  &[checked="true"] {
+    @apply bg-no-repeat bg-neutral;
+    animation: checkmark var(--animation-input, 0.2s) ease-in-out;
+    background-image: linear-gradient(-45deg, transparent 65%, var(--chkbg) 65.99%), linear-gradient(45deg, transparent 75%, var(--chkbg) 75.99%), linear-gradient(-45deg, var(--chkbg) 40%, transparent 40.99%), linear-gradient(45deg, var(--chkbg) 30%, var(--chkfg) 30.99%, var(--chkfg) 40%, transparent 40.99%), linear-gradient(-45deg, var(--chkfg) 50%, var(--chkbg) 50.99%);
+  }
+  &:indeterminate {
+    @apply bg-no-repeat bg-neutral;
+    animation: checkmark var(--animation-input, 0.2s) ease-in-out;
+    background-image: linear-gradient(90deg, transparent 80%, var(--chkbg) 80%), linear-gradient(-90deg, transparent 80%, var(--chkbg) 80%), linear-gradient(0deg, var(--chkbg) 43%, var(--chkfg) 43%, var(--chkfg) 57%, var(--chkbg) 57%);
+  }
+  &-neutral {
+    --chkbg: var(--background-color-neutral-hocus);
+    --chkfg: var(--text-color-on-neutral-hocus);
+    @apply border-form hover:border-form;
+    /* &:focus-visible {
+      outline: 2px solid hsl(var(--p));
+    } */
+    &:checked,
+    &[checked="true"] {
+      @apply border-primary bg-primary text-on-primary;
+    }
+  }
+  &-secondary {
+    --chkbg: var(--s);
+    --chkfg: var(--sc);
+    @apply border-secondary hover:border-secondary;
+    /* &:focus-visible {
+      outline: 2px solid hsl(var(--s));
+    } */
+    &:checked,
+    &[checked="true"] {
+      @apply border-secondary bg-secondary text-on-secondary;
+    }
+  }
+  &-accent {
+    --chkbg: var(--a);
+    --chkfg: var(--ac);
+    @apply border-accent hover:border-accent;
+    /* &:focus-visible {
+      outline: 2px solid hsl(var(--a));
+    } */
+    &:checked,
+    &[checked="true"] {
+      @apply border-accent bg-accent text-on-accent;
+    }
+  }
+  &:disabled {
+    @apply bg-white border-transparent cursor-not-allowed opacity-20;
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    background-position-y: 5px;
+  }
+  50% {
+    background-position-y: -2px;
+  }
+  100% {
+    background-position-y: 0;
+  }
+}
+
+/* backward comptability */
+.checkbox-mark {
+  @apply hidden;
+}
+
+/* body[dir="rtl"] {
+  .checkbox {
+    --chkbg: var(--bc);
+    --chkfg: var(--b1);
+    &:checked,
+    &[checked="true"] {
+      background-image: linear-gradient(45deg, transparent 65%, hsl(var(--chkbg)) 65.99%), linear-gradient(-45deg, transparent 75%, hsl(var(--chkbg)) 75.99%), linear-gradient(45deg, hsl(var(--chkbg)) 40%, transparent 40.99%), linear-gradient(-45deg, hsl(var(--chkbg)) 30%, hsl(var(--chkfg)) 30.99%, hsl(var(--chkfg)) 40%, transparent 40.99%), linear-gradient(45deg, hsl(var(--chkfg)) 50%, hsl(var(--chkbg)) 50.99%);
+    }
+  }
+} */

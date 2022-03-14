@@ -42,6 +42,8 @@ export const useServer = defineStore('server', {
       } catch (e) {
         // TODO: Log error and emit event to toast
         console.log(e)
+        this.$state.isConnecting = false
+        return
       }
       this.$state.isConnecting = false
       this.$state.connected = true

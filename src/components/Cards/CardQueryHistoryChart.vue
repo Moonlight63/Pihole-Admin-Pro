@@ -1,27 +1,31 @@
 <script setup>
 import { useApi } from '@/stores/api'
-// import resolveConfig from 'tailwindcss/resolveConfig'
-// import tailwindConfig from '@/../tailwind.config.js'
-// import { TailwindConfig } from 'tailwindcss/tailwind-config'
-
-// const fullConfig = resolveConfig(tailwindConfig as unknown as TailwindConfig)
-
-// const orange = fullConfig.theme.colors
-// console.log('🚀 ~ file: CardQueryHistoryChart.vue ~ line 10 ~ orange', orange)
-
-// const titleStack = ref(['Admin', 'Dashboard'])
+import { useGlobal } from '@/stores/global';
+import { useServer } from '@/stores/server';
 
 const apiStore = useApi()
 
 const chartData = ref(null)
 
+const theme = computed(() => useGlobal().theme)
+
+const getCssPrimary = () => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-primary')
+const getCssSuccess = () => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-success')
+const getCssDanger = () => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-danger')
+
 const fillChartData = () => {
+
+  if(!apiStore.queryHistory.history) {
+    chartData.value = null
+    return
+  }
+
   const labels = [
     'Blocked DNS Queries',
     'Cached DNS Queries',
     'Forwarded DNS Queries'
   ]
-  const colors = ['rgb(239 68 68)', 'rgb(16 185 129)', 'rgb(59 130 246)']
+  const colors = [getCssDanger(), getCssSuccess(), getCssPrimary()]
 
   const data = {
     labels: [],
@@ -63,6 +67,19 @@ const fillChartData = () => {
 //     required: true
 //   }
 // })
+
+const animate = ref(true)
+
+watch(theme, val => {
+  if (chartData.value) {
+    fillChartData()
+  }
+})
+
+watch(() => apiStore.queryHistory, val => {
+  fillChartData()
+}, { deep: true })
+
 </script>
 
 <template>
@@ -74,7 +91,12 @@ const fillChartData = () => {
     @headerIconClick="fillChartData"
   >
     <div v-if="chartData">
-      <QueriesChart :data="chartData" class="h-96" />
+      <QueriesChart :data="chartData" :animate="animate" class="h-96" />
+    </div>
+    <div v-else-if="useServer().connected" class="py-24 text-center text-on-main-muted" >
+      <p>No Data found...</p>
+      <p>It appears that you are connected to a server, but the server has not returned any data.</p>
+      <p>Is this a new server, or do you have logging disabled?</p>
     </div>
     <div v-else class="py-24 text-center text-on-main-muted">
       <p>No Data found...</p>

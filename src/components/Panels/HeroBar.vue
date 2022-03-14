@@ -10,11 +10,11 @@ import { useGlobal } from '@/stores/global'
       <h1 class="text-3xl font-semibold leading-tight">
         <slot />
       </h1>
-      <JbButton
+      <!-- <JbButton
         :label="useGlobal().darkMode ? 'Light Mode' : 'Dark Mode'"
         icon="mdi:theme-light-dark"
         @click="useGlobal().toggleDarkMode()"
-      />
+      /> -->
     </Level>
   </section>
 </template>

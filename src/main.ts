@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 
 import App from './App.vue'
 import router from './router'
-import { darkModeKey, apiAddressKey } from '@/config.js'
+import { apiAddressKey, themeKey } from '@/config.js'
 import { createPinia } from 'pinia'
 import { useGlobal } from './stores/global'
 import { useClients } from './stores/clients'
@@ -24,11 +24,12 @@ const serverStore = useServer()
 
 /* Dark mode */
 if (
-  (!localStorage[darkModeKey] &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches) ||
-  localStorage[darkModeKey] === '1'
+  (!localStorage[themeKey] &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches)
 ) {
-  globalStore.toggleDarkMode(true)
+  globalStore.changeTheme('dark')
+} else if (localStorage[themeKey]) {
+  globalStore.changeTheme(localStorage[themeKey])
 }
 
 /* Fetch sample data */

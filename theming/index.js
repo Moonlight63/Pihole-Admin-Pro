@@ -1,4 +1,5 @@
-const themeSwapper = require('tailwindcss-theme-swapper')
+const plugin = require('tailwindcss/plugin')
+// const themeSwapper = require('tailwindcss-theme-swapper')
     // , glob = require('glob')
     // , path = require('path')
 
@@ -14,8 +15,96 @@ const themeSwapper = require('tailwindcss-theme-swapper')
 // }
 // exports.Theme = Theme
 
-exports.plugin = void 0
-const swapt = () => {
+
+function kebabCase (string) {
+  return string
+  .replace(/([a-z])([A-Z])/g, '$1-$2')
+  .replace(/\s+/g, '-')
+  .toLowerCase()
+}
+
+function flatten (
+  obj,
+  transformKeyCallback = key => key.join('.'),
+  previousKeys = [],
+  flattened = {}
+) {
+  return Object
+    .entries(obj)
+    .reduce((acc, [key, value]) => {
+      const keyPath = [...previousKeys, key]
+
+      if (typeof value === 'object') {
+        flatten(value, transformKeyCallback, keyPath, acc)
+      } else {
+        flattened[transformKeyCallback(keyPath)] = value
+      }
+      return acc
+    }, flattened)
+}
+
+const getTailwindKeyName = keys =>
+  keys.filter(key => key.toLowerCase() !== 'default').map(kebabCase).join('-')
+
+
+function getThemeAsCustomProps (
+  tokenValues
+) {
+  return flatten(
+    tokenValues,
+    keys => `--${getTailwindKeyName(keys)}`
+  )
+}
+
+function resolveThemeConfig (
+  tokenValue,
+  previousKeys = []
+) {
+  return Object
+    .entries(tokenValue)
+    .reduce((acc, [key, value]) => {
+      const keyPath = [ ...previousKeys, key ]
+      return {
+        ...acc,
+        [key]: typeof value === "object"
+          ? resolveThemeConfig(value, keyPath)
+          : `var(--${getTailwindKeyName(keyPath)}, ${value})`
+      }
+    }, {})
+}
+
+const themeSwap = (options = defaultOptions) => ({ addBase }) => {
+  const { themes } = options
+
+  themes.forEach(themeConfig => {
+    const { theme, mediaQuery, selectors = [] } = themeConfig
+
+    if (selectors.length > 0) {
+      addBase({
+        [selectors.join(', ')]: getThemeAsCustomProps(theme)
+      })
+    }
+  })
+}
+
+const swapper = plugin.withOptions(
+  themeSwap,
+  (options = defaultOptions) => {
+    const baseTheme = options
+      .themes
+      .find(theme => theme.name === 'base')
+
+    return {
+      theme: {
+        extend: baseTheme && baseTheme.theme
+          ? resolveThemeConfig(baseTheme.theme)
+          : {}
+      }
+    }
+  }
+)
+
+const getPlugin = () => {
 
     const themes = []
 
@@ -25,15 +114,15 @@ const swapt = () => {
     // });
 
     
-    const names = []
+    const names = ['button*']
     require('./themes/index').forEach(file => {
-        console.log(file);
+        // console.log(file);
         themes.push(file.theme)
         names.push(file.theme.name)
     })
     // console.log(JSON.stringify(themes, null, 2));
 
-    const thing = themeSwapper({
+    const thing = swapper({
         themes: themes
     })
     console.log(
@@ -44,5 +133,4 @@ const swapt = () => {
     return thing
 }
 
-exports.plugin = swapt()
-
+module.exports = getPlugin()
