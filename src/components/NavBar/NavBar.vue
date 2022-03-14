@@ -1,13 +1,10 @@
 <script setup>
 import { useGlobal } from '@/stores/global'
 import { useUsers } from '@/stores/user'
+import NavBarThemeSwitch from './NavBarThemeSwitch.vue';
 
 const storeGlobal = useGlobal()
 const storeUser = useUsers()
-
-const toggleLightDark = () => {
-  storeGlobal.toggleDarkMode()
-}
 
 const userName = computed(() => storeUser.userName)
 
@@ -28,7 +25,7 @@ const menuNavBarToggle = () => {
 
 <template>
   <nav
-    class="absolute top-0 left-0 right-0 z-30 flex w-screen border-b border-gray-100 bg-panel h-14 transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:border-gray-800"
+    class="absolute top-0 left-0 right-0 z-30 flex w-screen border-b-menu bg-menu h-14 transition-position xl:pl-60 lg:w-auto lg:items-stretch"
   >
     <div class="flex items-stretch flex-1 h-14">
       <NavBarItem
@@ -46,7 +43,7 @@ const menuNavBarToggle = () => {
       </NavBarItem>
     </div>
     <div
-      class="absolute left-0 w-screen shadow bg-panel top-14 lg:w-auto lg:items-stretch lg:flex lg:grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none"
+      class="absolute left-0 w-screen shadow bg-menu top-14 lg:w-auto lg:items-stretch lg:flex lg:grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none"
       :class="[isMenuNavBarActive ? 'block' : 'hidden']"
     >
       <div
@@ -69,10 +66,6 @@ const menuNavBarToggle = () => {
           </template>
         </NavBarMenu>
         <NavBarMenu hasDivider>
-          <!-- <UserAvatar class="inline-flex w-6 h-6 mr-3" />
-          <div>
-            <span>{{ userName }}</span>
-          </div> -->
           <NavBarItemLabel :label="userName">
             <UserAvatar class="inline-flex w-6 h-6 mr-3" />
           </NavBarItemLabel>
@@ -93,28 +86,9 @@ const menuNavBarToggle = () => {
             </NavBarItem>
           </template>
         </NavBarMenu>
-        <NavBarItem
-          hasDivider
-          isDesktopIconOnly
-          @click.prevent="toggleLightDark"
-        >
-          <NavBarItemLabel
-            icon="mdi:theme-light-dark"
-            label="Light/Dark"
-            isDesktopIconOnly
-          />
-        </NavBarItem>
-        <!-- <nav-bar-item
-          href="https://github.com/justboil/admin-one-vue-tailwind"
-          has-divider
-          is-desktop-icon-only
-        >
-          <nav-bar-item-label
-            :icon="mdiGithub"
-            label="GitHub"
-            is-desktop-icon-only
-          />
-        </nav-bar-item> -->
+
+        <NavBarThemeSwitch />
+
         <NavBarItem isDesktopIconOnly>
           <NavBarItemLabel
             icon="mdi:logout"

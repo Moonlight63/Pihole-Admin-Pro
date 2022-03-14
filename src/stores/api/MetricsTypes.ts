@@ -85,3 +85,12 @@ export type SummaryType = {
     }
   }
 }
+
+export type QueryHistoryType = {
+  history : [{
+    timestamp: number
+    total: number
+    cached: number
+    blocked: number
+  }]
+}

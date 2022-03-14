@@ -2,7 +2,7 @@
 ARG VARIANT=16
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
 
-RUN su node -c "umask 0002 && npm install -g pnpm http-server @vue/cli@next @vue/cli-service-global@next"
+RUN su node -c "umask 0002 && npm install -g pnpm vite http-server @vue/cli@next @vue/cli-service-global@next"
 WORKDIR /app
 
 EXPOSE 8080

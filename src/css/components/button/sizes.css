@@ -1,0 +1,56 @@
+.button {
+  &-xs {
+    @apply p-2.5 text-xs;
+    line-height: 1em;
+    /* font-size: 0.75rem; */
+  }
+  &-sm {
+    @apply p-3 text-sm;
+    line-height: 1em;
+    /* font-size: 0.875rem; */
+  }
+  &-md {
+    @apply p-4 text-base;
+    line-height: 1em;
+    /* font-size: 0.875rem; */
+  }
+  &-lg {
+    @apply p-6 text-lg;
+    line-height: 1em;
+    /* font-size: 1.125rem; */
+  }
+  &-wide {
+    @apply w-64;
+  }
+  &-block {
+    @apply w-full;
+  }
+  /* &-square {
+    &:where(.button-xs) {
+      @apply w-6 h-6 p-0;
+    }
+    &:where(.button-sm) {
+      @apply w-8 h-8 p-0;
+    }
+    &:where(.button-md) {
+      @apply w-12 h-12 p-0;
+    }
+    &:where(.button-lg) {
+      @apply w-16 h-16 p-0;
+    }
+  }
+  &-circle {
+    &:where(.button-xs) {
+      @apply w-6 h-6 p-0 rounded-full;
+    }
+    &:where(.button-sm) {
+      @apply w-8 h-8 p-0 rounded-full;
+    }
+    &:where(.button-md) {
+      @apply w-12 h-12 p-0 rounded-full;
+    }
+    &:where(.button-lg) {
+      @apply w-16 h-16 p-0 rounded-full;
+    }
+  } */
+}

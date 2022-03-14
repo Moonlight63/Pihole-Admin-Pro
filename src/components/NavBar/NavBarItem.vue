@@ -16,7 +16,7 @@ const props = defineProps({
   },
   activeColor: {
     type: String,
-    default: 'text-blue-600'
+    default: 'text-primary'
   },
   hasDivider: Boolean,
   isDesktopIconOnly: Boolean,
@@ -44,10 +44,8 @@ const componentClass = computed(() => {
     'shrink-0',
     'relative',
     'cursor-pointer',
-    'hover:text-blue-500',
-    props.active
-      ? props.activeColor
-      : 'text-black dark:text-white dark:hover:text-gray-400'
+    'hover:text-primary',
+    props.active ? props.activeColor : 'text-on-menu'
   ]
 
   if (props.type === 'block') {
@@ -61,7 +59,7 @@ const componentClass = computed(() => {
   }
 
   if (props.hasDivider) {
-    base.push('lg:border-r', 'lg:border-gray-100', 'lg:dark:border-gray-800')
+    base.push('lg:border-r-menu-divider')
   }
 
   if (props.isDesktopIconOnly) {

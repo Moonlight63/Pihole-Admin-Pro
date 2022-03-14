@@ -1,0 +1,254 @@
+.button {
+  @apply font-semibold uppercase;
+  /* border-width: var(--border-width-button, 1px); */
+  animation: button-pop 0.25s ease-out;
+  text-transform: uppercase;
+  &:active:hover,
+  &:active:focus {
+    animation: none;
+  }
+  /* &:active:hover,
+  &:active:focus {
+    transform: scale(0.95);
+  } */
+
+  /* default button */
+  & {
+    @apply bg-neutral text-on-neutral;
+    box-shadow: inset 0px 0px 0px var(--outline-button-width-neutral) var(--outline-button-color-neutral);
+    &:hover,
+    &-active {
+      @apply bg-neutral-hocus text-on-neutral-hocus;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-neutral) var(--outline-button-color-neutral-hocus);
+    }
+    &:focus-visible {
+      outline: 2px solid hsl(var(--nf));
+      outline-offset: 2px;
+    }
+  }
+  /* brand colors */
+  &-primary {
+    @apply bg-primary text-on-primary;
+    box-shadow: inset 0px 0px 0px var(--outline-button-width-primary) var(--outline-button-color-primary);
+    &:hover,
+    &.button-active {
+      @apply bg-primary-hocus text-on-primary-hocus;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-primary) var(--outline-button-color-primary-hocus);
+    }
+    &:focus-visible {
+      outline: 2px solid hsl(var(--p));
+    }
+  }
+  &-secondary {
+    @apply bg-secondary text-on-secondary;
+    box-shadow: inset 0px 0px 0px var(--outline-button-width-secondary) var(--outline-button-color-secondary);
+    &:hover,
+    &.button-active {
+      @apply bg-secondary-hocus text-on-secondary-hocus;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-secondary) var(--outline-button-color-secondary-hocus);
+    }
+    &:focus-visible {
+      outline: 2px solid hsl(var(--s));
+    }
+  }
+  &-accent {
+    @apply bg-accent text-on-accent;
+    box-shadow: inset 0px 0px 0px var(--outline-button-width-accent) var(--outline-button-color-accent);
+    &:hover,
+    &.button-active {
+      @apply bg-accent-hocus text-on-accent-hocus;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-accent) var(--outline-button-color-accent-hocus);
+    }
+    &:focus-visible {
+      outline: 2px solid hsl(var(--a));
+    }
+  }
+
+  /* button with state colors */
+  &-info {
+    @apply bg-info text-on-info;
+    box-shadow: inset 0px 0px 0px var(--outline-button-width-info) var(--outline-button-color-info);
+    &:hover,
+    &.button-active {
+      @apply bg-info-hocus text-on-info-hocus;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-info) var(--outline-button-color-info-hocus);
+    }
+    &:focus-visible {
+      outline: 2px solid hsl(var(--in));
+    }
+  }
+  &-success {
+    @apply bg-success text-on-success;
+    box-shadow: inset 0px 0px 0px var(--outline-button-width-success) var(--outline-button-color-success);
+    &:hover,
+    &.button-active {
+      @apply bg-success-hocus text-on-success-hocus;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-success) var(--outline-button-color-success-hocus);
+    }
+    &:focus-visible {
+      outline: 2px solid hsl(var(--su));
+    }
+  }
+  &-warning {
+    @apply bg-warning text-on-warning;
+    box-shadow: inset 0px 0px 0px var(--outline-button-width-warning) var(--outline-button-color-warning);
+    &:hover,
+    &.button-active {
+      @apply bg-warning-hocus text-on-warning-hocus;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-warning) var(--outline-button-color-warning-hocus);
+    }
+    &:focus-visible {
+      outline: 2px solid hsl(var(--wa));
+    }
+  }
+  &-danger {
+    @apply bg-danger text-on-danger;
+    box-shadow: inset 0px 0px 0px var(--outline-button-width-danger) var(--outline-button-color-danger);
+    &:hover,
+    &.button-active {
+      @apply bg-danger-hocus text-on-danger-hocus;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-danger) var(--outline-button-color-danger-hocus);
+    }
+    &:focus-visible {
+      outline: 2px solid hsl(var(--er));
+    }
+  }
+
+  /* button variants */
+  &-ghost {
+    @apply text-current bg-transparent border border-transparent border-button-ghost;
+    &:hover,
+    &.button-active {
+      @apply border-opacity-0 bg-neutral-hocus;
+    }
+    &:focus-visible {
+      outline: 2px solid 0 0 2px currentColor;
+    }
+  }
+  &-link {
+    @apply bg-transparent border-transparent text-primary;
+    &:hover,
+    &.button-active {
+      @apply underline bg-transparent border-transparent;
+    }
+    &:focus-visible {
+      outline: 2px solid 0 0 2px currentColor;
+    }
+  }
+
+  /* outline */
+  &-outline {
+    @apply bg-transparent text-on-main;
+    box-shadow: inset 0px 0px 0px var(--outline-button-width-neutral) var(--outline-button-color-neutral);
+    &:hover {
+      @apply bg-neutral-hocus text-on-neutral-hocus;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-neutral) var(--outline-button-color-neutral-hocus);
+    }
+    &.button-primary {
+      @apply text-primary;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-primary) var(--outline-button-color-primary);
+      &:hover {
+        @apply bg-primary-hocus text-on-primary-hocus;
+        box-shadow: inset 0px 0px 0px var(--outline-button-width-primary) var(--outline-button-color-primary-hocus);
+      }
+    }
+    &.button-secondary {
+      @apply text-secondary;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-secondary) var(--outline-button-color-secondary);
+      &:hover {
+        @apply bg-secondary-hocus text-on-secondary-hocus;
+        box-shadow: inset 0px 0px 0px var(--outline-button-width-secondary) var(--outline-button-color-secondary-hocus);
+      }
+    }
+    &.button-accent {
+      @apply text-accent;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-accent) var(--outline-button-color-accent);
+      &:hover {
+        @apply bg-accent-hocus text-on-accent-hocus;
+        box-shadow: inset 0px 0px 0px var(--outline-button-width-accent) var(--outline-button-color-accent-hocus);
+      }
+    }
+    &.button-success {
+      @apply text-success;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-success) var(--outline-button-color-success);
+      &:hover {
+        @apply bg-success-hocus text-on-success-hocus;
+        box-shadow: inset 0px 0px 0px var(--outline-button-width-success) var(--outline-button-color-success-hocus);
+      }
+    }
+    &.button-info {
+      @apply text-info;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-info) var(--outline-button-color-info);
+      &:hover {
+        @apply bg-info-hocus text-on-info-hocus;
+        box-shadow: inset 0px 0px 0px var(--outline-button-width-info) var(--outline-button-color-info-hocus);
+      }
+    }
+    &.button-warning {
+      @apply text-warning;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-warning) var(--outline-button-color-warning);
+      &:hover {
+        @apply bg-warning-hocus text-on-warning-hocus;
+        box-shadow: inset 0px 0px 0px var(--outline-button-width-warning) var(--outline-button-color-warning-hocus);
+      }
+    }
+    &.button-danger {
+      @apply text-danger;
+      box-shadow: inset 0px 0px 0px var(--outline-button-width-danger) var(--outline-button-color-danger);
+      &:hover {
+        @apply bg-danger-hocus text-on-danger-hocus;
+        box-shadow: inset 0px 0px 0px var(--outline-button-width-danger) var(--outline-button-color-danger-hocus);
+      }
+    }
+  }
+
+  /* disabled */
+  /* &-disabled,
+  &[disabled] {
+    @apply border-opacity-0 bg-opacity-20 text-on-main text-opacity-20;
+  } */
+
+  /* loading */
+  /* &.loading {
+    &.button-square:before,
+    &.button-circle:before {
+      @apply mr-0;
+    }
+    &.button-xl:before,
+    &.button-lg:before {
+      @apply w-5 h-5;
+    }
+    &.button-sm:before,
+    &.button-xs:before {
+      @apply w-3 h-3;
+    }
+  }*/
+} 
+/* group */
+.button-group {
+  & > input[type="radio"]:checked.button,
+  & > .button-active {
+    @apply border-primary bg-primary text-on-primary;
+    &:focus-visible {
+      outline: 2px solid hsl(var(--colors-primary));
+    }
+  }
+  & > .button:not(:first-child) {
+    @apply rounded-l-none;
+  }
+  & > .button:not(:last-child) {
+    @apply rounded-r-none;
+  }
+}
+
+@keyframes button-pop {
+  0% {
+    transform: scale(var(--button-focus-scale, 0.95));
+  }
+  40% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

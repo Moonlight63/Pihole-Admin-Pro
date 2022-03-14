@@ -35,9 +35,9 @@ const menuClick = (event) => {
   }
 }
 
-const styleActive = 'font-bold text-menu-items-active'
+const styleActive = 'font-bold text-on-menu-active'
 
-const styleInactive = 'text-menu-items'
+const styleInactive = 'text-on-menu'
 
 const enter = (el) => {
   el.style.height = 'auto'
@@ -74,16 +74,18 @@ const leave = (el) => {
       @click="menuClick"
     >
       <div
-        class="flex mx-4 rounded-lg cursor-pointer hover:bg-opacity-50 dark:hover:bg-opacity-50"
+        class="flex mx-4 cursor-pointer rounded-button hover:bg-ghost-hocus"
         :class="[
-          isSubmenuList ? 'p-3 text-sm my-1.5' : 'py-2',
+          isSubmenuList
+            ? 'p-3 text-sm my-1.5 hover:bg-menu-subitem-hocus'
+            : 'py-2 hover:bg-menu-item-hocus',
           vSlot && vSlot.isExactActive
             ? isSubmenuList
-              ? 'bg-menu-items-subitems-active'
-              : 'bg-menu-items-active'
+              ? 'bg-menu-subitem-active'
+              : 'bg-menu-item-active'
             : isSubmenuList
-            ? 'bg-menu-items-subitems'
-            : 'bg-menu-items'
+            ? 'bg-menu-subitem'
+            : 'bg-menu-item'
         ]"
       >
         <UiIconify

@@ -36,7 +36,7 @@ const wrapperClass = computed(() => {
     <div :class="wrapperClass">
       <slot />
     </div>
-    <div v-if="help" class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+    <div v-if="help" class="mt-1 text-xs text-on-main-muted">
       {{ help }}
     </div>
   </div>

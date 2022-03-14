@@ -61,12 +61,21 @@ const buttonsDisabled = computed(
 
   <MainSection>
     <CardComponent class="shadow-2xl md:w-7/12 lg:w-5/12 xl:w-4/12 md:mx-auto">
-      <div class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400">
-        <JbButton
-          label="Toggle"
-          outline
-          @click="useGlobal().toggleDarkMode()"
-        />
+      <div class="py-24 text-center text-on-main-muted lg:py-12">
+        <div class="flex items-center justify-center">
+          <!-- <JbButton
+            class="mr-2"
+            label="Toggle"
+            outline
+            @click="useGlobal().toggleDarkMode()"
+          /> -->
+          <button class="button button-sm">
+            Button2
+          </button>
+        </div>
+        <div class="flex items-center justify-center mt-6">
+          <input type="checkbox" class="checkbox" />
+        </div>
       </div>
     </CardComponent>
   </MainSection>
@@ -129,7 +138,7 @@ const buttonsDisabled = computed(
   </MainSection>
 
   <TitledSection custom>
-    <h1 class="text-2xl text-gray-500 dark:text-gray-400">Notifications</h1>
+    <h1 class="text-2xl text-on-main-muted">Notifications</h1>
     <div class="flex items-center justify-center mt-6">
       <CheckRadioPicker
         v-model="notificationSettingsModel"
@@ -200,6 +209,7 @@ const buttonsDisabled = computed(
       <b>Danger state</b>. Notification
       <template #right>
         <JbButton
+          class="border border-danger-hocus"
           icon="mdi:open-in-new"
           label="Button"
           color="danger"
@@ -210,7 +220,6 @@ const buttonsDisabled = computed(
     </Notification>
 
     <Notification
-      color="white"
       icon="mdi:select-color"
       :outline="notificationsOutline"
     >
@@ -389,6 +398,54 @@ const buttonsDisabled = computed(
           :disabled="buttonsDisabled"
         />
       </JbButtons>
+
+      <Divider />
+
+      <div class="button-group">
+        <JbButton
+          color="white"
+          label="Button"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <JbButton
+          color="light"
+          label="Button"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <JbButton
+          color="info"
+          label="Button"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <JbButton
+          color="success"
+          label="Button"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <JbButton
+          color="warning"
+          label="Button"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <JbButton
+          color="danger"
+          label="Button"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+      </div>
+      
     </CardComponent>
   </MainSection>
 
@@ -397,9 +454,7 @@ const buttonsDisabled = computed(
   <MainSection>
     <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
       <CardComponent title="With Title" mb="">
-        <div
-          class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400"
-        >
+        <div class="py-24 text-center text-on-main-muted lg:py-12">
           With title
         </div>
       </CardComponent>
@@ -410,9 +465,7 @@ const buttonsDisabled = computed(
         headerIcon="mdi:close"
         mb=""
       >
-        <div
-          class="py-24 text-center text-gray-500 lg:py-12 dark:text-gray-400"
-        >
+        <div class="py-24 text-center text-on-main-muted lg:py-12">
           With title & icons
         </div>
       </CardComponent>

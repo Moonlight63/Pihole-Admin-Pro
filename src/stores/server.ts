@@ -28,9 +28,9 @@ export const useServer = defineStore('server', {
         if (!(url.protocol === 'http:' || url.protocol === 'https:')) {
           url = new URL(`${location.protocol}//${hostname}`)
         }
-        const parsedUrl = url.protocol + '//' + url.host
+        const parsedUrl = `${url.protocol}//${url.host}`
 
-        await Connector.connect(parsedUrl + '/api/')
+        await Connector.connect(`${parsedUrl}/api/`)
 
         // TODO: Log Successfully Connected Event (and show toast)
 
@@ -42,6 +42,8 @@ export const useServer = defineStore('server', {
       } catch (e) {
         // TODO: Log error and emit event to toast
         console.log(e)
+        this.$state.isConnecting = false
+        return
       }
       this.$state.isConnecting = false
       this.$state.connected = true

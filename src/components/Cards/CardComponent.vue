@@ -14,11 +14,11 @@ const props = defineProps({
   },
   rounded: {
     type: String,
-    default: 'md:rounded-2xl'
+    default: 'md:rounded-card'
   },
   bgColor: {
     type: String,
-    default: 'bg-panel'
+    default: 'bg-card'
   },
   hasTable: Boolean,
   empty: Boolean,
@@ -55,12 +55,12 @@ const submit = (e) => {
   <Component
     :is="is"
     :class="componentClass"
-    class="border border-gray-100 dark:border-gray-900"
+    class="border-card"
     @submit="submit"
   >
     <header
       v-if="title"
-      class="flex items-stretch border-b border-gray-100 dark:border-gray-700"
+      class="flex items-stretch border-b border-divider"
     >
       <p
         class="flex items-center py-3 font-bold grow"
@@ -79,10 +79,7 @@ const submit = (e) => {
         <UiIconify :icon="computedHeaderIcon" />
       </a>
     </header>
-    <div
-      v-if="empty"
-      class="py-24 text-center text-gray-500 dark:text-gray-400"
-    >
+    <div v-if="empty" class="py-24 text-center text-on-main-muted">
       <p>Nothing's here…</p>
     </div>
     <div v-else :class="{ 'p-6': !hasTable }">

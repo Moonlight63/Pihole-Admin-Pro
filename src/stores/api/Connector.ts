@@ -37,6 +37,7 @@ export default class Connector {
   static async disconnect() {
     try {
       Connector.getInstance().stopLoop()
+      Connector.getInstance().apiStore.$reset()
       Connector.instance = null
     } catch (e) {
       if (e instanceof Error) throw e
@@ -77,17 +78,30 @@ export default class Connector {
       // Perform status update
       this.updateLoopTimer = setTimeout(async () => {
         try {
-          await this.updateLoop()
+          this.updateLoop()
+          console.log('LOOP FINISHED')
         } catch (e) {
           // TODO: Check for disconnection error, set updateLoopTimer to null, and try reconnect
+          console.log(e)
+
           this.stopLoop()
         }
-      }, 1000)
+      }, 10000)
     }
   }
 
   private async updateLoop() {
-    this.axios
+    console.log('UPDATE LOOP')
+    console.log(
+      '🚀 ~ file: Connector.ts ~ line 95 ~ Connector ~ updateLoop ~ this.updateLoopTimer',
+      this.updateLoopTimer
+    )
+    console.log(
+      '🚀 ~ file: Connector.ts ~ line 95 ~ Connector ~ updateLoop ~ this.justConnected',
+      this.justConnected
+    )
+
+    await this.axios
       .get('stats/summary')
       .then((r) => {
         if (r.data) {
@@ -99,9 +113,22 @@ export default class Connector {
         // alert(error.message)
       })
 
-    this.justConnected = false
+    await this.axios
+      .get('history')
+      .then((r) => {
+        if (r.data) {
+          this.apiStore.updateQueryHistory(r.data)
+        }
+      })
+      .catch((error) => {
+        throw error
+        // alert(error.message)
+      })
+
     this.updateLoopCounter++
     this.scheduleUpdate()
+    this.justConnected = false
+    return true
   }
 
   async getBasicData() {
