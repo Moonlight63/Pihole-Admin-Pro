@@ -17,8 +17,6 @@ const fillChartData = () => {
   chartData4.value = chartConfig.sampleChartData(4, 1)
 }
 
-const csstest = computed(() => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-primary'))
-
 const storeApi = useApi()
 // const storeClients = useClients()
 
