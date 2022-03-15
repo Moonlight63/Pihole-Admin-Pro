@@ -155,7 +155,7 @@ onMounted(() => {
     /> -->
 
       <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
-        <CardComponent
+        <!-- <CardComponent
           title="Query Types"
           icon="mdi:finance"
           headerIcon="mdi:reload"
@@ -165,8 +165,10 @@ onMounted(() => {
           <div v-if="chartData3">
             <RingChart :data="chartData3" class="h-96" />
           </div>
-        </CardComponent>
-        <CardComponent
+        </CardComponent> -->
+        <CardQueryTypesChart />
+        
+        <!-- <CardComponent
           title="Upstream Servers"
           icon="mdi:finance"
           headerIcon="mdi:reload"
@@ -176,7 +178,9 @@ onMounted(() => {
           <div v-if="chartData4">
             <RingChart :data="chartData4" class="h-96" />
           </div>
-        </CardComponent>
+        </CardComponent> -->
+        <CardUpstreamChart />
+
         <CardComponent
           icon="mdi:monitor-cellphone"
           title="Top Allowed Domains"
@@ -184,6 +188,7 @@ onMounted(() => {
         >
           <TopDomains />
         </CardComponent>
+
 
         <CardComponent
           icon="mdi:monitor-cellphone"

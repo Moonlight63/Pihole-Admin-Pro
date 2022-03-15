@@ -1,15 +1,5 @@
 <script setup>
-import { ref, watch, computed, onMounted } from 'vue'
-// import {
-//   Chart,
-//   LineElement,
-//   PointElement,
-//   LineController,
-//   LinearScale,
-//   CategoryScale,
-//   Tooltip
-// } from 'chart.js'
-
+import { useGlobal } from '@/stores/global';
 import Chart from 'chart.js/auto'
 
 const props = defineProps({
@@ -17,26 +7,30 @@ const props = defineProps({
     type: Object,
     required: true
   }
-  // labels: {
-  //   type: Array,
-  //   required: false,
-  //   default: []
-  // }
 })
 
 const root = ref(null)
 
 let chart
 
-// Chart.register(LineElement, PointElement, LineController, LinearScale, CategoryScale, Tooltip)
+const chartData = computed(() => props.data)
+
+const getCssText = () => getComputedStyle(document.documentElement,null).getPropertyValue('--text-color-on-main')
+
+const hoverPointer = ref(false)
 
 onMounted(() => {
   chart = new Chart(root.value, {
     type: 'doughnut',
-    data: props.data,
+    data: chartData.value,
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      elements: {
+        arc: {
+          borderWidth: 0,
+        }
+      },
       scales: {
         y: {
           display: false
@@ -47,16 +41,24 @@ onMounted(() => {
       },
       plugins: {
         legend: {
+          labels: {
+            color: getCssText()
+          },
           display: true,
           position: 'right',
-          align: 'start'
+          align: 'start',
+          rtl: true,
+          onClick: Chart.overrides.doughnut.plugins.legend.onClick,
+          onHover: () => { hoverPointer.value = true },
+          onLeave: () => { hoverPointer.value = false }
         }
       }
     }
   })
-})
 
-const chartData = computed(() => props.data)
+  // Stop animations after inital load
+  chart.options.animation.duration = 0
+})
 
 watch(chartData, (data) => {
   if (chart) {
@@ -64,8 +66,18 @@ watch(chartData, (data) => {
     chart.update()
   }
 })
+
+const theme = computed(() => useGlobal().theme)
+
+watch(theme, (theme) => {
+  if (chart) {
+    const cssText = getCssText()
+    chart.options.plugins.legend.labels.color = cssText
+    chart.update()
+  }
+})
 </script>
 
 <template>
-  <canvas ref="root" />
+  <canvas ref="root" :class="hoverPointer ? 'cursor-pointer' : ''" />
 </template>

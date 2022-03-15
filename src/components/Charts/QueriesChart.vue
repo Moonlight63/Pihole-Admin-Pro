@@ -27,15 +27,15 @@ function padNumber(num) {
 const getCssText = () => getComputedStyle(document.documentElement,null).getPropertyValue('--text-color-on-main')
 const getCssLines = () => getComputedStyle(document.documentElement,null).getPropertyValue('--border-color-divider')
 
+const chartData = computed(() => props.data)
+
 onMounted(() => {
   const cssText = getCssText()
   const cssLines = getCssLines()
   chart = new Chart(root.value, {
     type: 'bar',
-    data: props.data,
+    data: chartData.value,
     options: {
-      // animation: shouldAnimate.value,
-      animation: false,
       interaction: {
         mode: 'x'
       },
@@ -120,10 +120,11 @@ onMounted(() => {
       }
     }
   })
+
+  // Stop animations after inital load
+  chart.options.animation.duration = 0
 })
 
-const chartData = computed(() => props.data)
-// const shouldAnimate = computed(() => props.animate)
 
 watch(chartData, (data) => {
   if (chart) {
@@ -144,12 +145,6 @@ watch(theme, (theme) => {
   }
 })
 
-// watch(shouldAnimate, (data) => {
-//   if (chart) {
-//     chart.options.animate = data.value
-//     chart.update()
-//   }
-// })
 </script>
 
 <template>

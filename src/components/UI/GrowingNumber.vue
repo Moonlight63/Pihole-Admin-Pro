@@ -18,13 +18,24 @@ const props = defineProps({
   duration: {
     type: Number,
     default: 500
-  }
+  },
+  // percision: {
+  //   type: Number,
+  //   default: 5
+  // }
 })
 
 const newValue = ref(0)
 
-const newValueFormatted = computed(() =>
-  newValue.value < 1000 ? newValue.value : numeral(newValue.value).format('0,0')
+const newValueFormatted = computed(() => {
+  return newValue.value.toLocaleString()
+    // const val = newValue.value % 1 != 0 ? newValue.value.toFixed(props.percision) : newValue.value
+    // return newValue.value < 1000 ? val : parseFloat(val).toLocaleString()
+    // if (newValue.value < 1000) {
+    //   return newValue.value % 1 != 0 ? newValue.value.toFixed(props.percision) : newValue.value
+    // } 
+    // return newValue.value % 1 != 0 ? newValue.value.toFixed(props.percision).format('0,0') : newValue.value.format('0,0')
+  }
 )
 
 const value = computed(() => props.value)
