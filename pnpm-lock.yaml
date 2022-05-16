@@ -43,6 +43,8 @@ specifiers:
   eslint-plugin-promise: ^5.1.1
   eslint-plugin-vue: ^8.3.0
   https-localhost: ^4.7.0
+  js-sha256: ^0.9.0
+  mande: ^2.0.1
   numeral: ^2.0.6
   pinia: ^2.0.10
   pnpm: ^6.26.1
@@ -67,6 +69,7 @@ specifiers:
   vue-class-component: ^8.0.0-0
   vue-router: ^4.0.0-0
   vue-tsc: ^0.30.2
+  vue3-cookies: ^1.0.6
 
 dependencies:
   '@iconify/iconify': 2.1.2
@@ -75,11 +78,14 @@ dependencies:
   chartjs-adapter-date-fns: 2.0.0_chart.js@3.7.1
   core-js: 3.21.1
   date-fns: 2.28.0
+  js-sha256: 0.9.0
+  mande: 2.0.1
   numeral: 2.0.6
   pinia: 2.0.11_typescript@4.1.6+vue@3.2.31
   vue: 3.2.31
   vue-class-component: 8.0.0-rc.1_vue@3.2.31
   vue-router: 4.0.12_vue@3.2.31
+  vue3-cookies: 1.0.6
 
 devDependencies:
   '@iconify-json/carbon': 1.1.1
@@ -4471,6 +4477,10 @@ packages:
       easy-stack: 1.0.1
     dev: true
 
+  /js-sha256/0.9.0:
+    resolution: {integrity: sha512-sga3MHh9sgQN2+pJ9VYZ+1LPwXOxuBJBA5nrR5/ofPfuiJBE2hnjsaN8se8JznOmGLN2p49Pe5U/ttafcs/apA==}
+    dev: false
+
   /js-stringify/1.0.2:
     resolution: {integrity: sha1-Fzb939lyTyijaCrcYjCufk6Weds=}
     dev: true
@@ -4718,6 +4728,10 @@ packages:
     dependencies:
       semver: 6.3.0
     dev: true
+
+  /mande/2.0.1:
+    resolution: {integrity: sha512-IkId2U/+SEDJcsdGDvE94WZXGkCT7YTQ/DMmqkF4q3lA7Od+wWbPrMRQG04ytGVOuY3AshBH3dMHRlktUXgHTg==}
+    dev: false
 
   /mdn-data/2.0.14:
     resolution: {integrity: sha512-dn6wd0uw5GsdswPFfsgMp5NSB0/aDe6fK94YJV/AJDYXL6HVLWBsxeq7js7Ad+mU2K9LAlwpk6kN2D5mwCPVow==}
@@ -7470,6 +7484,12 @@ packages:
       '@vue/runtime-dom': 3.2.31
       '@vue/server-renderer': 3.2.31_vue@3.2.31
       '@vue/shared': 3.2.31
+    dev: false
+
+  /vue3-cookies/1.0.6:
+    resolution: {integrity: sha512-a1UvVD0qIgxyOqjlSOwnLnqAnz8ASltugEv8yX+96i/WGZAN9fEDci7xO4HIWZE1uToUnRq9JnFhvfDCSo45OA==}
+    dependencies:
+      vue: 3.2.31
     dev: false
 
   /watchpack/2.3.1:

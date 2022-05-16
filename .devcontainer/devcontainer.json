@@ -25,7 +25,9 @@
 		"2gua.rainbow-brackets",
 		"oderwat.indent-rainbow",
 		"heybourn.headwind",
-		"johnsoncodehk.volar"
+		"Vue.volar",
+		"ChakrounAnas.turbo-console-log",
+		"rangav.vscode-thunder-client"
 	],
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

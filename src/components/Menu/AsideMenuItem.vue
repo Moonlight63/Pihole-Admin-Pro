@@ -74,7 +74,7 @@ const leave = (el) => {
       @click="menuClick"
     >
       <div
-        class="flex mx-4 cursor-pointer rounded-button hover:bg-ghost-hocus"
+        class="flex cursor-pointer mx-menu-items rounded-button hover:bg-ghost-hocus"
         :class="[
           isSubmenuList
             ? 'p-3 text-sm my-1.5 hover:bg-menu-subitem-hocus'
@@ -123,3 +123,10 @@ const leave = (el) => {
     </Transition>
   </li>
 </template>
+<!-- <style>
+.aside-menu-item {
+  @apply flex mx-4 cursor-pointer rounded-button hover:bg-ghost-hocus;
+  margin-left: var(--spacing-menu-items-margin);
+  margin-right: var(--spacing-menu-items-margin);
+}
+</style> -->

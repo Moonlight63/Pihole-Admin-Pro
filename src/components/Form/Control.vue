@@ -34,6 +34,10 @@ const props = defineProps({
     type: [String, Number, Boolean, Array, Object],
     default: ''
   },
+  error: {
+    type: Boolean,
+    default: false
+  },
   required: Boolean,
   borderless: Boolean,
   transparent: Boolean,
@@ -54,7 +58,8 @@ const inputElClass = computed(() => {
     'px-3 py-2 max-w-full focus:ring focus:outline-none border-form rounded-form w-full placeholder-form',
     computedType.value === 'textarea' ? 'h-24' : 'h-12',
     props.borderless ? 'border-0' : 'border',
-    props.transparent ? 'bg-transparent' : 'bg-form'
+    props.transparent ? 'bg-transparent' : 'bg-form',
+    props.error ? 'border-danger' : ''
   ]
 
   if (props.icon) {
@@ -138,6 +143,6 @@ if (props.ctrlKFocus) {
       :type="computedType"
       :class="inputElClass"
     />
-    <ControlIcon v-if="icon" :icon="icon" :h="controlIconH" />
+    <ControlIcon v-if="icon" :icon="icon" :h="controlIconH" :class="props.error ? 'text-danger' : ''" />
   </div>
 </template>

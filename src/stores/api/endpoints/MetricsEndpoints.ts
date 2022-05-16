@@ -1,5 +1,7 @@
+import { Endpoint, EndpointBaseTypes } from "./BaseEndpoint"
+
 /* eslint-disable camelcase */
-export type SummaryType = {
+export type SummaryGet = {
   queries: {
     total: number
     blocked: number
@@ -86,7 +88,7 @@ export type SummaryType = {
   }
 }
 
-export type QueryHistoryType = {
+export type QueryHistoryGet = {
   history : [{
     timestamp: number
     total: number
@@ -94,3 +96,30 @@ export type QueryHistoryType = {
     blocked: number
   }]
 }
+
+export type ClientHistoryGet = {
+  history : [{
+    timestamp: number
+    data: [number]
+  }]
+  clients : [{
+    name: string
+    ip: string
+  }]
+} 
+
+interface SummaryTypes extends EndpointBaseTypes {
+  GET_TYPE: SummaryGet
+}
+
+interface HistoryTypes extends EndpointBaseTypes {
+  GET_TYPE: QueryHistoryGet
+}
+
+interface ClientHistoryTypes extends EndpointBaseTypes {
+  GET_TYPE: ClientHistoryGet
+}
+
+export const SummaryEndpoint = new Endpoint<SummaryTypes>('/api/stats/summary')
+export const QueryHistoryEndpoint = new Endpoint<HistoryTypes>('/api/history')
+export const ClientHistoryEndpoint = new Endpoint<ClientHistoryTypes>('/api/history/clients', { authRequied: true })

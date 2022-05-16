@@ -46,6 +46,10 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  loading: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -109,15 +113,25 @@ const componentClass = computed(() => {
     // getButtonColor(props.color, isOutlined.value, !props.disabled)
     'button-'+props.color,
     isOutlined.value ? 'button-outline' : '',
-    props.small ? 'button-sm' : ''
+    props.small ? 'button-sm' : '',
+    // props.disabled ? 'button-disabled' : '',
+    props.loading ? 'loading' : ''
   ]
 
-  if (props.disabled) {
-    base.push(
-      'cursor-not-allowed',
-      'opacity-50'
-    )
-  }
+  // if (props.disabled) {
+  //   base.push(
+  //     'cursor-not-allowed',
+  //     'opacity-50'
+  //   )
+  // }
+
+  // if (props.loading) {
+  //   base.push(
+  //     'cursor-not-allowed',
+  //     'opacity-50',
+  //     'button-loading'
+  //   )
+  // }
 
   return base
 })

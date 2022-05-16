@@ -6,8 +6,10 @@ const storeServer = useServer()
 const apiAddress = ref(storeServer.apiAddress)
 
 const tryConnect = () => {
-  if(!storeServer.connected)
+  if(!storeServer.connected) {
+    console.log(apiAddress.value)
     storeServer.connect(apiAddress.value)
+  }
   else
     storeServer.disconnect()
 }

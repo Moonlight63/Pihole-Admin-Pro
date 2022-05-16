@@ -116,6 +116,13 @@ watch(() => queryTypes.value, val => {
   fillChartData()
 }, { deep: true })
 
+onMounted(() => {
+  if(!queryTypes.value) {
+    return
+  }
+  fillChartData()
+})
+
 </script>
 
 <template>
@@ -123,7 +130,6 @@ watch(() => queryTypes.value, val => {
     title="Query Types"
     icon="mdi:finance"
     headerIcon="mdi:reload"
-    class="mb-6"
     @headerIconClick="fillChartData"
   >
     <div v-if="chartData">

@@ -5,10 +5,6 @@ import { useUsers } from '@/stores/user'
 const storeGlobal = useGlobal()
 const storeUser = useUsers()
 
-const toggleLightDark = () => {
-  storeGlobal.toggleDarkMode()
-}
-
 const userName = computed(() => storeUser.userName)
 
 const menuToggleMobileIcon = computed(() =>
@@ -56,6 +52,12 @@ const changeTheme = (theme) => {
       </NavBarItem>
       <NavBarItem @click="changeTheme('nordark')">
         <NavBarItemLabel label="Nordark" />
+      </NavBarItem>
+      <NavBarItem @click="changeTheme('metro')">
+        <NavBarItemLabel label="Metro" />
+      </NavBarItem>
+      <NavBarItem @click="changeTheme('metrodark')">
+        <NavBarItemLabel label="Metro Dark" />
       </NavBarItem>
     </template>
   </NavBarMenu>

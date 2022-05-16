@@ -1,5 +1,6 @@
-/* eslint-disable camelcase */
-export type VersionType = {
+import { Endpoint, EndpointBaseTypes } from "./BaseEndpoint"
+
+export type VersionGet = {
   web: {
     branch: string
     tag: string
@@ -15,7 +16,7 @@ export type VersionType = {
   }
 }
 
-export type SysinfoType = {
+export type SysinfoGet = {
   system: {
     uptime: number
     memory: {
@@ -68,3 +69,14 @@ export type SysinfoType = {
     }
   }
 }
+
+interface VersionTypes extends EndpointBaseTypes {
+  GET_TYPE: VersionGet
+}
+
+interface SysTypes extends EndpointBaseTypes {
+  GET_TYPE: SysinfoGet
+}
+
+export const VersionEndpoint = new Endpoint<VersionTypes>('/api/version')
+export const SysinfoEndpoint = new Endpoint<SysTypes>('/api/sysinfo')
