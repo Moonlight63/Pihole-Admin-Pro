@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup>
 import { useApi } from '@/stores/api'
 import * as chartConfig from '@/components/Charts/chart.config.js'
 
-const chartData = ref<unknown>(null)
-const chartData2 = ref<unknown>(null)
-const chartData3 = ref<unknown>(null)
-const chartData4 = ref<unknown>(null)
+const chartData = ref(null)
+const chartData2 = ref(null)
+const chartData3 = ref(null)
+const chartData4 = ref(null)
 
 const fillChartData = () => {
   chartData.value = chartConfig.sampleChartData(24)
@@ -36,7 +36,7 @@ onMounted(() => {
     <!-- <TitleBar :titleStack="titleStack" /> -->
     <MainSection>
 
-      <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-4">
+      <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-4 sm:grid-cols-2">
         <CardMetric
           class="text-on-success"
           color="text-white text-opacity-25"
@@ -79,8 +79,11 @@ onMounted(() => {
       <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <CardQueryTypesChart />
         <CardUpstreamChart />
+        <CardTopDomains />
+        <CardTopBlocked />
+        <CardTopClients />
 
-        <CardComponent
+        <!-- <CardComponent
           icon="mdi:monitor-cellphone"
           title="Top Allowed Domains"
           hasTable
@@ -94,7 +97,7 @@ onMounted(() => {
           hasTable
         >
           <TopClients />
-        </CardComponent>
+        </CardComponent> -->
       </div>
     </MainSection>
   </div>

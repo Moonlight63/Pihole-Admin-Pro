@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
-import { apiAddressKey } from '@/config.js'
+import { apiAddressKey, sidKey } from '@/config.js'
 import Connector from './api/Connector'
+import { useSession } from './session'
+import { useAuth } from './auth'
 
 // export const useServer = defineStore('server', {
 //   state: () => {
@@ -117,6 +119,11 @@ export const useServer = defineStore('server', () => {
     }
     isConnecting.value = false
     connected.value = true
+    const localStorageSidValue = localStorage.getItem(sidKey)
+    if (localStorageSidValue !== null) {
+      useSession().sid = localStorageSidValue
+      useAuth().checkAuth()
+    }
   }
 
   const disconnect = async () => {

@@ -14,7 +14,7 @@ const props = defineProps({
   },
   rounded: {
     type: String,
-    default: 'md:rounded-card'
+    default: 'sm:rounded-card'
   },
   bgColor: {
     type: String,
@@ -55,7 +55,7 @@ const submit = (e) => {
   <Component
     :is="is"
     :class="componentClass"
-    class="border-card"
+    class="overflow-hidden border-card"
     @submit="submit"
   >
     <header
@@ -82,7 +82,7 @@ const submit = (e) => {
     <div v-if="empty" class="py-24 text-center text-on-main-muted">
       <p>Nothing's here…</p>
     </div>
-    <div v-else :class="{ 'p-6': !hasTable }">
+    <div v-else :class="{ 'p-4': !hasTable }">
       <slot />
     </div>
   </Component>

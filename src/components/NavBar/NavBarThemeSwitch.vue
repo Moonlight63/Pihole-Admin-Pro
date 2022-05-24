@@ -8,7 +8,7 @@ const storeUser = useUsers()
 const userName = computed(() => storeUser.userName)
 
 const menuToggleMobileIcon = computed(() =>
-  storeGlobal.isMenuActive ? 'mdi:backburger' : 'mdi:forwardburger'
+  storeGlobal.menuActive ? 'mdi:backburger' : 'mdi:forwardburger'
 )
 
 const isMenuNavBarActive = ref(false)

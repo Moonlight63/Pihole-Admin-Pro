@@ -3,7 +3,7 @@
     :class="{
       'cursor-pointer': sortable
     }"
-    @click.stop="$emit('clicked')"
+    @click.stop="clicked()"
   >
     <Level>
       <slot />
@@ -37,4 +37,10 @@ const computedState = computed(() =>
 )
 
 const emits = defineEmits(['clicked'])
+
+const clicked = () => {
+  if (props.sortable) {
+    emits('clicked')
+  }
+}
 </script>

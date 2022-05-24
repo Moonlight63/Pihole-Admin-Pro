@@ -131,6 +131,7 @@ onMounted(() => {
     icon="mdi:finance"
     headerIcon="mdi:reload"
     @headerIconClick="fillChartData"
+    v-if="chartData && chartData.labels.length"
   >
     <div v-if="chartData">
       <RingChart :data="chartData" class="h-96" />

@@ -2,7 +2,7 @@
 import { computed, PropType } from 'vue'
 import Level from '@/components/UI/Level.vue'
 
-import JbButtons from '@/components/Form/JbButtons.vue'
+// import JbButtons from '@/components/Form/JbButtons.vue'
 import JbButton from '@/components/Form/JbButton.vue'
 
 const props = defineProps({
@@ -96,7 +96,8 @@ const gotoPreviousPage = () =>
         </slot>
       </div>
 
-      <JbButtons v-if="totalPages > 1">
+      <div class="button-group">
+      <!-- <JbButtons v-if="totalPages > 1"> -->
         <JbButton
           key="page_first"
           :disabled="isInFirstPage"
@@ -168,7 +169,8 @@ const gotoPreviousPage = () =>
           small
           @click.prevent="gotoLastPage"
         />
-      </JbButtons>
+      <!-- </JbButtons> -->
+      </div>
     </Level>
   </div>
 </template>

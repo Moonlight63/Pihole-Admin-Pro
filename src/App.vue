@@ -6,7 +6,6 @@ import { useClients } from './stores/clients'
 import { useServer } from './stores/server'
 import { useSession } from './stores/session'
 import { useAuth } from './stores/auth'
-import axios from 'axios'
 
 const userStore = useUsers()
 const globalStore = useGlobal()

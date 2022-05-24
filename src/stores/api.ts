@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { QueryHistoryGet, SummaryGet, ClientHistoryGet } from './api/endpoints/MetricsEndpoints'
 import { VersionGet } from './api/endpoints/InfoEndpoints'
-import { UpstreamsGet } from './api/endpoints/StatsEndpoints'
+import { TopBlockedGet, TopClientsGet, TopDomainsGet, UpstreamsGet } from './api/endpoints/StatsEndpoints'
 
 export const useApi = defineStore('api', () => {
     let currentSummary = ref({} as SummaryGet)
@@ -9,7 +9,10 @@ export const useApi = defineStore('api', () => {
     let queryHistory = ref({} as QueryHistoryGet)
     let clientHistory = ref({} as ClientHistoryGet)
     let upstreams = ref({} as UpstreamsGet)
-    
+    let topDomains = ref({} as TopDomainsGet)
+    let topBlocked = ref({} as TopBlockedGet)
+    let topClients = ref({} as TopClientsGet)
+
     const updateCurrentSummary = (payload: SummaryGet) => {
       currentSummary.value = payload
     }
@@ -22,6 +25,15 @@ export const useApi = defineStore('api', () => {
     const updateUpstreams = (payload: UpstreamsGet) => {
       upstreams.value = payload
     }
+    const updateTopDomains = (payload: TopDomainsGet) => {
+      topDomains.value = payload
+    }
+    const updateTopBlocked = (payload: TopBlockedGet) => {
+      topBlocked.value = payload
+    }
+    const updateTopClients = (payload: TopClientsGet) => {
+      topClients.value = payload
+    }
 
     return {
       currentSummary,
@@ -29,10 +41,16 @@ export const useApi = defineStore('api', () => {
       queryHistory,
       clientHistory,
       upstreams,
+      topDomains,
+      topBlocked,
+      topClients,
 
       updateCurrentSummary,
       updateQueryHistory,
       updateClientHistory,
-      updateUpstreams
+      updateUpstreams,
+      updateTopDomains,
+      updateTopBlocked,
+      updateTopClients,
     }
 })

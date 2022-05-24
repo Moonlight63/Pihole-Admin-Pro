@@ -2,12 +2,17 @@
 import { useApi } from '@/stores/api'
 import { useGlobal } from '@/stores/global';
 import { useServer } from '@/stores/server';
+import { useSession } from '@/stores/session';
 
 const apiStore = useApi()
 
 const chartData = ref(null)
 
 const theme = computed(() => useGlobal().theme)
+
+const show = computed(() => {
+  return (useServer().connected && useSession().valid)
+})
 
 const getCssPrimary = () => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-primary')
 const getCssWarning = () => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-warning')
@@ -108,6 +113,7 @@ onMounted(() => {
     headerIcon="mdi:reload"
     class="mb-6"
     @headerIconClick="fillChartData"
+    v-if="show"
   >
     <div v-if="chartData">
       <QueriesChart :data="chartData" :animate="animate" class="h-96" />

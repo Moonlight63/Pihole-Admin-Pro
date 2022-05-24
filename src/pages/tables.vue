@@ -1,5 +1,5 @@
 <script setup>
-const titleStack = ref(['Admin', 'Tables'])
+const titleStack = ref(["Admin", "Tables"]);
 </script>
 
 <template>
@@ -10,12 +10,7 @@ const titleStack = ref(['Admin', 'Tables'])
       <b>Responsive table.</b> Collapses on mobile
     </Notification>
 
-    <CardComponent
-      class="mb-6"
-      title="Clients"
-      icon="mdi:account-multiple"
-      hasTable
-    >
+    <CardComponent class="mb-6" title="Clients" icon="mdi:account-multiple" hasTable>
       <ClientsTable checkable />
     </CardComponent>
 
@@ -35,7 +30,11 @@ const titleStack = ref(['Admin', 'Tables'])
       <b>Empty table.</b> When there's nothing to show
     </Notification>
 
-    <CardComponent empty />
+    <CardComponent class="mb-6" empty />
+
+    <CardComponent class="mb-6">
+      <TopDomainsTable />
+    </CardComponent>
   </MainSection>
 
   <BottomOtherPagesSection />
@@ -43,7 +42,7 @@ const titleStack = ref(['Admin', 'Tables'])
 
 <route lang="yaml">
 meta:
-  layout: 'default'
-  title: 'Tables'
-  icon: 'mdi:desktop-mac'
+  layout: "default"
+  title: "Tables"
+  icon: "mdi:desktop-mac"
 </route>
