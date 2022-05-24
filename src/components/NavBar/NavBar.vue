@@ -9,7 +9,7 @@ const storeUser = useUsers()
 const userName = computed(() => storeUser.userName)
 
 const menuToggleMobileIcon = computed(() =>
-  storeGlobal.isMenuActive ? 'mdi:backburger' : 'mdi:forwardburger'
+  storeGlobal.menuActive ? 'mdi:backburger' : 'mdi:forwardburger'
 )
 
 const isMenuNavBarActive = ref(false)
@@ -49,7 +49,7 @@ const menuNavBarToggle = () => {
       <div
         class="overflow-y-auto max-h-screen-menu lg:overflow-visible lg:flex lg:items-stretch lg:justify-end lg:ml-auto"
       >
-        <NavBarMenu hasDivider>
+        <!-- <NavBarMenu hasDivider>
           <NavBarItemLabel icon="mdi:menu" label="Sample menu" />
 
           <template #dropdown>
@@ -85,7 +85,7 @@ const menuNavBarToggle = () => {
               <NavBarItemLabel icon="mdi:logout" label="Log Out" />
             </NavBarItem>
           </template>
-        </NavBarMenu>
+        </NavBarMenu> -->
 
         <NavBarThemeSwitch />
 

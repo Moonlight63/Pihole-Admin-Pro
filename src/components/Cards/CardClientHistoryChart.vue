@@ -2,6 +2,7 @@
 import { useApi } from '@/stores/api'
 import { useGlobal } from '@/stores/global';
 import { useServer } from '@/stores/server';
+import { useSession } from '@/stores/session';
 
 const apiStore = useApi()
 
@@ -9,54 +10,70 @@ const chartData = ref(null)
 
 const theme = computed(() => useGlobal().theme)
 
+const show = computed(() => {
+  return (useServer().connected && useSession().valid)
+})
+
 const getCssPrimary = () => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-primary')
+const getCssWarning = () => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-warning')
+const getCssInfo = () => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-info')
 const getCssSuccess = () => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-success')
 const getCssDanger = () => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-danger')
 
 const fillChartData = () => {
 
-  if(!apiStore.queryHistory.history) {
+  if(!apiStore.clientHistory.history) {
     chartData.value = null
     return
   }
 
-  const labels = [
-    'Blocked DNS Queries',
-    'Cached DNS Queries',
-    'Forwarded DNS Queries'
+  const labels = []
+  const colors = [
+    getCssPrimary(),
+    getCssWarning(),
+    getCssInfo(),
+    getCssSuccess(),
+    getCssDanger(),
   ]
-  const colors = [getCssDanger(), getCssSuccess(), getCssPrimary()]
-
   const data = {
     labels: [],
     datasets: []
   }
 
-  // Collect values and colors, and labels
-  for (let i = 0; i < labels.length; i++) {
+
+  apiStore.clientHistory.clients.forEach(function (client) {
+    labels.push(client.name !== null ? client.name : client.ip);
+  });
+
+  for (let i = 0; i < apiStore.clientHistory.clients.length; i++) {
     data.datasets.push({
       data: [],
-      backgroundColor: colors[i],
+      // If we ran out of colors, make a random one
+      backgroundColor:
+        i < colors.length
+          ? colors[i]
+          : "#" + (0x1000000 + Math.random() * 0xffffff).toString(16).substr(1, 6),
       pointRadius: 0,
       pointHitRadius: 5,
       pointHoverRadius: 5,
       label: labels[i],
-      cubicInterpolationMode: 'monotone'
-    })
+      cubicInterpolationMode: "monotone"
+    });
   }
 
-  // Add data for each dataset that is available
-  apiStore.queryHistory.history.forEach((item) => {
-    const timestamp = new Date(1000 * parseInt(item.timestamp, 10))
 
-    data.labels.push(timestamp)
-    const blocked = item.blocked
-    const cached = item.cached
-    const permitted = item.total - (blocked + cached)
-    data.datasets[0].data.push(blocked)
-    data.datasets[1].data.push(cached)
-    data.datasets[2].data.push(permitted)
-  })
+  // Add data for each dataset that is available
+  apiStore.clientHistory.clients.forEach(function (i, c) {
+    apiStore.clientHistory.history.forEach(function (item) {
+      data.datasets[c].data.push(item.data[c]);
+    });
+  });
+
+  // Extract data timestamps
+  apiStore.clientHistory.history.forEach(function (item) {
+    var d = new Date(1000 * parseInt(item.timestamp, 10));
+    data.labels.push(d);
+  });
 
   chartData.value = data
 }
@@ -76,12 +93,12 @@ watch(theme, val => {
   }
 })
 
-watch(() => apiStore.queryHistory, val => {
+watch(() => apiStore.clientHistory, val => {
   fillChartData()
 }, { deep: true })
 
 onMounted(() => {
-  if(!apiStore.queryHistory.history) {
+  if(!apiStore.clientHistory.history) {
     return
   }
   fillChartData()
@@ -91,11 +108,12 @@ onMounted(() => {
 
 <template>
   <CardComponent
-    title="Total queries over last 24 hours"
+    title="Client activity over last 24 hours"
     icon="mdi:finance"
     headerIcon="mdi:reload"
     class="mb-6"
     @headerIconClick="fillChartData"
+    v-if="show"
   >
     <div v-if="chartData">
       <QueriesChart :data="chartData" :animate="animate" class="h-96" />

@@ -1,21 +1,25 @@
 <script setup>
-import { useGlobal } from '@/stores/global'
+import { useGlobal } from "@/stores/global";
 
 defineProps({
   menu: {
     type: Array,
-    default: () => []
+    default: () => [],
+  },
+  menuNew: {
+    type: Array,
+    default: []
   }
-})
+});
 
-const store = useGlobal()
+const store = useGlobal();
 </script>
 
 <template>
   <aside
     id="aside"
     class="absolute top-0 z-40 h-screen border-r-menu bg-menu w-60 transition-position xl:left-0"
-    :class="store.isMenuActive ? 'left-0' : '-left-60'"
+    :class="store.menuActive ? 'left-0' : '-left-60'"
   >
     <div class="flex flex-row items-center flex-1 w-full text-on-menu h-14">
       <NavBarItem

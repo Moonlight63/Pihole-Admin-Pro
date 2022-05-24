@@ -2,12 +2,17 @@
 import { useApi } from '@/stores/api'
 import { useGlobal } from '@/stores/global';
 import { useServer } from '@/stores/server';
+import { useSession } from '@/stores/session';
 
-const queryTypes = computed(() => useApi().currentSummary?.queries?.types)
+const upstreams = computed(() => useApi().upstreams.upstreams)
 
 const chartData = ref(null)
 
 const theme = computed(() => useGlobal().theme)
+
+const show = computed(() => {
+  return (useServer().connected && useSession().valid)
+})
 
 const getCssPrimary = () => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-primary')
 const getCssWarning = () => getComputedStyle(document.documentElement,null).getPropertyValue('--colors-warning')
@@ -17,12 +22,12 @@ const getCssDanger = () => getComputedStyle(document.documentElement,null).getPr
 
 const fillChartData = () => {
 
-  if(!queryTypes.value) {
+  if(!upstreams.value) {
     chartData.value = null
     return
   }
 
-  const types = queryTypes.value
+  const streams = upstreams.value
 
   const colors = [
     getCssPrimary(),
@@ -32,78 +37,95 @@ const fillChartData = () => {
     getCssDanger(),
   ]
 
+
   let v = [],
       c = [],
       k = [],
       i = 0,
-      sum = 0;
+      sum = 0,
+      values = [];
 
   // Compute total number of queries
-  Object.keys(types).forEach((item) => {
-    sum += types[item];
+  streams.forEach(function (item) {
+    sum += item.count;
   });
 
-  // Fill chart with data (only include query types which appeared recently)
-  let querytypeids = [];
-  Object.keys(types).forEach((item) => {
-    if (types[item] > 0) {
-      v.push((100 * types[item]) / sum);
-      c.push(colors[i % colors.length]);
-      k.push(item);
-      querytypeids.push(i + 1);
+  // Collect values and colors
+  streams.forEach(function (item) {
+    let label = item.ip;
+    if (item.name.length > 0) {
+      label = item.ip;
     }
 
-    i++;
+    let percent = (100 * item.count) / sum;
+    values.push([label, percent, colors[i++ % colors.length]]);
   });
 
+  // Split data into individual arrays for the graphs
+  values.forEach(function (item) {
+    k.push(item[0]);
+    v.push(item[1]);
+    c.push(item[2]);
+  });
+
+  // Build a single dataset with the data to be pushed
+  // let dd = { data: v, backgroundColor: c };
+
   const data = {
-    labels: [],
-    datasets: []
+    labels: k,
+    datasets: [{ data: v, backgroundColor: c }]
   }
+
+  chartData.value = data
 
   // Build a single dataset with the data to be pushed
   // var dd = { data: v, backgroundColor: c };
   // and push it at once
-  data.datasets[0] = { data: v, backgroundColor: c };
-  data.labels = k;
-
-  chartData.value = data
-
-  // const labels = [
-  //   'Blocked DNS Queries',
-  //   'Cached DNS Queries',
-  //   'Forwarded DNS Queries'
-  // ]
-  // const colors = [getCssDanger(), getCssSuccess(), getCssPrimary()]
+  // data.datasets[0] = { data: v, backgroundColor: c };
+  // data.labels = k;
 
 
-  // // Collect values and colors, and labels
-  // for (let i = 0; i < labels.length; i++) {
-  //   data.datasets.push({
-  //     data: [],
-  //     backgroundColor: colors[i],
-  //     pointRadius: 0,
-  //     pointHitRadius: 5,
-  //     pointHoverRadius: 5,
-  //     label: labels[i],
-  //     cubicInterpolationMode: 'monotone'
-  //   })
+
+
+
+
+  // let v = [],
+  //     c = [],
+  //     k = [],
+  //     i = 0,
+  //     sum = 0;
+
+  // // Compute total number of queries
+  // Object.keys(types).forEach((item) => {
+  //   sum += types[item];
+  // });
+
+  // // Fill chart with data (only include query types which appeared recently)
+  // let querytypeids = [];
+  // Object.keys(types).forEach((item) => {
+  //   if (types[item] > 0) {
+  //     v.push((100 * types[item]) / sum);
+  //     c.push(colors[i % colors.length]);
+  //     k.push(item);
+  //     querytypeids.push(i + 1);
+  //   }
+
+  //   i++;
+  // });
+
+  // const data = {
+  //   labels: [],
+  //   datasets: []
   // }
 
-  // // Add data for each dataset that is available
-  // apiStore.queryHistory.history.forEach((item) => {
-  //   const timestamp = new Date(1000 * parseInt(item.timestamp, 10))
-
-  //   data.labels.push(timestamp)
-  //   const blocked = item.blocked
-  //   const cached = item.cached
-  //   const permitted = item.total - (blocked + cached)
-  //   data.datasets[0].data.push(blocked)
-  //   data.datasets[1].data.push(cached)
-  //   data.datasets[2].data.push(permitted)
-  // })
+  // // Build a single dataset with the data to be pushed
+  // // var dd = { data: v, backgroundColor: c };
+  // // and push it at once
+  // data.datasets[0] = { data: v, backgroundColor: c };
+  // data.labels = k;
 
   // chartData.value = data
+
 }
 
 watch(theme, val => {
@@ -112,19 +134,26 @@ watch(theme, val => {
   }
 })
 
-watch(() => queryTypes.value, val => {
+watch(() => upstreams.value, val => {
   fillChartData()
 }, { deep: true })
+
+onMounted(() => {
+  if(!upstreams.value) {
+    return
+  }
+  fillChartData()
+})
 
 </script>
 
 <template>
-  <!-- <CardComponent
-    title="Query Types"
+  <CardComponent
+    title="Upstreams"
     icon="mdi:finance"
     headerIcon="mdi:reload"
-    class="mb-6"
     @headerIconClick="fillChartData"
+    v-if="show"
   >
     <div v-if="chartData">
       <RingChart :data="chartData" class="h-96" />
@@ -138,18 +167,16 @@ watch(() => queryTypes.value, val => {
       <p>No Data found...</p>
       <p>Are you connected to a server?</p>
     </div>
-  </CardComponent> -->
-
-  <CardComponent
+  </CardComponent>
+</template>
+  <!-- <CardComponent
     title="Upstream Servers"
     icon="mdi:finance"
     headerIcon="mdi:reload"
-    class="mb-6"
     @headerIconClick="fillChartData"
   >
     <div class="py-24 text-center text-on-main-muted">
       <p>No Data found...</p>
       <p>Future home of upstream server stats!</p>
     </div>
-  </CardComponent>
-</template>
+  </CardComponent> -->

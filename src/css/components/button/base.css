@@ -6,7 +6,7 @@
   /* disabled */
   &-disabled,
   &[disabled] {
-    @apply pointer-events-none;
+    @apply opacity-50 pointer-events-none;
   }
 
   /* shapes */
@@ -19,10 +19,7 @@
 
   /* loading */
   &.loading {
-    &,
-    &:hover {
-      @apply pointer-events-none;
-    }
+    @apply opacity-50 pointer-events-none;
     &:before {
       @apply w-3.5 h-3.5 mr-2 border-2 rounded-full;
       animation: spin 2s linear infinite;

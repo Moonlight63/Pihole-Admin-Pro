@@ -148,6 +148,9 @@ const theme = new Theme({
       form: textColors['on-main-muted'],
       ...hocusColors.background
     },
+    spacing: {
+      'menu-items': '1rem'
+    },
     pageBackgrounds: {
       login: 'bg-gradient-to-tr from-purple-400 via-pink-500 to-red-500',
       error: 'bg-gradient-to-tr from-pink-400 via-red-500 to-yellow-500'

@@ -35,7 +35,7 @@ defineProps({
   <CardComponent :bgColor="bgColor" class="relative">
     <!-- <level mobile> -->
     <div class="z-[1] relative">
-      <h3 class="text-lg leading-tight">
+      <h3 class="text-lg leading-tight truncate">
         {{ label }}
       </h3>
       <h1 class="text-3xl font-semibold leading-tight">

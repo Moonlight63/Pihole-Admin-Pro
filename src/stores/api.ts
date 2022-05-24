@@ -1,48 +1,56 @@
 import { defineStore } from 'pinia'
-import { VersionType } from './api/FtlTypes'
-import { QueryHistoryType, SummaryType } from './api/MetricsTypes'
+import { QueryHistoryGet, SummaryGet, ClientHistoryGet } from './api/endpoints/MetricsEndpoints'
+import { VersionGet } from './api/endpoints/InfoEndpoints'
+import { TopBlockedGet, TopClientsGet, TopDomainsGet, UpstreamsGet } from './api/endpoints/StatsEndpoints'
 
-export const useApi = defineStore('api', {
-  state: () => {
+export const useApi = defineStore('api', () => {
+    let currentSummary = ref({} as SummaryGet)
+    let version = ref({} as VersionGet)
+    let queryHistory = ref({} as QueryHistoryGet)
+    let clientHistory = ref({} as ClientHistoryGet)
+    let upstreams = ref({} as UpstreamsGet)
+    let topDomains = ref({} as TopDomainsGet)
+    let topBlocked = ref({} as TopBlockedGet)
+    let topClients = ref({} as TopClientsGet)
+
+    const updateCurrentSummary = (payload: SummaryGet) => {
+      currentSummary.value = payload
+    }
+    const updateQueryHistory = (payload: QueryHistoryGet) => {
+      queryHistory.value = payload
+    }
+    const updateClientHistory = (payload: ClientHistoryGet) => {
+      clientHistory.value = payload
+    }
+    const updateUpstreams = (payload: UpstreamsGet) => {
+      upstreams.value = payload
+    }
+    const updateTopDomains = (payload: TopDomainsGet) => {
+      topDomains.value = payload
+    }
+    const updateTopBlocked = (payload: TopBlockedGet) => {
+      topBlocked.value = payload
+    }
+    const updateTopClients = (payload: TopClientsGet) => {
+      topClients.value = payload
+    }
+
     return {
-      currentSummary: {} as SummaryType,
-      version: {} as VersionType,
-      queryHistory: {} as QueryHistoryType
+      currentSummary,
+      version,
+      queryHistory,
+      clientHistory,
+      upstreams,
+      topDomains,
+      topBlocked,
+      topClients,
+
+      updateCurrentSummary,
+      updateQueryHistory,
+      updateClientHistory,
+      updateUpstreams,
+      updateTopDomains,
+      updateTopBlocked,
+      updateTopClients,
     }
-  },
-  getters: {},
-  actions: {
-    updateCurrentSummary(payload: SummaryType) {
-      if (this.$state)
-        this.$state.currentSummary = payload
-    },
-    updateQueryHistory(payload: QueryHistoryType) {
-      this.$state.queryHistory = payload
-    },
-    reset() {
-      this.$reset
-    }
-  }
 })
-
-// export const useApi = defineStore('api', () => {
-//     let currentSummary = ref({} as SummaryType)
-//     let version = ref({} as VersionType)
-//     let queryHistory = ref({} as QueryHistoryType)
-    
-//     const updateCurrentSummary = (payload: SummaryType) => {
-//       currentSummary.value = payload
-//     }
-//     const updateQueryHistory = (payload: QueryHistoryType) => {
-//       queryHistory.value = payload
-//     }
-
-//     return {
-//       currentSummary,
-//       version,
-//       queryHistory,
-
-//       updateCurrentSummary,
-//       updateQueryHistory
-//     }
-// })

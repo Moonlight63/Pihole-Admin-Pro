@@ -3,5 +3,7 @@ module.exports = [
   require('./dark'),
   require('./light'),
   require('./nordark'),
-  require('./nordic')
+  require('./nordic'),
+  require('./metro'),
+  require('./metroDark')
 ]

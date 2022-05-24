@@ -1,6 +1,16 @@
-<script setup>
+<script setup lang="ts">
 import { useUsers } from './stores/user'
+import { apiAddressKey, themeKey, sidKey } from '@/config.js'
+import { useGlobal } from './stores/global'
+import { useClients } from './stores/clients'
+import { useServer } from './stores/server'
+import { useSession } from './stores/session'
+import { useAuth } from './stores/auth'
+
 const userStore = useUsers()
+const globalStore = useGlobal()
+const clientsStore = useClients()
+const serverStore = useServer()
 
 userStore.user({
   name: 'John Doe',
@@ -8,6 +18,49 @@ userStore.user({
   avatar:
     'https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93'
 })
+
+// Move initailization code to App's onMounted so that all data and stores are sure to have been loaded
+onMounted(async () => {
+  console.log("Vue is ready!");
+
+  // axios.defaults.withCredentials = true
+
+  /* Dark mode */
+  if (
+    (!localStorage[themeKey] &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
+    globalStore.changeTheme('dark')
+  } else if (localStorage[themeKey]) {
+    globalStore.changeTheme(localStorage[themeKey])
+  }
+
+  /* Fetch sample data */
+  clientsStore.fetchClients()
+  clientsStore.fetchHistory()
+  clientsStore.getusers()
+
+  // create async selfcalling function to use await
+  const localStorageApiAddressValue = localStorage.getItem(apiAddressKey)
+  if (localStorageApiAddressValue !== null) {
+    serverStore.apiAddress = localStorageApiAddressValue
+    console.log("Before Await");
+    
+    await serverStore.connect(localStorageApiAddressValue)
+  
+    console.log("After Await");
+    console.log("🚀 ~ file: App.vue ~ line 53 ~ onMounted ~ serverStore.connected", serverStore.connected)
+    if (serverStore.connected) {
+      const localStorageSidValue = localStorage.getItem(sidKey)
+      if (localStorageSidValue !== null) {
+        useSession().sid = localStorageSidValue
+        useAuth().checkAuth()
+      }
+    }
+  }
+
+})
+
 </script>
 
 <template>

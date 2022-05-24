@@ -33,6 +33,21 @@ const props = defineProps({
   loading: { type: Boolean, required: false, default: false },
   hoverable: { type: Boolean, required: false, default: false },
   clickable: { type: Boolean, required: false, default: false },
+  initState: {
+    type: Object as PropType<{ sortation?: DataTableSortation, pagination?: DataTablePagination, filter?: string }>,
+    required: false,
+    default: {
+      sortation: {
+        ascending: false,
+        sortByKey: ''
+      },
+      pagination: {
+        page: 0,
+        perPage: 10
+      },
+      filter: ''
+    }
+  },
   paginationOptions: {
     type: [Object, Array, Boolean] as PropType<DataTablePaginationOptions>,
     required: false,
@@ -58,7 +73,7 @@ const emit = defineEmits([
 ])
 
 // FILTERING
-const internalFilter = ref('')
+const internalFilter = ref(props.initState?.filter ??'')
 
 const calculatedFilterState = computed(() => {
   if (props.filter !== null && typeof props.filter === 'string') return props.filter
@@ -66,7 +81,7 @@ const calculatedFilterState = computed(() => {
 })
 
 const internalFilterFunc = () => {
-  let result = []
+  let result: DataTableRows = []
   if (calculatedFilterState.value === '') result = props.rows
   result = filterForString(props.rows, calculatedFilterState.value)
   emit('output:filtered', result)
@@ -76,7 +91,7 @@ const internalFilterFunc = () => {
 const dataFiltered = computed(() => {
   if (props.filter !== null || props.filter === false) {
     // console.log('External Filtering!')
-    return props.rows
+    return props.rows ?? []
   } else {
     // console.log('Internal Filtering!')
     return internalFilterFunc()
@@ -85,9 +100,9 @@ const dataFiltered = computed(() => {
 
 // SORTATION
 const internalSort = reactive({
-  sortByKey: '',
-  ascending: false,
-  sortedInput: undefined
+  sortByKey: props.initState?.sortation?.sortByKey ?? '',
+  ascending: props.initState?.sortation?.ascending ?? false,
+  sortedInput: props.initState?.sortation?.sortedInput ?? undefined
 })
 
 const calculatedSortState = computed(() => {
@@ -107,13 +122,27 @@ const internalSortFunc = () => {
   if (calculatedSortState.value.sortByKey === '') {
     sorted = dataFiltered.value
   } else {
+    // sorted = dataFiltered.value.slice(0).sort((b, a) => {
+    //   return (a[calculatedSortState.value.sortByKey] as object)
+    //     .toString()
+    //     .toLowerCase()
+    //     .localeCompare((b[calculatedSortState.value.sortByKey] as object)
+    //       .toString()
+    //       .toLowerCase(), undefined, {sensitivity: 'base', numeric: true, ignorePunctuation: true})
+    // })
+
     sorted = dataFiltered.value.slice(0).sort((b, a) => {
       return (a[calculatedSortState.value.sortByKey] as object)
         .toString()
-        .toLowerCase()
         .localeCompare((b[calculatedSortState.value.sortByKey] as object)
           .toString()
-          .toLowerCase())
+          , undefined
+          , {
+            sensitivity: 'base',
+            numeric: true,
+            ignorePunctuation: false
+            }
+        )
     })
   }
   if (calculatedSortState.value.ascending) sorted.reverse()
@@ -129,7 +158,7 @@ const dataSorted = computed(() => {
       return props.rows
     }
     // console.log('External Sorting!')
-    return props.sortation.sortedInput || []
+    return props.sortation.sortedInput ?? []
   } else {
     // console.log('Internal Sorting!')
     return internalSortFunc()
@@ -138,8 +167,8 @@ const dataSorted = computed(() => {
 
 // PAGINATION
 const internalPaged = reactive({
-  page: 0,
-  perPage: 10
+  page: props.initState?.pagination?.page ?? 0,
+  perPage: props.initState?.pagination?.perPage ?? 10
 })
 
 const calculatedPagedState = computed(() => {
@@ -243,8 +272,8 @@ const handleChangeSort = (sortBy: string) => {
   if (props.sortation !== null) {
     emit('update:sortation', {
       ...props.sortation,
-      sortByKey: sortBy || '',
-      ascending: internalSort.ascending || false
+      sortByKey: sortBy ?? '',
+      ascending: internalSort.ascending ?? false
     })
   } else if (props.pagination !== null) {
     // manually call sort, because it wont be called by pageination
@@ -292,8 +321,8 @@ watch(() => props.rows, () => {
 
 <template>
   <div class="">
-    <Level>
-      <Field class="w-24">
+    <Level v-if="showPagination || props.filter !== false">
+      <Field v-if="showPagination" class="w-24">
         <Control
           :modelValue="calculatedPagedState.perPage"
           :options="props.paginationOptions"

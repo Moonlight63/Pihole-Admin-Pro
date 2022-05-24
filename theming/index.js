@@ -125,10 +125,10 @@ const getPlugin = () => {
     const thing = swapper({
         themes: themes
     })
-    console.log(
-        '🚀 ~ file: theme.config.js ~ line 54 ~ swapt ~ thing',
-        JSON.stringify(thing, null, 2)
-    )
+    // console.log(
+    //     '🚀 ~ file: theme.config.js ~ line 54 ~ swapt ~ thing',
+    //     JSON.stringify(thing, null, 2)
+    // )
     thing.config.safelist = names
     return thing
 }

@@ -15,11 +15,11 @@ tr:last-child {
 }
 
 th {
-  @apply lg:text-left lg:py-2 lg:px-3;
+  @apply lg:text-left lg:py-2 lg:px-4;
 }
 
 td {
-  @apply flex justify-between px-4 py-3 text-right align-top border-b border-gray-100 lg:table-cell lg:text-left lg:py-2 lg:px-3 lg:align-middle lg:border-b-0 dark:border-gray-700;
+  @apply flex justify-between px-4 py-3 text-right align-top border-b border-gray-100 lg:table-cell lg:text-left lg:py-2 lg:px-4 lg:align-middle lg:border-b-0 dark:border-gray-700;
 }
 
 /* tr:nth-child(odd) td {
@@ -44,7 +44,7 @@ td.checkbox-cell, th.checkbox-cell {
 }
 
 td.progress-cell progress {
-  @apply flex self-center w-2/5 lg:w-full;
+  @apply flex self-center w-full sm:w-2/5 lg:w-full;
 }
 
 td.image-cell {
@@ -60,5 +60,5 @@ td.image-cell .image {
 }
 
 .table-pagination {
-  @apply px-6 py-3 border-t border-gray-100 dark:border-gray-700;
+  @apply px-3 py-3 border-t border-gray-100 dark:border-gray-700;
 }

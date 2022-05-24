@@ -16,9 +16,12 @@ declare module 'vue' {
     CardMetric: typeof import('./components/Cards/CardMetric.vue')['default']
     CardQueryHistoryChart: typeof import('./components/Cards/CardQueryHistoryChart.vue')['default']
     CardQueryTypesChart: typeof import('./components/Cards/CardQueryTypesChart.vue')['default']
+<<<<<<< HEAD
+=======
     CardTopBlocked: typeof import('./components/Cards/CardTopBlocked.vue')['default']
     CardTopClients: typeof import('./components/Cards/CardTopClients.vue')['default']
     CardTopDomains: typeof import('./components/Cards/CardTopDomains.vue')['default']
+>>>>>>> feature/dashboard
     CardTransactionBar: typeof import('./components/Cards/CardTransactionBar.vue')['default']
     CardUpstreamChart: typeof import('./components/Cards/CardUpstreamChart.vue')['default']
     CardWidget: typeof import('./components/Cards/CardWidget.vue')['default']
