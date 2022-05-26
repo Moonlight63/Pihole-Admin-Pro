@@ -1,0 +1,1 @@
+import{g as s}from"./index.8e950e9d.js";import{e as o,i as a,g as r,w as c,q as n,j as l}from"./vendor.c4b4c3b3.js";const _={class:"p-6 border-t-card border-b-card bg-card"},d={class:"text-3xl font-semibold leading-tight"},h={setup(i){return(e,m)=>{const t=s;return o(),a("section",_,[r(t,null,{default:c(()=>[n("h1",d,[l(e.$slots,"default")])]),_:3})])}}};export{h as _};
