@@ -149,7 +149,8 @@ const theme = new Theme({
       ...hocusColors.background
     },
     spacing: {
-      'menu-items': '1rem'
+      'menu-items': '1rem',
+      'button-padding': '1rem'
     },
     pageBackgrounds: {
       login: 'bg-gradient-to-tr from-purple-400 via-pink-500 to-red-500',

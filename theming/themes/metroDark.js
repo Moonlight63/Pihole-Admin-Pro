@@ -124,7 +124,8 @@ const theme = new Theme({
       'button': '1px'
     },
     spacing: {
-      'menu-items': '0px'
+      'menu-items': '0px',
+      'button-padding': '0.7rem 1rem'
     },
     pageBackgrounds: {
       login: 'bg-gradient-to-tr from-purple-900 via-pink-900 to-red-900',

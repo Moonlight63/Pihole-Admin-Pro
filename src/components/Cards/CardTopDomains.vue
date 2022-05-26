@@ -44,7 +44,7 @@ const columns: DataTableColumns = [
           <TableBodyCell v-text="`${row.domain}`" />
           <TableBodyCell v-text="row.count" />
           <TableBodyCell class="progress-cell">
-            <progress max="100" :value="row.count">
+            <progress :max="(dataRaw[0].count*1.1)+10" :value="row.count">
               {{ row.progress }}
             </progress>
           </TableBodyCell>

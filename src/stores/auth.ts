@@ -50,6 +50,13 @@ export const useAuth = defineStore('auth', () => {
       const request = await AuthEndpoint.get()
       session.set(request.session)
       updating.value = false
+      if (session.valid) {
+        console.log("Starting timer for auth check.")
+        setTimeout(() => {
+          console.log("Running checkAuth")
+          checkAuth()
+        }, 60000)
+      }
       return request.session.valid
     } catch (error) {
       updating.value = false

@@ -1,6 +1,7 @@
 'use strict'
 
 import { useApi } from '../api'
+import AuthEndpoint from './endpoints/AuthEndpoint'
 import EndpointLooper from './endpoints/EndpointLooper'
 import { VersionEndpoint } from './endpoints/InfoEndpoints'
 import { QueryHistoryEndpoint, SummaryEndpoint, ClientHistoryEndpoint } from './endpoints/MetricsEndpoints'
@@ -82,13 +83,13 @@ export default class Connector {
   apiStore = useApi()
 
   private endpoints: Array<EndpointLooper> = [
-    new EndpointLooper(SummaryEndpoint, this.apiStore.updateCurrentSummary, 100000),
-    new EndpointLooper(QueryHistoryEndpoint, this.apiStore.updateQueryHistory, 100000),
-    new EndpointLooper(ClientHistoryEndpoint, this.apiStore.updateClientHistory, 100000),
-    new EndpointLooper(UpstreamsEndpoint, this.apiStore.updateUpstreams, 100000),
-    new EndpointLooper(TopDomainsEndpoint, this.apiStore.updateTopDomains, 100000),
-    new EndpointLooper(TopBlockedEndpoint, this.apiStore.updateTopBlocked, 100000),
-    new EndpointLooper(TopClientsEndpoint, this.apiStore.updateTopClients, 200000),
+    new EndpointLooper(SummaryEndpoint, this.apiStore.updateCurrentSummary, 60000),
+    new EndpointLooper(QueryHistoryEndpoint, this.apiStore.updateQueryHistory, 600000),
+    new EndpointLooper(ClientHistoryEndpoint, this.apiStore.updateClientHistory, 600000),
+    new EndpointLooper(UpstreamsEndpoint, this.apiStore.updateUpstreams, 60000),
+    new EndpointLooper(TopDomainsEndpoint, this.apiStore.updateTopDomains, 60000),
+    new EndpointLooper(TopBlockedEndpoint, this.apiStore.updateTopBlocked, 60000),
+    new EndpointLooper(TopClientsEndpoint, this.apiStore.updateTopClients, 60000),
   ]
   
   // private apiStore = useApi()
